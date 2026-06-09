@@ -1,0 +1,46 @@
+/******************************************************************************
+PROJETO.......: Delícia Gelada
+ARQUIVO.......: style.css
+AUTOR.........: Diego de Pádua Bezerra de Lemos
+VERSÃO........: 1.0.0
+
+DESCRIÇÃO:
+Arquivo responsável por estilos globais da aplicação.
+A maior parte da estilização será realizada através do Tailwind CSS.
+
+******************************************************************************/
+
+/* Remove margens e espaçamentos padrões */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Rolagem suave entre seções */
+html{
+    scroll-behavior: smooth;
+}
+
+/* Fonte padrão da aplicação */
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Personalização da barra de rolagem */
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-track{
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #00a9bb;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #008696;
+}
