@@ -34,7 +34,10 @@ responsividade da aplicação.
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Inria+Serif:wght@300;400;700&display=swap"
     rel="stylesheet" />
-  <script src="./app.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&display=swap" rel="stylesheet">
+  <script src="./js/app.js" defer></script>
 </head>
 
 <!--
@@ -44,7 +47,7 @@ m-0: remove toda a margem externa do elemento
 p-0: remove toda a margem interna do elemnto
 -->
 
-<body class="bg-white m-0 p-0 box-border">
+<body class="bg-white m-0 p-0 box-border font-[Inter]">
   <!-- HEADER 
       CABEÇALHO DA PÁGINA
 
@@ -66,12 +69,14 @@ p-0: remove toda a margem interna do elemnto
       <img src="./img/menu-hamburguer.png" alt="Menu" class="w-6 h-6">
     </button>
 
-    <!-- Logo 
-      Absolute: defide que a posição da imagem será absoluta dentro do elemento pai 
-      left: celular 20px á esquerda  
-    -->
-    <img src="./img/logo.png" alt="Logo Delícia Gelada"
-      class="hidden md:flex md:absolute md:left-[84px] xl:left-[150px] top-[5px] w-[120px] md:w-[252px] xl:w-[252px] z-30">
+    <nav>
+      <!-- Logo 
+       Absolute: defide que a posição da imagem será absoluta dentro do elemento pai 
+       left: celular 20px á esquerda   -->
+
+      <img src="./img/logo.png" alt="Logo Delícia Gelada"
+        class="hidden md:flex md:absolute md:left-[84px] xl:left-[150px] top-[3px] w-30 md:w-[200px] lg:w-[250px] xl:w-[280px] z-30 md:object-cover xl:object-cover">
+    </nav>
     <!-- Logo 
       Criando uma segunda logo para poder chegar no mobile e ficar centralizado ao meio 
     -->
@@ -107,7 +112,6 @@ p-0: remove toda a margem interna do elemnto
     </div>
 
   </header>
-
   <!--
     MAIN:
     Container principal da aplicação.
@@ -118,26 +122,28 @@ p-0: remove toda a margem interna do elemnto
     min-h-screen   -> Garante altura mínima equivalente a 100% da tela.
     overflow-hidden -> Impede que elementos ultrapassem os limites do container.
     -->
-  <main class="w-full max-w-[1920px] mx-auto bg-white min-h-screen">
+  <main class="w-full mx-auto min-h-screen">
 
     <!-- BANNER PRINCIPAL -->
-    <section class="w-full h-[420px] md:h-[480px] xl:h-[560px] bg-cover bg-center relative"
+    <section class="w-full h-[420px] md:h-[480px] xl:h-[700px] bg-cover bg-center relative"
       style="background-image: url('./img/Rectangle 2.png');">
 
       <!-- Camada escura para melhorar a leitura dos textos -->
       <div class="absolute inset-0 bg-black/30"></div>
 
       <!-- Conteúdo principal do banner -->
-      <div class="relative z-10 pt-[105px] md:pt-[115px] xl:pt-[130px] pl-6 md:pl-[70px] xl:pl-[95px] text-white">
+      <div
+        class="relative h-full z-10 pt-[50px] md:pt-[115px] lg:pt-[120px] xl:pt-[150px] pl-6 md:pl-[70px] xl:pl-[95px] text-white">
 
         <!-- Título de destaque da página -->
-        <h1 class="text-[34px] md:text-[48px] xl:text-[62px] leading-tight font-bold">
+        <h1 class="text-[25px] md:text-[48px] xl:text-[62px] leading-tight font-bold font-[Inter]">
           Sinta o sabor <br>
-          do <span class="text-[#ff6b00] italic font-normal text-[46px] md:text-[64px] xl:text-[82px]">momento!</span>
+          do <span class=" absolute top-14 md:top-[142px] lg:top-[120px] xl:top-[180px] left-16 md:left-[140px] lg:left-[150px] xl:left-[180px] text-[#FF9100] font-normal font-[Gwendolyn]
+                             text-[52px] lg:text-[120px] md:text-[90px]">momento!</span>
         </h1>
 
         <!-- Descrição institucional -->
-        <p class="mt-[8px] text-[15px] md:text-[19px] xl:text-[24px] leading-tight font-light">
+        <p class="mt-[8px] text-[15px] md:text-[19px] lg:text-[24px] xl:text-[24px] leading-tight font-light">
           Coquetéis artesanais e bebidas especiais <br>
           para refrescar seus melhores momentos.
         </p>
@@ -145,22 +151,24 @@ p-0: remove toda a margem interna do elemnto
         <!-- BOTÕES -->
         <div class="flex gap-4 md:gap-6 xl:gap-8 mt-5 xl:mt-7">
           <button
-            class="w-[145px] md:w-[170px] xl:w-[190px] h-[38px] md:h-[44px] xl:h-[48px] bg-[#ff6500] rounded-full text-white text-[12px] md:text-[14px] xl:text-[15px] font-bold">
+            class="w-[100px] md:w-[170px] xl:w-[190px] h-[25px] md:h-[44px] xl:h-[48px] bg-[#FF9100] rounded-full text-white text-[11px] md:text-[14px] xl:text-[15px] font-bold">
             Ver Catálogo
           </button>
 
           <button
-            class="w-[185px] md:w-[230px] xl:w-[255px] h-[38px] md:h-[44px] xl:h-[48px] bg-white rounded-full text-[#00a9bb] text-[12px] md:text-[14px] xl:text-[15px] font-bold">
+            class="w-[135px] md:w-[230px] xl:w-[255px] h-[25px] md:h-[44px] xl:h-[48px] bg-white rounded-full text-[#00C3D0] text-[11px] md:text-[14px] xl:text-[15px] font-bold 
+                    border-2 lg:border-3 border-[#00C3D0] ">
             Sobre a Delícia Gelada
           </button>
         </div>
 
         <!-- SELINHOS -->
-        <div class="flex gap-6 md:gap-10 xl:gap-14 mt-5 xl:mt-6">
+        <div class="flex flex-col md:flex-row lg:flex-row xl-flex-row gap-6 md:gap-10 xl:gap-14 mt-5 xl:mt-6">
 
           <div class="flex items-center gap-3">
             <div
-              class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] md:text-[22px] xl:text-[24px]">
+              class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] 
+                      md:text-[22px] xl:text-[24px]">
               18+
             </div>
 
@@ -188,53 +196,60 @@ p-0: remove toda a margem interna do elemnto
     </section>
 
     <!-- CATEGORIAS DE PRODUTOS -->
-    <section class="bg-white py-[50px] md:py-[65px] xl:py-[80px] flex justify-center items-center px-4">
-
+     <!-- 
+        py - padding vertical
+     -->
       <div
-        class="w-full max-w-[1100px] min-h-[180px] xl:min-h-[205px] flex flex-wrap items-center justify-center gap-8 md:gap-12 xl:gap-[70px] px-6 py-8">
+        class="w-full min-h-[180px] xl:min-h-[205px] flex flex-wrap items-center justify-center gap-5 md:gap-12 xl:gap-[70px] px-6 py-8">
 
         <div class="text-center">
-          <img src="./img/classicos.png"
-            class="w-[82px] h-[82px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
+          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
+          <img src="./img/classicos.png" 
+            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
           <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Clássicos</h3>
           <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Receitas tradicionais</p>
         </div>
 
         <div class="text-center">
+          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
           <img src="./img/tropicais.png"
-            class="w-[82px] h-[82px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
+            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
           <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Tropicais</h3>
           <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Sabores do paraíso</p>
         </div>
 
         <div class="text-center">
+          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
           <img src="./img/frozen.png"
-            class="w-[82px] h-[82px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
+            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
           <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Frozen</h3>
           <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Gelados e cremosos</p>
         </div>
 
         <div class="text-center">
+          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
           <img src="./img/alcoolicos.png"
-            class="w-[82px] h-[82px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
+            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
           <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Alcoólicos</h3>
           <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Com teor alcoólico</p>
         </div>
 
         <div class="text-center">
+          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
           <img src="./img/nao-alcoolico.png"
-            class="w-[82px] h-[82px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
+            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
           <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Não alcoólico</h3>
           <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Sem álcool</p>
         </div>
 
       </div>
 
-    </section>
-
-
     <!-- CATÁLOGO / DESTAQUES -->
-    <section class="bg-white px-6 md:px-10 xl:px-[70px] pt-[60px] xl:pt-[80px]">
+    <!-- 
+      px - padding horizontal
+      pt - padding top
+    -->
+    <section class="bg-white px-6 md:px-10 xl:px-[70px] pt-[40px] xl:pt-[80px]">
 
       <div class="max-w-[1780px] mx-auto">
 
@@ -242,51 +257,53 @@ p-0: remove toda a margem interna do elemnto
         <div class="flex items-center justify-between">
 
           <div>
-            <p class="text-[12px] md:text-[14px] xl:text-[16px] text-[#ff6500] font-semibold mb-[8px]">
+            <p class="text-[12px] md:text-[14px] xl:text-[16px] text-[#FF9100] font-semibold mb-[8px]">
               CATÁLOGO
             </p>
 
-            <h2 class="text-[24px] md:text-[32px] xl:text-[40px] font-bold leading-none">
+            <h2 class="text-[18px] md:text-[32px] xl:text-[40px] font-bold leading-none">
               Destaques da <span class="text-[#00bcd4]">Casa</span>
             </h2>
           </div>
 
           <button
-            class="w-[150px] md:w-[190px] xl:w-[220px] h-[38px] md:h-[44px] xl:h-[50px] border border-[#00bcd4] rounded-full text-[#00bcd4] text-[11px] md:text-[13px] xl:text-[15px] font-semibold">
+            class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00bcd4] rounded-full 
+                  text-[#00bcd4] text-[9px] md:text-[13px] xl:text-[15px] font-semibold">
             Ver todos os Drinks
           </button>
 
         </div>
 
+        <div>
         <!-- Filtros de busca -->
-        <div class="flex items-center gap-14 mt-[30px] w-full">
+        <div class="flex flex-wrap gap-4 md:gap-14 lg:gap-14 xl:gap-14 mt-[30px] w-full">
 
           <!-- Busca -->
-          <div class="flex-1 h-[50px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
-            <input type="text" placeholder="Buscar por nome do drink" class="w-full text-[15px] outline-none">
-            <span class="text-[28px]">⌕</span>
+          <div class="w-[250px] h-[50px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
+            <input type="text" placeholder="Buscar por nome do drink" class="w-full text-[13px] pt-[10px] outline-none">
+            <button class="text-[28px]">⌕</button>
           </div>
 
           <!-- Categoria -->
-          <select class="flex-1 h-[50px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
+          <select class="w-[120px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
             <option>Categoria</option>
           </select>
 
           <!-- Tipo -->
-          <select class="flex-1 h-[50px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
+          <select class="w-[120px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
             <option>Tipo</option>
           </select>
 
           <!-- Preço mínimo -->
           <input type="text" placeholder="Preço min"
-            class="flex-1 h-[50px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
+            class="w-[77px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
 
           <!-- Preço máximo -->
           <input type="text" placeholder="Preço max"
-            class="flex-1 h-[50px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
+            class="w-[77px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
 
           <!-- Botão -->
-          <button class="flex-1 h-[50px] bg-[#00bcd4] rounded-full text-white text-[15px] font-semibold">
+          <button class="w-[110px] h-[41px] bg-[#00bcd4] rounded-full text-white text-[15px] font-semibold">
             Buscar por preço
           </button>
 

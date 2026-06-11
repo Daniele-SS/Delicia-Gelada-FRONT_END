@@ -22,11 +22,6 @@ html{
     scroll-behavior: smooth;
 }
 
-/* Fonte padrão da aplicação */
-body{
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 /* Personalização da barra de rolagem */
 ::-webkit-scrollbar{
     width: 8px;
@@ -37,10 +32,23 @@ body{
 }
 
 ::-webkit-scrollbar-thumb{
-    background: #00a9bb;
+    background: #00C3D0;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover{
-    background: #008696;
+    background: #00C3D0;
 }
+
+.gwendolyn-regular {
+    font-family: "Gwendolyn", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .gwendolyn-bold {
+    font-family: "Gwendolyn", cursive;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
