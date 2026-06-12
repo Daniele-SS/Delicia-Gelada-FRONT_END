@@ -6,32 +6,81 @@
 ---------------------------------------------------->
 
 <!DOCTYPE html>
-<html lang="pt-br" class="bg-blue-100 font-serif text-gray-900">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-<!--
-    <div class="flex justify-end">
-        <img src="./img/Gemini_Generated_Image_ce7rnce7rnce7rnc 1.png" alt="Mulher com drink" class="object-cover object-center">
-    </div>
--->
+<html lang="pt-br" class="font-inter">
 
-    <div class="flex h-screen w-full bg-cyan-50">
-        <div class="w-1/2 flex flex-col justify-center items-center">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Administrativa | Delicia Gelada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="font-sans text-gray-900">
+
+  <div class="relative h-screen w-full">
+
+    <!-- imagem de fundo -->
+    <img src="./img/body.jpeg" alt="Corpo da tela" class="absolute inset-0 h-full w-full object-cover">
+
+    <!-- conteúdo por cima -->
+    <div class="relative z-10 flex h-full">
+
+      <!-- lado esquerdo: formulário -->
+      <div class="flex flex-col justify-center items-center w-full md:w-1/2 px-12">
+
+        <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-36 mb-6">
+
+        <h1 class="text-orange-500 font-bold text-2xl text-center mb-6">
+          Bem-vindo à Área Administrativa!
+        </h1>
+
+        <!-- formulário -->
+        <div class="w-full max-w-sm flex flex-col gap-4">
+
+          <input type="email" placeholder="Email"
+            class="w-full border border-gray-300 rounded px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
+
+          <div class="relative">
+            <input type="password" placeholder="Senha" id="inputSenha"
+              class="w-full border border-gray-300 rounded px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
+
+            <!-- ícone mostrar/ocultar senha -->
+            <button type="button" onclick="toggleSenha()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+            </button>
+
           </div>
-      
-        <div class="w-1/2 h-full relative">
-          <img 
-            src="./img/Gemini_Generated_Image_ce7rnce7rnce7rnc 1.png" 
-            alt="Mulher com drink" 
-            class="w-full h-full object-cover [clip-path:polygon(20%_0,_100%_0,_100%_100%,_0_20%)]">
+
+          <!-- link esqueceu senha -->
+          <div class="text-center">
+            <a href="#" class="text-blue-500 text-sm hover:underline">
+              Esqueceu sua senha ?
+            </a>
+          </div>
+
+          <!-- botão entrar -->
+          <button
+            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded tracking-widest transition">
+            ENTRAR
+          </button>
+
         </div>
       </div>
-    
+
+      <!-- lado direito: vazio (a imagem de fundo já cobre) -->
+      <div class="hidden md:block md:w-1/2"></div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleSenha() {
+      const input = document.getElementById('inputSenha')
+      input.type = input.type === 'password' ? 'text' : 'password'
+    }
+  </script>
+
 </body>
+
 </html>
