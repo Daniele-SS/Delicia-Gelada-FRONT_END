@@ -10,14 +10,29 @@ function toggleSenha() {
     input.type = input.type === 'password' ? 'text' : 'password'
   }
   
-  function irParaDashboard() {
+function irParaDashboard() {
     document.getElementById('tela-login').classList.add('hidden')
     document.getElementById('tela-dashboard').classList.remove('hidden')
     document.getElementById('tela-dashboard').classList.add('flex')
-  }
+}
   
-  function mostrarSecao(secao) {
+function mostrarSecao(secao) {
+    if (secao === 'bebida') {
+      // Esconde a tela do dashboard
+      document.getElementById('tela-dashboard').classList.add('hidden')
+      document.getElementById('tela-dashboard').classList.remove('flex')
+      
+      // Exibe a tela de adicionar bebida
+      document.getElementById('tela-adicionar-bebida').classList.remove('hidden')
+      document.getElementById('tela-adicionar-bebida').classList.add('flex')
+    }
+}
     // por enquanto só loga no console
-    // aqui você vai conectar com as próximas telas/modais
+    // aqui só vai conectar com as próximas telas/modais
     console.log('Seção clicada:', secao)
-  }
+
+function voltarParaDashboard() {
+      document.getElementById('tela-adicionar-bebida').classList.add('hidden');
+      document.getElementById('tela-dashboard').classList.remove('hidden');
+      document.getElementById('tela-dashboard').classList.add('flex');
+}
