@@ -60,56 +60,47 @@ p-0: remove toda a margem interna do elemnto
       md: tamanho médio, utilizado no tablet
       xl: tamanho grande, utilizado no desktop
     -->
-  <header class="relative w-full h-[105px] md:h-[77px] xl:h-[80px] bg-[#FF9100] flex items-center justify-center px-4">
+  <header class="relative w-full bg-[#FF9100] h-[105px] md:h-[77px] flex items-center justify-center px-4">
 
-    <!-- Botão hamburguer (imagem) 
-      O botão do menu fica absoluto à esquerda no mobile e desaparece no tablet/desktop. 
-    -->
-    <button class="absolute left-4 md:hidden">
+    <!-- Botão Hamburger (Mobile) -->
+    <button id="btn-hamburger" class="md:hidden fixed top-4 left-4 z-50">
       <img src="./img/menu-hamburguer.png" alt="Menu" class="w-6 h-6">
     </button>
 
-    <nav>
-      <!-- Logo 
-       Absolute: defide que a posição da imagem será absoluta dentro do elemento pai 
-       left: celular 20px á esquerda   -->
+    <!-- Overlay para sombra -->
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
 
-      <img src="./img/logo.png" alt="Logo Delícia Gelada"
-        class="hidden md:flex md:absolute md:left-[84px] xl:left-[150px] top-[3px] w-30 md:w-[200px] lg:w-[250px] xl:w-[280px] z-30 md:object-cover xl:object-cover">
-    </nav>
-    <!-- Logo 
-      Criando uma segunda logo para poder chegar no mobile e ficar centralizado ao meio 
-    -->
+    <!-- Logo -->
     <img src="./img/logo.png" alt="Logo Delícia Gelada"
-      class="md:hidden flex left-[84px] xl:hidden top-[5px] w-[120px] z-30">
+      class="w-28 md:w-[200px] xl:w-[280px] md:absolute md:left-[84px] md:top-[3px] z-30 flex justify-center md:flex-none">
 
-    <!-- Menu 
-      hidden no começo é para poder sumir quando entra no mobile
-      quando passar o mouse por cima as letras mudam de cor para branco
-        - hover: text-white
-        - hover:after: cria a linha laranja embaixo no hover
-        - absolute -bottom-1 left-0 w-full h-[2px] bg-[#ff6500]: estiliza a linha laranja de 2px.
-    -->
-    <nav
-      class="hidden md:flex md:flex-wrap justify-center lg:justify-around items-center gap-5 lg:gap-0 w-full lg:w-[30vw] font-[Inter] text-[14px]">
-      <a href="#" class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] 
-                      hover:after:bg-[#FD6100] after:transition-all after:duration-300"> INÍCIO
-      </a>
-      <a href="#" class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px]  
-                      hover:after:bg-[#FD6100] after:transition-all after:duration-300"> CATÁLOGO
-      </a>
-      <a href="#" class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] 
-                      hover:after:bg-[#FD6100] after:transition-all after:duration-300"> CONTATO
-      </a>
+    <!-- Menu Desktop -->
+    <nav class="hidden md:flex justify-center items-center gap-6 lg:gap-10 w-full lg:w-[30vw] font-[Inter] text-[14px]">
+      <a href="#inicio"
+        class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-[#FD6100] after:transition-all after:duration-300">INÍCIO</a>
+      <a href="#catalogo"
+        class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-[#FD6100] after:transition-all after:duration-300">CATÁLOGO</a>
+      <a href="#contato"
+        class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-[#FD6100] after:transition-all after:duration-300">CONTATO</a>
     </nav>
 
-    <!-- Busca -->
-    <div class=" hidden md:flex absolute right-[20px] md:right-[40px] xl:right-[60px] flex items-center gap-[10px]">
+    <div class="hidden md:flex absolute right-[40px] items-center gap-[10px]">
       <input type="text" placeholder="Buscar produto"
-        class="w-[140px] md:w-[190px] xl:w-[240px] h-[34px] xl:h-[38px] rounded-[4px] px-[12px] text-[12px] shadow-md outline-none">
-
-      <button class="text-[28px] xl:text-[34px] leading-none">⌕</button>
+        class="w-[190px] xl:w-[240px] h-[34px] xl:h-[38px] rounded-[4px] px-3 text-[12px] shadow-md outline-none">
+      <span class="text-[28px] xl:text-[34px] leading-none">⌕</span>
     </div>
+
+    <!-- w-3/4 - largura do elemento igual a 3/4 (75%) da largura da tela).
+        max-w-xs - limita a largura máxima do elemento a um valor definido como Tailwind “xs” (~20rem ou 320px), evitando que fique muito largo em telas grandes.
+        z-50 - define o z-index alto, garantindo que o menu fique sobre outros elementos da página.
+    -->
+    <nav id="mobile-menu"
+      class="fixed top-0 left-0 w-3/4 max-w-xs h-full bg-[#FF9100] shadow-2xl hidden z-50 flex flex-col p-6 gap-4">
+      <a href="#inicio" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">INÍCIO</a>
+      <a href="#catalogo" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CATÁLOGO</a>
+      <a href="#contato" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CONTATO</a>
+      <a href="#sobre-nos" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">SOBRE NÓS</a>
+    </nav>
 
   </header>
   <!--
@@ -125,7 +116,7 @@ p-0: remove toda a margem interna do elemnto
   <main class="w-full mx-auto min-h-screen">
 
     <!-- BANNER PRINCIPAL -->
-    <section class="w-full h-[420px] md:h-[480px] xl:h-[700px] bg-cover bg-center relative"
+    <section id="inicio" class="w-full h-[420px] md:h-[480px] xl:h-[700px] bg-cover bg-center relative"
       style="background-image: url('./img/Rectangle 2.png');">
 
       <!-- Camada escura para melhorar a leitura dos textos -->
@@ -155,8 +146,7 @@ p-0: remove toda a margem interna do elemnto
             Ver Catálogo
           </button>
 
-          <button
-            class="w-[135px] md:w-[230px] xl:w-[255px] h-[25px] md:h-[44px] xl:h-[48px] bg-white rounded-full text-[#00C3D0] text-[11px] md:text-[14px] xl:text-[15px] font-bold 
+          <button class="w-[135px] md:w-[230px] xl:w-[255px] h-[25px] md:h-[44px] xl:h-[48px] bg-white rounded-full text-[#00C3D0] text-[11px] md:text-[14px] xl:text-[15px] font-bold 
                     border-2 lg:border-3 border-[#00C3D0] ">
             Sobre a Delícia Gelada
           </button>
@@ -166,8 +156,7 @@ p-0: remove toda a margem interna do elemnto
         <div class="flex flex-col md:flex-row lg:flex-row xl-flex-row gap-6 md:gap-10 xl:gap-14 mt-5 xl:mt-6">
 
           <div class="flex items-center gap-3">
-            <div
-              class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] 
+            <div class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] 
                       md:text-[22px] xl:text-[24px]">
               18+
             </div>
@@ -196,53 +185,70 @@ p-0: remove toda a margem interna do elemnto
     </section>
 
     <!-- CATEGORIAS DE PRODUTOS -->
-     <!-- 
+    <!-- 
         py - padding vertical
      -->
-      <div
-        class="w-full min-h-[180px] xl:min-h-[205px] flex flex-wrap items-center justify-center gap-5 md:gap-12 xl:gap-[70px] px-6 py-8">
+    <section class="bg-white py-8 px-6 md:px-10 xl:px-[70px]">
+      <div class="max-w-[1780px] mx-auto flex flex-wrap justify-center gap-6 md:gap-12 xl:gap-[70px]">
 
-        <div class="text-center">
-          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
-          <img src="./img/classicos.png" 
-            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
-          <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Clássicos</h3>
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Receitas tradicionais</p>
-        </div>
+        <!-- Card 1 -->
+        <a href="" class="block">
+          <div
+            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/classicos.png" alt="Clássicos"
+              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+            <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Clássicos</h3>
+            <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Receitas tradicionais</p>
+          </div>
+        </a>
 
-        <div class="text-center">
-          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
-          <img src="./img/tropicais.png"
-            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
-          <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Tropicais</h3>
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Sabores do paraíso</p>
-        </div>
+        <!-- Card 2 -->
+        <a href="" class="block">
+          <div
+            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/tropicais.png" alt="Tropicais"
+              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+            <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Tropicais</h3>
+            <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Sabores do paraíso</p>
+          </div>
+        </a>
 
-        <div class="text-center">
-          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
-          <img src="./img/frozen.png"
-            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
-          <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Frozen</h3>
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Gelados e cremosos</p>
-        </div>
+        <!-- Card 3 -->
+        <a href="" class="block">
+          <div
+            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/frozen.png" alt="Frozen"
+              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+            <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Frozen</h3>
+            <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Gelados e cremosos</p>
+          </div>
+        </a>
 
-        <div class="text-center">
-          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
-          <img src="./img/alcoolicos.png"
-            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
-          <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Alcoólicos</h3>
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Com teor alcoólico</p>
-        </div>
+        <!-- Card 4 -->
+        <a href="" class="block">
+          <div
+            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/alcoolicos.png" alt="Alcoólicos"
+              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+            <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Alcoólicos</h3>
+            <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Com teor alcoólico</p>
+          </div>
+        </a>
 
-        <div class="text-center">
-          <!--aqui vai a url da imagem, deixei esta para não deixar em branco-->
-          <img src="./img/nao-alcoolico.png"
-            class="w-[60px] h-[60px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mx-auto">
-          <h3 class="text-[12px] md:text-[14px] xl:text-[16px] mt-3 font-medium">Não alcoólico</h3>
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600">Sem álcool</p>
-        </div>
+
+        <!-- Card 5 -->
+        <a href="" class="block">
+          <div
+            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/nao-alcoolico.png" alt="Não alcoólico"
+              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+            <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Não alcoólico</h3>
+            <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Sem álcool</p>
+          </div>
+        </a>
 
       </div>
+    </section>
 
     <!-- CATÁLOGO / DESTAQUES -->
     <!-- 
@@ -256,72 +262,288 @@ p-0: remove toda a margem interna do elemnto
         <!-- Cabeçalho da seção -->
         <div class="flex items-center justify-between">
 
-          <div>
+          <div id="catalogo">
             <p class="text-[12px] md:text-[14px] xl:text-[16px] text-[#FF9100] font-semibold mb-[8px]">
               CATÁLOGO
             </p>
 
             <h2 class="text-[18px] md:text-[32px] xl:text-[40px] font-bold leading-none">
-              Destaques da <span class="text-[#00bcd4]">Casa</span>
+              Destaques da <span class="text-[#00C3D0]">Casa</span>
             </h2>
           </div>
 
-          <button
-            class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00bcd4] rounded-full 
-                  text-[#00bcd4] text-[9px] md:text-[13px] xl:text-[15px] font-semibold">
+          <button class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
+                  text-[#00C3D0] text-[9px] md:text-[13px] xl:text-[15px] font-semibold">
             Ver todos os Drinks
           </button>
 
         </div>
 
-        <div>
-        <!-- Filtros de busca -->
-        <div class="flex flex-wrap gap-4 md:gap-14 lg:gap-14 xl:gap-14 mt-[30px] w-full">
+        <div class="flex">
+          <!-- Filtros de busca -->
+          <div class="flex flex-wrap gap-4 md:gap-3 lg:gap-2 xl:gap-6 mt-[30px] w-full">
 
-          <!-- Busca -->
-          <div class="w-[250px] h-[50px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
-            <input type="text" placeholder="Buscar por nome do drink" class="w-full text-[13px] pt-[10px] outline-none">
-            <button class="text-[28px]">⌕</button>
+            <!-- Busca -->
+            <div
+              class="w-[240px] md:w-[220px] lg:[250px] xl:w-[330px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
+              <input type="text" placeholder="Buscar por nome do drink"
+                class="w-full text-[13px] pt-[10px] outline-none">
+              <button class="text-[28px]">⌕</button>
+            </div>
+
+            <!-- Categoria -->
+            <select
+              class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
+              <option>Categoria</option>
+            </select>
+
+            <!-- Tipo -->
+            <select
+              class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
+              <option>Tipo</option>
+            </select>
+
+            <!-- Preço mínimo -->
+            <input type="text" placeholder="Preço min"
+              class="w-[95px] h-[41px] md:w-[115px] lg:w-[130px] xl:w-[190px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
+
+            <!-- Preço máximo -->
+            <input type="text" placeholder="Preço max"
+              class="w-[95px] h-[41px] md:w-[115px] lg:w-[130px] xl:w-[190px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
+
           </div>
-
-          <!-- Categoria -->
-          <select class="w-[120px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
-            <option>Categoria</option>
-          </select>
-
-          <!-- Tipo -->
-          <select class="w-[120px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
-            <option>Tipo</option>
-          </select>
-
-          <!-- Preço mínimo -->
-          <input type="text" placeholder="Preço min"
-            class="w-[77px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
-
-          <!-- Preço máximo -->
-          <input type="text" placeholder="Preço max"
-            class="w-[77px] h-[41px] bg-white rounded-[6px] shadow-md px-[14px] text-[15px]">
-
           <!-- Botão -->
-          <button class="w-[110px] h-[41px] bg-[#00bcd4] rounded-full text-white text-[15px] font-semibold">
-            Buscar por preço
-          </button>
-
+          <div class="flex items-end justify-center">
+            <button class="w-[110px] md:w-[150px] lg:[150px] xl:w-[210px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
+                           text-white bg-[#00C3D0] text-[10px] md:text-[13px] xl:text-[15px] font-semibold">
+              Buscar por preço
+            </button>
+          </div>
         </div>
-
-      </div>
 
     </section>
     <!-- CARDS DOS DRINKS -->
-    <section class="px-[28px] mt-[25px] pb-[40px] bg-[#fafafa]">
+    <div id="container-produtos" class="flex justify-center">
+      <!-- grid de produtos -->
+      <div id="produtos"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-8 md:gap-12 lg:gap-12 xl:gap-12 mt-8">
+        <!-- inicio do card  -->
+        <div id="card-bebida"
+          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+          <!-- imagem  -->
+          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
+            class="w-full h-[150px] xl:h-[229px] object-cover">
+          <!-- informações  -->
+          <div id="info-bebida" class="flex flex-col m-1">
+            <!-- nome  -->
+            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
+              Orange Paradise
+            </h3>
+            <!-- categoria  -->
+            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
+              Tropicais
+            </span>
+            <!-- descricao  -->
+            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
+              Vodka, suco de laranja, limão e essência tropical.
+            </p>
+            <!-- preco  -->
+            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
+              R$28.90
+            </h4>
+            <!-- botao  -->
+            <div class="flex justify-center">
+              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
+                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
+                VER DETALHES
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <div id="container-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[28px]">
+        <div id="card-bebida"
+          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+          <!-- imagem  -->
+          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
+            class="w-full h-[150px] xl:h-[229px] object-cover">
+          <!-- informações  -->
+          <div id="info-bebida" class="flex flex-col m-1">
+            <!-- nome  -->
+            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
+              Orange Paradise
+            </h3>
+            <!-- categoria  -->
+            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
+              Tropicais
+            </span>
+            <!-- descricao  -->
+            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
+              Vodka, suco de laranja, limão e essência tropical.
+            </p>
+            <!-- preco  -->
+            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
+              R$28.90
+            </h4>
+            <!-- botao  -->
+            <div class="flex justify-center">
+              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
+                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
+                VER DETALHES
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-bebida"
+          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+          <!-- imagem  -->
+          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
+            class="w-full h-[150px] xl:h-[229px] object-cover">
+          <!-- informações  -->
+          <div id="info-bebida" class="flex flex-col m-1">
+            <!-- nome  -->
+            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
+              Orange Paradise
+            </h3>
+            <!-- categoria  -->
+            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
+              Tropicais
+            </span>
+            <!-- descricao  -->
+            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
+              Vodka, suco de laranja, limão e essência tropical.
+            </p>
+            <!-- preco  -->
+            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
+              R$28.90
+            </h4>
+            <!-- botao  -->
+            <div class="flex justify-center">
+              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
+                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
+                VER DETALHES
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-bebida"
+          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+          <!-- imagem  -->
+          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
+            class="w-full h-[150px] xl:h-[229px] object-cover">
+          <!-- informações  -->
+          <div id="info-bebida" class="flex flex-col m-1">
+            <!-- nome  -->
+            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
+              Orange Paradise
+            </h3>
+            <!-- categoria  -->
+            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
+              Tropicais
+            </span>
+            <!-- descricao  -->
+            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
+              Vodka, suco de laranja, limão e essência tropical.
+            </p>
+            <!-- preco  -->
+            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
+              R$28.90
+            </h4>
+            <!-- botao  -->
+            <div class="flex justify-center">
+              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
+                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
+                VER DETALHES
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
-    </section>
-
+    </div>
+    <!-- sobre nós  -->
+    <div id="sobre-nos" class="w-full bg-[#E4F3F4] mt-9 p-6">
+      <h1 class="text-[24px] md:text-[48px] xl:text-[48 px] text-[#FF9100] leading-tight font-bold font-[Inter]">
+        Sobre nós</h1>
+      <h1 class="text-[24px] md:text-[40px] xl:text-[48px] leading-tight font-bold font-[Inter]">
+        A Delícia está<br>
+        nos <span
+          class="text-[#FF9100] font-normal font-[Gwendolyn] text-[45px] lg:text-[120px] md:text-[90px]">detalhes!</span>
+      </h1>
+      <h4 class="text-[#8E8E93] text-[11px] md:text-[14px] xl:text-[24px]">
+        A Delícia gelada nasceu da paixão por criar<br>
+        experiências únicas. Nossos drinks são preparados <br>com ingredientes selecionados,
+        muito carinho e um <br>toque especial que você só encontra aqui!
+      </h4>
+      <div class="mt-3 gap-2 flex md:gap-36 md:h-16 items-center">
+        <div class="flex gap-2">
+          <img src="./img/Bay Leaf.png" class="w-8 h-8" alt=" folhas">
+          <h4 class="text-[11px] md:text-[14px] xl:text-[16px]">Ingredientes<br>selecionados.</h4>
+        </div>
+        <div class="flex gap-2">
+          <img src="./img/Crown.png" class="w-8 h-8" alt="coroa">
+          <h4 class="text-[11px] md:text-[14px] xl:text-[16px]">Receitas<br>autorais.</h4>
+        </div>
+        <div class="flex gap-2">
+          <img src="./img/Approval.png" class="w-8 h-8" alt="aprovado">
+          <h4 class="text-[11px] md:text-[14px] xl:text-[16px]">Qualidade em<br>cada drink.</h4>
+        </div>
+      </div>
     </div>
   </main>
+
+
+  <footer id="contato" class="bg-[#FF9100] text-white text-[10px] md:text-[14px] px-2 py-8">
+    <div class="flex md:flex-row items-start md:items-center md:justify-center gap-4 md:gap-36 ">
+
+      <div class="md:flex md:gap-36">
+        <!-- Bloco 1: Telefone -->
+        <div class="flex items-start gap-2 w-full">
+          <img src="./img/Phone.png" alt="Telefone" class="w-6 h-6">
+          <div class="flex flex-col">
+            <span class="font-bold">Telefone</span>
+            <span>(11) 98765-4321</span>
+          </div>
+        </div>
+
+        <!-- Bloco 2: E-mail -->
+        <div class="flex items-center gap-2 w-full py-6 md:py-0">
+          <img src="./img/Email.png" alt="E-mail" class="w-6 h-6">
+          <div class="flex flex-col">
+            <span class="font-bold">E-mail</span>
+            <span>contato@deliciagelada.com.br</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:flex md:gap-36">
+        <!-- Bloco 3: Localização -->
+        <div class="flex items-center gap-2 w-full">
+          <img src="./img/Location.png" alt="Localização" class="w-6 h-6">
+          <div class="flex flex-col">
+            <span class="font-bold">Localização</span>
+            <span>Rua das Graças, 123<br>Centro -Jandira/SP</span>
+          </div>
+        </div>
+
+        <!-- Bloco 4: Instagram -->
+        <div class="flex items-center gap-2 w-full py-6 md:py-0">
+          <img src="./img/Instagram.png" alt="Instagram" class="w-6 h-6">
+          <div class="flex flex-col">
+            <span class="font-bold">Siga-nos</span>
+            <span>@deliciageladadrinks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Linha horizontal + copyright + 18+ -->
+    <div
+      class="border-t border-white mt-2 pt-4 flex flex-col items-center justify-center text-[12px] md:flex-row md:justify-center md:text-[14px] gap-2">
+      <span>2026 Delícia Gelada. Todos os direitos reservados</span>
+      <div class="border border-white rounded-full w-6 h-6 flex items-center justify-center text-[10px]">18+</div>
+    </div>
+  </footer>
 </body>
 
 </html>

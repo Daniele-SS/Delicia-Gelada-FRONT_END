@@ -14,6 +14,9 @@ function irParaDashboard() {
     document.getElementById('tela-login').classList.add('hidden')
     document.getElementById('tela-dashboard').classList.remove('hidden')
     document.getElementById('tela-dashboard').classList.add('flex')
+
+    document.getElementById('tela-adicionar-categoria').classList.add('hidden')
+    document.getElementById('tela-adicionar-categoria').classList.add('flex')
 }
   
 function mostrarSecao(secao) {
@@ -25,6 +28,10 @@ function mostrarSecao(secao) {
       // Exibe a tela de adicionar bebida
       document.getElementById('tela-adicionar-bebida').classList.remove('hidden')
       document.getElementById('tela-adicionar-bebida').classList.add('flex')
+
+      // Exibe a tela de adicionar categoria
+      document.getElementById('tela-adicionar-categoria'.classList.add('hidden'))
+      document.getElementById('tela-adicionar-categoria').classList.add('flex')
     }
 }
     // por enquanto só loga no console
@@ -32,7 +39,10 @@ function mostrarSecao(secao) {
     console.log('Seção clicada:', secao)
 
 function voltarParaDashboard() {
-      document.getElementById('tela-adicionar-bebida').classList.add('hidden');
-      document.getElementById('tela-dashboard').classList.remove('hidden');
-      document.getElementById('tela-dashboard').classList.add('flex');
+      document.getElementById('tela-adicionar-bebida').classList.add('hidden')
+      document.getElementById('tela-dashboard').classList.remove('hidden')
+      document.getElementById('tela-dashboard').classList.add('flex')
+
+      document.getElementById('tela-adicionar-categoria').classList.add('hidden')
+      document.getElementById('tela-adicionar-categoria').classList.add('flex')
 }
