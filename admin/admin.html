@@ -7,64 +7,50 @@
 
 <!DOCTYPE html>
 <html lang="pt-br" class="font-inter">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Área Administrativa | Delicia Gelada</title>
+  <title>Login | Delicia Gelada</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./css/style.css">
   <script src="./js/admin.js" defer type="module"></script>
 </head>
-
 <body class="font-inter text-gray-900">
 
   <div id="tela-login" class="relative h-screen w-full">
-
-    <!-- imagem de fundo -->
     <img src="./img/body.jpeg" alt="Corpo da tela" class="absolute inset-0 h-full w-full object-cover">
 
-    <!-- conteúdo por cima -->
     <div class="relative z-10 flex h-full">
 
-      <!-- lado esquerdo: formulário -->
       <div class="flex flex-col justify-center items-center w-full md:w-1/2 px-12">
-
         <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-36 mb-6">
-
+        
         <h1 class="text-orange-500 font-bold text-2xl text-center mb-6">
           Bem-vindo à Área Administrativa!
         </h1>
 
-        <!-- formulário -->
         <div class="w-full max-w-sm flex flex-col gap-4">
-
           <input type="email" placeholder="Email"
             class="w-full border border-gray-300 rounded px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
 
           <div class="relative">
             <input type="password" placeholder="Senha" id="inputSenha"
               class="w-full border border-gray-300 rounded px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
-
-            <!-- ícone mostrar/ocultar senha -->
             <button type="button" onclick="toggleSenha()"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
             </button>
-
           </div>
 
-          <!-- link esqueceu senha -->
           <div class="text-center">
             <a href="#" class="text-blue-500 text-sm hover:underline">
               Esqueceu sua senha ?
             </a>
           </div>
 
-          <button onclick="irParaDashboard()"
+          <button onclick="window.location.href='../admin/pages/dashboard.html'"
             class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded tracking-widest transition">
             ENTRAR
           </button>
-
         </div>
       </div>
 
@@ -72,238 +58,5 @@
     </div>
   </div>
 
-  <!-- ==================== TELA 2: DASHBOARD ==================== -->
-  <div id="tela-dashboard" class="hidden font-sans bg-gray-100 h-screen flex">
-
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-[#E4F3F4] flex flex-col items-center py-8 px-4 h-screen fixed">
-      <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
-      <p class="text-gray-700 text-sm tracking-widest mb-auto">Área Administrativa</p>
-      <div class="flex flex-col items-center gap-2 mt-auto">
-        <img src="./img/gestor.png" alt="Foto do gestor"
-          class="w-24 h-24 rounded-full object-cover border-4 border-white shadow">
-        <p class="text-sm font-semibold text-gray-700">NOME</p>
-        <p class="text-xs text-gray-500 font-bold">Gestor(a)</p>
-      </div>
-    </aside>
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="ml-64 flex-1 p-10">
-      <div class="grid grid-cols-2 gap-6">
-
-        <!-- card: Adicionar Bebida -->
-        <div
-          class="bg-white rounded-lg flex items-center justify-between px-10 py-8 shadow-sm cursor-pointer hover:shadow-md transition"
-          onclick="mostrarSecao('bebida')">
-          <span class="text-blue-600 font-bold text-2xl leading-tight">Adicionar<br>Bebida</span>
-          <button
-            class="w-16 h-16 bg-orange-500 hover:bg-orange-600 rounded-full text-white text-3xl font-bold flex items-center justify-center shadow transition">+</button>
-        </div>
-
-        <!-- card: Adicionar Admin -->
-        <div
-          class="bg-white rounded-lg flex items-center justify-between px-10 py-8 shadow-sm cursor-pointer hover:shadow-md transition"
-          onclick="mostrarSecao('admin')">
-          <span class="text-blue-600 font-bold text-2xl leading-tight">Adicionar<br>Admin</span>
-          <button
-            class="w-16 h-16 bg-orange-500 hover:bg-orange-600 rounded-full text-white text-3xl font-bold flex items-center justify-center shadow transition">+</button>
-        </div>
-
-        <!-- card: Adicionar Categoria -->
-        <div
-          class="bg-white rounded-lg flex items-center justify-between px-10 py-8 shadow-sm cursor-pointer hover:shadow-md transition"
-          onclick="mostrarSecao('categoria')">
-          <span class="text-blue-600 font-bold text-2xl leading-tight">Adicionar<br>Categoria</span>
-          <button
-            class="w-16 h-16 bg-orange-500 hover:bg-orange-600 rounded-full text-white text-3xl font-bold flex items-center justify-center shadow transition">+</button>
-        </div>
-
-        <!-- card: Lista Completa -->
-        <div class="bg-white rounded-lg flex flex-col items-center justify-center gap-4 px-10 py-8 shadow-sm">
-          <span class="text-blue-600 font-bold text-xl">Lista Completa</span>
-          <div class="flex flex-col gap-2 w-full items-center">
-            <button onclick="mostrarSecao('lista-bebidas')"
-              class="border border-gray-300 rounded px-6 py-1 text-sm text-gray-700 hover:bg-gray-50 transition w-32 text-center">
-              Bebidas
-            </button>
-            <button onclick="mostrarSecao('lista-categorias')"
-              class="border border-gray-300 rounded px-6 py-1 text-sm text-gray-700 hover:bg-gray-50 transition w-32 text-center">
-              Categorias
-            </button>
-            <button onclick="mostrarSecao('lista-admins')"
-              class="border border-gray-300 rounded px-6 py-1 text-sm text-gray-700 hover:bg-gray-50 transition w-32 text-center">
-              Admins
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </main>
-  </div>
-
-  <script src="./js/admin.js"></script>
-
-  <!-- ==================== TELA 3: ADICIONAR NOVA BEBIDA ==================== -->
-  <div id="tela-adicionar-bebida" class="hidden font-sans bg-gray-100 min-h-screen w-full">
-
-    <!-- SIDEBAR — oculta no mobile, visível no desktop -->
-    <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
-      <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
-      <p class="text-gray-700 text-sm tracking-widest mb-auto">Área Administrativa</p>
-      <div class="flex flex-col items-center gap-2 mt-auto">
-        <img src="./img/gestor.png" alt="Foto do gestor"
-          class="w-24 h-24 rounded-full object-cover border-4 border-white shadow">
-        <p class="text-sm font-semibold text-gray-700">NOME</p>
-        <p class="text-xs text-gray-500">Gestor(a)</p>
-      </div>
-    </aside>
-
-    <!-- HEADER mobile — aparece só no mobile no lugar da sidebar -->
-    <header class="md:hidden w-full bg-blue-100 flex items-center justify-between px-4 py-3">
-      <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-16">
-      <p class="text-gray-700 text-xs tracking-widest">Área Administrativa</p>
-    </header>
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="md:pl-64 w-full min-h-screen p-6 md:p-10">
-      <!-- título -->
-      <div class="flex gap-3 mb-6 md:mb-8">
-        <div class="w-1.5 h-8 md:h-10 bg-orange-500 rounded-sm"></div>
-        <h2 class="text-blue-900 font-bold text-xl md:text-3xl">Adicionar Nova Bebida</h2>
-      </div>
-
-      <!-- grid do formulário -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 max-w-5xl mx-auto">
-
-        <!-- coluna esquerda -->
-        <div class="flex flex-col gap-4">
-          <div>
-            <label class="text-blue-600 font-bold text-xs block mb-1">NOME DA BEBIDA</label>
-            <input type="text" id="nomeBebida" placeholder="Ex: Coquetel de Verão Tropical"
-              class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white">
-          </div>
-
-          <div>
-            <label class="text-blue-600 font-bold text-xs block mb-1">CATEGORIA</label>
-            <select id="categoriaBebida" class="w-full border border-gray-300 rounded px-3 py-2 bg-white text-sm">
-              <option value="">Selecione uma categoria...</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="text-blue-600 font-bold text-xs block mb-1">DESCRIÇÃO DA BEBIDA</label>
-            <textarea id="descricaoBebida" rows="4" placeholder="Descrição da bebida..."
-              class="w-full border border-gray-300 rounded px-3 py-2 resize-none text-sm bg-white"></textarea>
-          </div>
-
-          <!-- toggle Produto Ativo -->
-          <div class="flex items-center gap-2 mt-1">
-            <input type="checkbox" id="produtoAtivo" checked class="w-4 h-4 accent-blue-500">
-            <label for="produtoAtivo" class="text-blue-500 text-sm font-medium">Produto Ativo</label>
-          </div>
-        </div>
-
-        <!-- coluna direita -->
-        <div class="flex flex-col gap-4">
-          <div>
-            <label class="text-blue-600 font-bold text-xs block mb-1">IMAGEM DA BEBIDA</label>
-            <div class="w-full h-48 md:h-56 rounded-xl overflow-hidden">
-              <img id="previewImagem" src="./img/placeholder-bebida.jpeg" class="w-full h-full object-cover"
-                alt="Preview" onerror="this.src='./img/sem-imagem.png'">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="text-blue-600 font-bold text-xs block mb-1">TIPO</label>
-              <input type="text" id="tipoBebida" placeholder="Ex: Batido"
-                class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white">
-            </div>
-            <div>
-              <label class="text-blue-600 font-bold text-xs block mb-1">PREÇO (R$)</label>
-              <input type="text" id="precoBebida" placeholder="00,00"
-                class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white">
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- botões -->
-      <div class="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-6 md:mt-10">
-        <button onclick="voltarParaDashboard()"
-          class="w-full md:w-auto px-8 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded transition">
-          CANCELAR
-        </button>
-        <button onclick="salvarNovaBebida(event)"
-          class="w-full md:w-auto px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition">
-          SALVAR PRODUTO
-        </button>
-      </div>
-
-    </main>
-
-    <!-- ==================== TELA 4: ADICIONAR NOVA CATEGORIA ==================== -->
-    <div id="tela-adicionar-categoria" class="hidden font-sans bg-gray-100 min-h-screen w-full">
-
-      <!-- SIDEBAR -->
-      <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
-        <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
-        <p class="text-gray-700 text-sm tracking-widest mb-auto">Área Administrativa</p>
-        <div class="flex flex-col items-center gap-2 mt-auto">
-          <img src="./img/gestor.png" alt="Foto do gestor"
-            class="w-24 h-24 rounded-full object-cover border-4 border-white shadow">
-          <p class="text-sm font-semibold text-gray-700">NOME</p>
-          <p class="text-xs text-gray-500">Gestor(a)</p>
-        </div>
-      </aside>
-
-      <!-- HEADER mobile -->
-      <header class="md:hidden w-full bg-[#E4F3F4] flex items-center justify-between px-4 py-3">
-        <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-16">
-        <p class="text-gray-700 text-xs tracking-widest">Área Administrativa</p>
-      </header>
-
-      <!-- CONTEÚDO PRINCIPAL -->
-      <main class="md:pl-64 w-full min-h-screen p-6 md:p-10">
-
-        <!-- título -->
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-1.5 h-10 bg-orange-500 rounded-sm"></div>
-          <h2 class="text-blue-900 font-bold text-xl md:text-3xl">Adicionar Nova Categoria</h2>
-        </div>
-
-        <!-- formulário -->
-        <div class="flex flex-col gap-4 max-w-sm">
-
-          <div>
-            <label class="text-blue-600 font-bold text-xs block mb-1">NOME DA CATEGORIA</label>
-            <input type="text" id="nomeCategoria" placeholder="Ex: Bebidas Topicais, Alcoólicos, Vinhos..."
-              class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white">
-          </div>
-
-          <div class="flex items-center gap-2">
-            <input type="checkbox" id="categoriaAtiva" checked class="w-4 h-4 accent-blue-500">
-            <label for="categoriaAtiva" class="text-blue-500 text-sm font-medium">Categoria Ativa</label>
-          </div>
-
-        </div>
-
-        <!-- botões -->
-        <div class="flex flex-col md:flex-row gap-3 mt-auto md:absolute md:bottom-10 md:right-10">
-          <button onclick="voltarParaDashboard()"
-            class="px-8 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded transition">
-            CANCELAR
-          </button>
-          <button onclick="salvarNovaCategoria()"
-            class="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition">
-            SALVAR CATEGORIA
-          </button>
-        </div>
-
-      </main>
-    </div>
-
 </body>
-
 </html>
