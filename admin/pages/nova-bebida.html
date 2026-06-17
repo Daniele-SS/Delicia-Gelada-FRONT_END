@@ -1,9 +1,9 @@
-<!---------------------------------------------------
- * Objetivo: Arquivo responsável pela página do ADMIN
- * Data: 11/06/2026
+<!---------------------------------------------------------------------------------------------------------
+ * Objetivo: Arquivo responsável pelo gerenciamento das demais páginas (bebidas, categoria e novos admins)
+ * Data: 16/06/2026
  * Autora: Daniele Silva Santos
  * Versão: 1.0
----------------------------------------------------->
+---------------------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html>
 <html lang="pt-br" class="font-inter">
@@ -17,7 +17,7 @@
 </head>
 <body class="font-sans bg-gray-50">
 
-  <div id="tela-adicionar-bebida" class="min-h-screen w-full flex">
+  <div id="tela-adicionar-bebida" class="min-h-screen flex">
     
     <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
       <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
@@ -26,7 +26,7 @@
       <div class="flex flex-col items-center gap-2 mt-auto">
         <img src="../img/gestor.png" alt="Foto do gestor"
           class="w-20 h-20 rounded-full object-cover border-2 border-white shadow">
-        <p class="text-sm font-bold text-gray-800">Rodrigo</p>
+        <p class="text-sm font-bold text-gray-800">NOME</p>
         <p class="text-xs text-gray-600 font-medium">Gestor</p>
       </div>
     </aside>
@@ -36,18 +36,18 @@
       <p class="text-gray-700 text-xs tracking-widest font-medium">Área Administrativa</p>
     </header>
 
-    <main class="md:pl-64 w-full min-h-screen p-6 pt-24 pb-12 md:pt-10 md:p-12">
+    <main class="md:ml-64 flex-1 min-h-screen pt-24 pb-12 px-6 md:pt-12 md:px-16 flex flex-col w-full">
       
-      <div class="max-w-5xl mx-auto w-full">
+      <div class="max-w-5xl mx-auto w-full flex-1">
         
         <div class="flex items-center gap-3 mb-8 md:mb-10">
           <div class="w-1.5 h-8 md:h-10 bg-orange-500 rounded-sm shrink-0"></div>
           <h2 class="text-[#005A9C] font-bold text-2xl md:text-3xl leading-tight">Adicionar Nova Bebida</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 w-full">
           
-          <div class="flex flex-col gap-5">
+          <div class="flex flex-col gap-5 w-full">
             <div>
               <label class="text-[#005A9C] font-bold text-sm block mb-2">NOME DA BEBIDA</label>
               <input type="text" id="nomeBebida" placeholder="Ex: Coquetel de Verão Tropical"
@@ -76,7 +76,7 @@
             </div>
           </div>
 
-          <div class="flex flex-col gap-5 justify-between">
+          <div class="flex flex-col gap-5 justify-between w-full">
             
             <div>
               <label class="text-[#005A9C] font-bold text-sm block mb-2">IMAGEM DA BEBIDA</label>

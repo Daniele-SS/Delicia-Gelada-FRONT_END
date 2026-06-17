@@ -12,18 +12,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | Delicia Gelada</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./css/style.css">
-  <script src="./js/admin.js" defer type="module"></script>
+  <link rel="stylesheet" href="./admin/css/style.css">
+  <script src="./admin/js/admin.js" defer></script>
 </head>
 <body class="font-inter text-gray-900">
 
   <div id="tela-login" class="relative h-screen w-full">
-    <img src="./img/body.jpeg" alt="Corpo da tela" class="absolute inset-0 h-full w-full object-cover">
+    <img src="./admin/img/body.jpeg" alt="Corpo da tela" class="absolute inset-0 h-full w-full object-cover">
 
     <div class="relative z-10 flex h-full">
 
       <div class="flex flex-col justify-center items-center w-full md:w-1/2 px-12">
-        <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-36 mb-6">
+        <img src="./admin/img/logo.png" alt="Logo Delícia Gelada" class="w-36 mb-6">
         
         <h1 class="text-orange-500 font-bold text-2xl text-center mb-6">
           Bem-vindo à Área Administrativa!
@@ -35,19 +35,24 @@
 
           <div class="relative">
             <input type="password" placeholder="Senha" id="inputSenha"
-              class="w-full border border-gray-300 rounded px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
+              class="w-full border border-gray-300 rounded px-4 py-3 pr-10 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
+            
             <button type="button" onclick="toggleSenha()"
-              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-500 transition">
+              <svg id="iconeOlho" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
             </button>
           </div>
 
           <div class="text-center">
-            <a href="#" class="text-blue-500 text-sm hover:underline">
+            <a href="./admin/pages/esqueceu-senha.html" class="text-blue-500 text-sm hover:underline">
               Esqueceu sua senha ?
             </a>
           </div>
 
-          <button onclick="window.location.href='../admin/pages/dashboard.html'"
+          <button onclick="window.location.href='./admin/pages/dashboard.html'"
             class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded tracking-widest transition">
             ENTRAR
           </button>
