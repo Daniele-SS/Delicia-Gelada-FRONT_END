@@ -57,8 +57,12 @@ window.salvarEdicaoModal = function() {
         celulas[0].innerText = document.getElementById('editAdmNome').value;
         celulas[1].innerText = document.getElementById('editAdmEmail').value;
     } else if (document.getElementById('modal-editar-cargo')?.classList.contains('hidden') === false) {
-            celulas[0].innerText = document.getElementById('editCargoNome').value;
-        }
+        celulas[0].innerText = document.getElementById('editCargoNome').value;
+    } else if (document.getElementById('modal-editar-tipo-bebida')?.classList.contains('hidden') === false) {
+        celulas[0].innerText = document.getElementById('editTipoNome').value;
+        celulas[1].innerText = document.getElementById('editTipoVolume').value;
+        celulas[2].innerText = document.getElementById('editTipoTeor').value;
+    }
     alert('Alteração salva com sucesso!');
     fecharModal();
 }
@@ -103,6 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (document.getElementById('modal-editar-cargo')) {
                     document.getElementById('editCargoNome').value = c[0].innerText.trim();
                     document.getElementById('modal-editar-cargo').classList.remove('hidden');
+                } else if (document.getElementById('modal-editar-tipo-bebida')) {
+                    document.getElementById('editTipoNome').value = c[0].innerText.trim();
+                    document.getElementById('editTipoVolume').value = c[1].innerText.trim();
+                    document.getElementById('editTipoTeor').value = c[2].innerText.trim();
+                    
+                    // Puxa as colunas ocultas da tabela para alimentar o formulário estático
+                    document.getElementById('editTipoIngredientes').value = c[4]?.innerText.trim() || '';
+                    document.getElementById('editTipoPreparo').value = c[5]?.innerText.trim() || '';
+                    document.getElementById('editTipoPerfil').value = c[6]?.innerText.trim() || '';
+                    document.getElementById('editTipoDica').value = c[7]?.innerText.trim() || '';
+                    
+                    document.getElementById('modal-editar-tipo-bebida').classList.remove('hidden');
                 }
             }
             if (btnExcluir && confirm('Deseja excluir este item?')) {

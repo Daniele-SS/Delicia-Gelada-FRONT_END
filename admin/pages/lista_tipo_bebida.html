@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="font-inter">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Bebida | Delicia Gelada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/admin.js" defer></script>
+</head>
+<body class="font-sans bg-gray-50">
+
+  <div id="tela-lista-tipos-bebida" class="min-h-screen flex">
+    
+    <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
+      <p class="text-gray-900 text-sm tracking-widest mb-auto font-medium" style="font-family: cursive;">Área Administrativa</p>
+      
+      <div class="flex flex-col items-center gap-2 mt-auto">
+        <img src="../img/gestor.png" alt="Foto do gestor" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow">
+        <p class="text-sm font-bold text-gray-800">Rodrigo</p>
+        <p class="text-xs text-gray-600 font-medium">Gestor</p>
+      </div>
+    </aside>
+
+    <header class="md:hidden w-full bg-[#E4F3F4] flex items-center justify-between px-4 py-3 fixed top-0 z-20 shadow-sm">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-16">
+      <p class="text-gray-700 text-xs tracking-widest font-medium">Área Administrativa</p>
+    </header>
+
+    <main class="md:ml-64 flex-1 min-h-screen pt-24 pb-12 px-5 md:pt-12 md:px-12 flex flex-col w-full">
+      <div class="max-w-6xl mx-auto w-full flex-1 flex flex-col">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 mb-8">
+          <div class="flex items-center gap-4">
+            <button onclick="window.location.href='../pages/dashboard.html'" 
+              class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-gray-300 text-[#005A9C] hover:bg-gray-100 transition shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              </svg>
+            </button>
+            <h2 class="text-[#005A9C] font-bold text-2xl md:text-4xl tracking-tight">Tipos de Bebida</h2>
+          </div>
+
+          <div class="relative w-full md:w-72 shrink-0">
+            <input type="text" placeholder="Buscar tipo..." 
+              class="w-full border border-gray-300 rounded-lg md:rounded-full pl-4 pr-10 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#005A9C] transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto flex-1 h-full">
+          <table id="tabelaTiposBebida" class="w-full text-left border-collapse min-w-[700px]">
+            <thead>
+              <tr class="bg-[#0b629e] text-white">
+                <th class="py-5 px-6 font-semibold text-sm tracking-wide">NOME DO TIPO</th>
+                <th class="py-5 px-6 font-semibold text-sm tracking-wide w-32">VOLUME</th>
+                <th class="py-5 px-6 font-semibold text-sm tracking-wide w-32">TEOR ALCOÓLICO</th>
+                <th class="py-5 px-6 font-semibold text-sm tracking-wide text-center w-40 border-l border-[#2e7eb3]">AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                <td class="py-4 px-6 text-sm font-semibold text-[#005A9C]">Coquetel Tropical</td>
+                <td class="py-4 px-6 text-sm text-gray-600">350ml</td>
+                <td class="py-4 px-6 text-sm text-gray-600">18%</td>
+                <td class="py-4 px-6 border-l border-gray-200">
+                  <div class="flex items-center justify-center gap-5">
+                    <button class="text-gray-800 hover:text-[#005A9C] transition" title="Editar">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+                    </button>
+                    <button class="text-gray-800 hover:text-red-600 transition" title="Excluir">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+                    </button>
+                  </div>
+                </td>
+                <td class="hidden">Vodka, suco de laranja, limão e essência tropical.</td>
+                <td class="hidden">Misturar todos os ingredientes na coqueteleira com gelo.</td>
+                <td class="hidden">Refrescante</td>
+                <td class="hidden">Servir em copo alto.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="modal-editar-tipo-bebida" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center backdrop-blur-sm p-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <div class="bg-[#E4F3F4] px-6 py-4 border-b border-gray-200 flex justify-between items-center shrink-0">
+        <h3 class="text-[#005A9C] font-bold text-xl">Editar Ficha Técnica (Tipo de Bebida)</h3>
+        <button onclick="fecharModal()" class="text-gray-500 hover:text-red-500 transition">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6 flex flex-col gap-4 overflow-y-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">NOME DO TIPO</label>
+            <input type="text" id="editTipoNome" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition">
+          </div>
+          <div>
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">VOLUME</label>
+            <input type="text" id="editTipoVolume" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition">
+          </div>
+          <div>
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">TEOR ALCOÓLICO</label>
+            <input type="text" id="editTipoTeor" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition">
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">INGREDIENTES</label>
+            <textarea id="editTipoIngredientes" rows="2" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition"></textarea>
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">MODO DE PREPARO</label>
+            <textarea id="editTipoPreparo" rows="2" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition"></textarea>
+          </div>
+          <div>
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">PERFIL</label>
+            <input type="text" id="editTipoPerfil" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition">
+          </div>
+          <div>
+            <label class="text-[#005A9C] font-bold text-xs block mb-1">DICA DELÍCIA</label>
+            <input type="text" id="editTipoDica" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-blue-400 outline-none transition">
+          </div>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-3 shrink-0">
+        <button onclick="fecharModal()" class="px-6 py-2.5 bg-gray-200 text-gray-700 font-bold text-sm rounded-lg hover:bg-gray-300 transition">CANCELAR</button>
+        <button onclick="salvarEdicaoModal()" class="px-6 py-2.5 bg-[#FF9800] text-white font-bold text-sm rounded-lg hover:bg-orange-500 transition shadow-md">SALVAR ALTERAÇÕES</button>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="font-inter">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Tipo de Bebida | Delicia Gelada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/admin.js" defer></script>
+</head>
+<body class="font-sans bg-gray-50">
+
+  <div id="tela-adicionar-tipo" class="min-h-screen w-full flex">
+    
+    <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
+      <p class="text-gray-900 text-sm tracking-widest mb-auto font-medium" style="font-family: cursive;">Área Administrativa</p>
+      
+      <div class="flex flex-col items-center gap-2 mt-auto">
+        <img src="../img/gestor.png" alt="Foto do gestor" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow">
+        <p class="text-sm font-bold text-gray-800">Rodrigo</p>
+        <p class="text-xs text-gray-600 font-medium">Gestor</p>
+      </div>
+    </aside>
+
+    <header class="md:hidden w-full bg-[#E4F3F4] flex items-center justify-between px-4 py-3 fixed top-0 z-20 shadow-sm">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-16">
+      <p class="text-gray-700 text-xs tracking-widest font-medium">Área Administrativa</p>
+    </header>
+
+    <main class="md:pl-64 w-full min-h-screen p-6 pt-24 pb-12 md:pt-10 md:p-12 flex flex-col">
+      
+      <div class="max-w-3xl mx-auto w-full flex-1 flex flex-col mt-2 md:mt-4">
+        
+        <div class="flex items-center gap-3 mb-8 md:mb-10">
+          <div class="w-1.5 h-8 md:h-10 bg-orange-500 rounded-sm shrink-0"></div>
+          <h2 class="text-[#005A9C] font-bold text-2xl md:text-3xl leading-tight">Adicionar Tipo de Bebida</h2>
+        </div>
+
+        <div class="bg-white p-6 md:p-8 rounded-xl border border-gray-200 shadow-sm">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            
+            <div class="md:col-span-2">
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">NOME DO TIPO <span class="text-red-500">*</span></label>
+              <input type="text" id="nomeTipo" placeholder="Ex: Coquetel Tropical, Refresco Natural..."
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <div>
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">VOLUME <span class="text-red-500">*</span></label>
+              <input type="text" id="volumeTipo" placeholder="Ex: 350ml"
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">TEOR ALCOÓLICO <span class="text-red-500">*</span></label>
+              <input type="text" id="teorTipo" placeholder="Ex: 0% ou 18%"
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">INGREDIENTES BASE <span class="text-red-500">*</span></label>
+              <textarea id="ingredientesTipo" rows="3" placeholder="Ex: Vodka, suco de laranja, gelo..."
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-none text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">MODO DE PREPARO <span class="text-red-500">*</span></label>
+              <textarea id="preparoTipo" rows="3" placeholder="Ex: Adicione todos os ingredientes na coqueteleira..."
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-none text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+            </div>
+
+            <div>
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">PERFIL DE SABOR</label>
+              <input type="text" id="perfilTipo" placeholder="Ex: Refrescante, Doce..."
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div>
+              <label class="text-[#005A9C] font-bold text-sm block mb-2">DICA DELÍCIA</label>
+              <input type="text" id="dicaTipo" placeholder="Ex: Fica melhor servido bem gelado!"
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-end gap-4 mt-8">
+          <button onclick="window.location.href='../pages/dashboard.html'"
+            class="w-full md:w-auto px-10 py-3.5 bg-[#E2E8F0] hover:bg-gray-300 text-gray-600 font-bold text-sm rounded-md transition order-2 md:order-1">
+            CANCELAR
+          </button>
+          <button onclick="salvarNovoTipoBebida(event)"
+            class="w-full md:w-auto px-10 py-3.5 bg-[#FF9800] hover:bg-orange-500 text-white font-bold text-sm rounded-md transition shadow-md order-1 md:order-2">
+            SALVAR TIPO DE BEBIDA
+          </button>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
