@@ -1,0 +1,61 @@
+<!---------------------------------------------------
+ * Objetivo: Arquivo responsável pela página de adição de novos cargos
+ * Data: 19/06/2026
+ * Autor: Jean Costa
+ * Versão: 1.0
+---------------------------------------------------->
+
+<!DOCTYPE html>
+<html lang="pt-br" class="font-inter">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Categoria | Delicia Gelada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/admin.js" defer></script>
+</head>
+<body class="font-sans bg-gray-50">
+
+  <div id="tela-adicionar-categoria" class="min-h-screen w-full flex">
+    
+    <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
+      <p class="text-gray-900 text-sm tracking-widest mb-auto font-medium" style="font-family: cursive;">Área Administrativa</p>
+      
+      <div class="flex flex-col items-center gap-2 mt-auto">
+        <img src="../img/gestor.png" alt="Foto do gestor"
+          class="w-20 h-20 rounded-full object-cover border-2 border-white shadow">
+        <p class="text-sm font-bold text-gray-800">Rodrigo</p>
+        <p class="text-xs text-gray-600 font-medium">Gestor</p>
+      </div>
+    </aside>
+
+    <header class="md:hidden w-full bg-[#E4F3F4] flex items-center justify-between px-4 py-3 fixed top-0 z-20 shadow-sm">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-16">
+      <p class="text-gray-700 text-xs tracking-widest font-medium">Área Administrativa</p>
+    </header>
+
+    <main class="md:pl-64 w-full p-6 md:p-12">
+        <div class="max-w-2xl mx-auto">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-1.5 h-10 bg-orange-500 rounded-sm"></div>
+            <h2 class="text-[#005A9C] font-bold text-3xl">Adicionar Novo Cargo</h2>
+          </div>
+  
+          <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+            <label class="text-[#005A9C] font-bold text-sm block mb-2">NOME DO CARGO</label>
+            <input type="text" id="nomeCargo" placeholder="Ex: Atendente, Gerente..."
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-6 focus:ring-2 focus:ring-blue-400 outline-none">
+            
+            <div class="flex justify-end gap-4">
+              <button onclick="window.location.href='../pages/dashboard.html'" class="px-8 py-3 bg-gray-200 rounded-lg font-bold text-sm">CANCELAR</button>
+              <button onclick="salvarNovoCargo()" class="px-8 py-3 bg-[#FF9800] text-white rounded-lg font-bold text-sm shadow-md">SALVAR CARGO</button>
+            </div>
+          </div>
+        </div>
+      </main>
+  </div>
+
+</body>
+</html>

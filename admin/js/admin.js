@@ -56,7 +56,9 @@ window.salvarEdicaoModal = function() {
     } else if (document.getElementById('modal-editar-admin')?.classList.contains('hidden') === false) {
         celulas[0].innerText = document.getElementById('editAdmNome').value;
         celulas[1].innerText = document.getElementById('editAdmEmail').value;
-    }
+    } else if (document.getElementById('modal-editar-cargo')?.classList.contains('hidden') === false) {
+            celulas[0].innerText = document.getElementById('editCargoNome').value;
+        }
     alert('Alteração salva com sucesso!');
     fecharModal();
 }
@@ -98,6 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('editAdmNome').value = c[0].innerText.trim();
                     document.getElementById('editAdmEmail').value = c[1].innerText.trim();
                     document.getElementById('modal-editar-admin').classList.remove('hidden');
+                } else if (document.getElementById('modal-editar-cargo')) {
+                    document.getElementById('editCargoNome').value = c[0].innerText.trim();
+                    document.getElementById('modal-editar-cargo').classList.remove('hidden');
                 }
             }
             if (btnExcluir && confirm('Deseja excluir este item?')) {

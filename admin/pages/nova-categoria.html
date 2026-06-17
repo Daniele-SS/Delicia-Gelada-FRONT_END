@@ -59,6 +59,23 @@
               class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-none text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
           </div>
 
+          <div>
+            <label class="text-[#005A9C] font-bold text-sm block mb-2">IMAGEM DE CAPA DA CATEGORIA</label>
+            <label for="imagemCategoria" class="relative flex flex-col items-center justify-center w-full h-40 md:h-48 bg-white border-2 border-gray-300 border-dashed rounded-xl cursor-pointer hover:bg-gray-50 overflow-hidden group">
+              <input type="file" id="imagemCategoria" accept="image/*" class="hidden" onchange="previewImagem(event, 'previewCategoria', 'textoUploadCategoria')" />
+              
+              <div id="textoUploadCategoria" class="flex flex-col items-center justify-center text-gray-400 px-4 text-center">
+                <svg class="w-8 h-8 mb-2" aria-hidden="true" fill="none" viewBox="0 0 20 16" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="text-sm font-semibold">Clique para adicionar uma imagem</p>
+                <p class="text-xs mt-1">PNG, JPG ou WEBP</p>
+              </div>
+
+              <img id="previewCategoria" src="" alt="Preview da Categoria" class="absolute inset-0 w-full h-full object-cover hidden z-10 group-hover:opacity-90 transition">
+            </label>
+          </div>
+
           <div class="mt-1">
             <label class="inline-flex items-center cursor-pointer">
               <input type="checkbox" id="categoriaAtiva" class="sr-only peer" checked>
