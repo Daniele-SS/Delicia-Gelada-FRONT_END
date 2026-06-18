@@ -37,7 +37,7 @@ responsividade da aplicação.
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&display=swap" rel="stylesheet">
-  <script src="./js/app.js" defer></script>
+  <script src="./js/app.js" type="module" defer></script>
 </head>
 
 <!--
@@ -85,9 +85,11 @@ p-0: remove toda a margem interna do elemnto
     </nav>
 
     <div class="hidden md:flex absolute right-[40px] items-center gap-[10px]">
-      <input type="text" placeholder="Buscar produto"
+
+      <input id="input-pesquisar" type="text" placeholder="Buscar produto"
         class="w-[190px] xl:w-[240px] h-[34px] xl:h-[38px] rounded-[4px] px-3 text-[12px] shadow-md outline-none">
-      <span class="text-[28px] xl:text-[34px] leading-none">⌕</span>
+
+      <button id="botao-pesquisar" class="text-[28px] xl:text-[34px] leading-none">⌕</button>
     </div>
 
     <!-- w-3/4 - largura do elemento igual a 3/4 (75%) da largura da tela).
@@ -140,46 +142,52 @@ p-0: remove toda a margem interna do elemnto
         </p>
 
         <!-- BOTÕES -->
-        <div class="flex gap-4 md:gap-6 xl:gap-8 mt-5 xl:mt-7">
-          <button
-            class="w-[100px] md:w-[170px] xl:w-[190px] h-[25px] md:h-[44px] xl:h-[48px] bg-[#FF9100] rounded-full text-white text-[11px] md:text-[14px] xl:text-[15px] font-bold">
-            Ver Catálogo
-          </button>
+        <a href="#catalogo">
+          <div class="flex gap-4 md:gap-6 xl:gap-8 mt-5 xl:mt-7">
+            <button
+              class="w-[100px] md:w-[170px] xl:w-[190px] h-[25px] md:h-[44px] xl:h-[48px] bg-[#FF9100] rounded-full text-white text-[11px] md:text-[14px] xl:text-[15px] font-bold">
+              Ver Catálogo
+            </button>
+        </a>
 
+        <a href="#sobre-nos">
           <button class="w-[135px] md:w-[230px] xl:w-[255px] h-[25px] md:h-[44px] xl:h-[48px] bg-white rounded-full text-[#00C3D0] text-[11px] md:text-[14px] xl:text-[15px] font-bold 
                     border-2 lg:border-3 border-[#00C3D0] ">
             Sobre a Delícia Gelada
           </button>
-        </div>
+        </a>
 
-        <!-- SELINHOS -->
-        <div class="flex flex-col md:flex-row lg:flex-row xl-flex-row gap-6 md:gap-10 xl:gap-14 mt-5 xl:mt-6">
+      </div>
 
-          <div class="flex items-center gap-3">
-            <div class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] 
+
+      <!-- SELINHOS -->
+      <div class="flex flex-col md:flex-row lg:flex-row xl-flex-row gap-6 md:gap-10 xl:gap-14 mt-5 xl:mt-6">
+
+        <div class="flex items-center gap-3">
+          <div class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] 
                       md:text-[22px] xl:text-[24px]">
-              18+
-            </div>
-
-            <p class="text-[10px] md:text-[12px] xl:text-[14px] leading-tight font-semibold">
-              Site exclusivo para <br>
-              maiores de 18 anos.
-            </p>
+            18+
           </div>
 
-          <div class="flex items-center gap-3">
-            <div
-              class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rotate-45 rounded-md flex items-center justify-center">
-              <span class="-rotate-45 text-[22px] md:text-[28px] xl:text-[32px]">✓</span>
-            </div>
-
-            <p class="text-[10px] md:text-[12px] xl:text-[14px] leading-tight font-semibold">
-              Segurança e qualidade <br>
-              em cada detalhe.
-            </p>
-          </div>
-
+          <p class="text-[10px] md:text-[12px] xl:text-[14px] leading-tight font-semibold">
+            Site exclusivo para <br>
+            maiores de 18 anos.
+          </p>
         </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rotate-45 rounded-md flex items-center justify-center">
+            <span class="-rotate-45 text-[22px] md:text-[28px] xl:text-[32px]">✓</span>
+          </div>
+
+          <p class="text-[10px] md:text-[12px] xl:text-[14px] leading-tight font-semibold">
+            Segurança e qualidade <br>
+            em cada detalhe.
+          </p>
+        </div>
+
+      </div>
 
       </div>
     </section>
@@ -188,7 +196,7 @@ p-0: remove toda a margem interna do elemnto
     <!-- 
         py - padding vertical
      -->
-    <section class="bg-white py-8 px-6 md:px-10 xl:px-[70px]">
+    <section id="categorias" class="bg-white py-8 px-6 md:px-10 xl:px-[70px]">
       <div class="max-w-[1780px] mx-auto flex flex-wrap justify-center gap-6 md:gap-12 xl:gap-[70px]">
 
         <!-- Card 1 -->
@@ -272,7 +280,7 @@ p-0: remove toda a margem interna do elemnto
             </h2>
           </div>
 
-          <button class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
+          <button id="btn-ver-todos" class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
                   text-[#00C3D0] text-[9px] md:text-[13px] xl:text-[15px] font-semibold">
             Ver todos os Drinks
           </button>
@@ -286,35 +294,35 @@ p-0: remove toda a margem interna do elemnto
             <!-- Busca -->
             <div
               class="w-[240px] md:w-[220px] lg:[250px] xl:w-[330px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
-              <input type="text" placeholder="Buscar por nome do drink"
+              <input id="busca-nome" type="text" placeholder="Buscar por nome do drink"
                 class="w-full text-[13px] pt-[10px] outline-none">
-              <button class="text-[28px]">⌕</button>
+              <button id="btn-busca" class="text-[28px]">⌕</button>
             </div>
 
             <!-- Categoria -->
-            <select
+            <select id="categoria"
               class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
               <option>Categoria</option>
             </select>
 
             <!-- Tipo -->
-            <select
+            <select id="tipo"
               class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
               <option>Tipo</option>
             </select>
 
             <!-- Preço mínimo -->
-            <input type="text" placeholder="Preço min"
+            <input id="preco-min" type="text" placeholder="Preço min"
               class="w-[95px] h-[41px] md:w-[115px] lg:w-[130px] xl:w-[190px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
 
             <!-- Preço máximo -->
-            <input type="text" placeholder="Preço max"
+            <input id="preco-max" type="text" placeholder="Preço max"
               class="w-[95px] h-[41px] md:w-[115px] lg:w-[130px] xl:w-[190px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
 
           </div>
           <!-- Botão -->
           <div class="flex items-end justify-center">
-            <button class="w-[110px] md:w-[150px] lg:[150px] xl:w-[210px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
+            <button id="btn-preco" class="w-[110px] md:w-[150px] lg:[150px] xl:w-[210px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
                            text-white bg-[#00C3D0] text-[10px] md:text-[13px] xl:text-[15px] font-semibold">
               Buscar por preço
             </button>
