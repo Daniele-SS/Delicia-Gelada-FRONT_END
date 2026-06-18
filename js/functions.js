@@ -151,8 +151,7 @@ function renderizarBebidas(lista) {
             // CARD PRINCIPAL
 
             const card = document.createElement('div')
-            card.className =
-                'card-bebida bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl mt-8'
+            card.className = 'bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[320px] xl:h-[450px] flex flex-col transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl mt-8'
 
             // IMAGEM
             const img = document.createElement('img')
@@ -220,7 +219,6 @@ function renderizarBebidas(lista) {
 async function criarCardDetalhesBebida(bebida) {
 
     try {
-
         const json = await getTipos()
         const tipos = json.response
 
@@ -286,79 +284,81 @@ async function criarCardDetalhesBebida(bebida) {
         containerImgInfo.appendChild(containerInfo)
         cardDetalhes.appendChild(containerImgInfo)
 
-        // Cards extras (volume, teor, perfil)
+       // Cards extras (volume, teor, perfil)
         const cardsExtras = document.createElement('div')
         cardsExtras.className = 'flex justify-between'
 
-        // inicio do card
+        // --- Card 1: Volume ---
         const cardDiv = document.createElement('div')
         cardDiv.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
-
-        // imagem
+        
         const imgCard = document.createElement('img')
         imgCard.src = './img/Measuring Cup.png'
-        imgCard.alt = 'copo medidor'
+        imgCard.alt = 'volume'
         imgCard.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-        cardDiv.appendChild(imgCard)
-
+        
         const titulo = document.createElement('h4')
-        titulo.textContent = tipos.volume
+        // Use exatamente o nome da coluna da VIEW
+        titulo.textContent = bebida.volume_em_mililitros || 'Não informado'
         titulo.className = 'font-bold text-[12px] xl:text-[20px]'
-        cardDiv.appendChild(titulo)
-
+        
         const descricaoCard = document.createElement('h4')
         descricaoCard.textContent = 'Volume'
         descricaoCard.className = 'text-[12px] xl:text-[20px]'
+        
+        cardDiv.appendChild(imgCard)
+        cardDiv.appendChild(titulo)
         cardDiv.appendChild(descricaoCard)
-        // fim do card 
 
-        //inicio card 2
+        // --- Card 2: Teor Alcoólico ---
         const cardDiv2 = document.createElement('div')
         cardDiv2.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
-
+        
         const imgCard2 = document.createElement('img')
         imgCard2.src = './img/teor-alcoolico.png'
-        imgCard2.alt = 'porcentagem de teor alcoolico'
+        imgCard2.alt = 'teor alcoolico'
         imgCard2.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-        cardDiv2.appendChild(imgCard2)
-
+        
         const titulo2 = document.createElement('h4')
-        titulo2.textContent = tipos.teor_alcoolico
+        titulo2.textContent = bebida.porcentagem_de_teor_alcoolico || 'Zero'
         titulo2.className = 'font-bold text-[12px] xl:text-[20px]'
-        cardDiv2.appendChild(titulo2)
-
+        
         const descricaoCard2 = document.createElement('h4')
         descricaoCard2.textContent = 'Teor Alcoólico'
         descricaoCard2.className = 'text-[12px] xl:text-[20px]'
+        
+        cardDiv2.appendChild(imgCard2)
+        cardDiv2.appendChild(titulo2)
         cardDiv2.appendChild(descricaoCard2)
-        //fim do card 2
 
-        //inicio card 3
+        // --- Card 3: Perfil ---
         const cardDiv3 = document.createElement('div')
         cardDiv3.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
-
+        
         const imgCard3 = document.createElement('img')
         imgCard3.src = './img/Winter.png'
         imgCard3.alt = 'perfil'
         imgCard3.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-        cardDiv3.appendChild(imgCard3)
-
+        
         const titulo3 = document.createElement('h4')
-        titulo3.textContent = tipos.volume
+        titulo3.textContent = bebida.perfil_de_sabor_da_bebida || 'Não informado'
         titulo3.className = 'font-bold text-[12px] xl:text-[20px]'
-        cardDiv3.appendChild(titulo3)
-
+        
         const descricaoCard3 = document.createElement('h4')
-        descricaoCard3.textContent = 'Volume'
+        descricaoCard3.textContent = 'Perfil'
         descricaoCard3.className = 'text-[12px] xl:text-[20px]'
+        
+        cardDiv3.appendChild(imgCard3)
+        cardDiv3.appendChild(titulo3)
         cardDiv3.appendChild(descricaoCard3)
-        //fim do card 3
 
         cardsExtras.appendChild(cardDiv)
         cardsExtras.appendChild(cardDiv2)
         cardsExtras.appendChild(cardDiv3)
 
         containerInfo.appendChild(cardsExtras)
+
+        // Adicione o container de informações ao card principal
         containerImgInfo.appendChild(containerInfo)
         cardDetalhes.appendChild(containerImgInfo)
 
@@ -435,6 +435,8 @@ async function criarCardDetalhesBebida(bebida) {
         dicaDiv.appendChild(dica)
         cardDetalhes.appendChild(dicaDiv)
 
+
+
         // Adiciona o card de detalhes ao DOM
         // O DOM (Document Object Model) é a representação da página HTML como uma árvore de elementos,
         // onde cada tag, atributo ou texto é um nó que pode ser acessado e manipulado pelo JavaScript.
@@ -463,11 +465,15 @@ async function criarCardDetalhesBebida(bebida) {
 }
 
 //função para iniciar a pagina
+//função para iniciar a pagina
 export async function iniciarPagina() {
 
     try {
+        // Exibe o modal e espera a resposta (true ou false)
+        const ehMaiorDe18 = await modalTelaInicial()
 
-        const json = await getBebidas(true)
+        // Passa a resposta para a API
+        const json = await getBebidas(ehMaiorDe18)
         
         todasBebidas = json.response
         if (!todasBebidas || todasBebidas.length == 0) {
@@ -487,8 +493,40 @@ export async function iniciarPagina() {
     }
 }
 
-function modalTelaInicial(){
+// Controla o modal de idade e retorna true ou false
+function modalTelaInicial() {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('age-gate-modal')
+        const btnSim = document.getElementById('btn-maior-idade')
+        const btnNao = document.getElementById('btn-menor-idade')
 
+        if (!modal) {
+            resolve(true)
+            return
+        }
+
+        // Verifica no navegador se o usuário já respondeu antes na mesma aba
+        const jaVerificou = sessionStorage.getItem('idadeVerificada')
+        if (jaVerificou) {
+            modal.classList.add('hidden')
+            resolve(jaVerificou === 'true')
+            return
+        }
+
+        // Se clicou em SIM (Maior de idade)
+        btnSim.addEventListener('click', () => {
+            sessionStorage.setItem('idadeVerificada', 'true')
+            modal.classList.add('hidden')
+            resolve(true)
+        })
+
+        // Se clicou em NÃO (Menor de idade)
+        btnNao.addEventListener('click', () => {
+            sessionStorage.setItem('idadeVerificada', 'false')
+            modal.classList.add('hidden')
+            resolve(false)
+        })
+    })
 }
 
 //função para configurar todos os eventos seja click ou enter utilizado na pagina

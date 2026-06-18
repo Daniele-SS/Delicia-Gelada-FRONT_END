@@ -362,68 +362,11 @@ window.fecharModal = function() {
 }
 
 
-window.carregarPerfilLogado = async function() {
-    const token = localStorage.getItem('tokenDeliciaGelada');
-    const foto = document.getElementById('foto-admin-sidebar');
-    const nome = document.getElementById('nome-admin-sidebar');
-    const cargo = document.getElementById('cargo-admin-sidebar');
-
-    if (!token) {
-        console.warn("Token não encontrado, redirecionando...");
-        window.location.href = '../../admin.html';
-        return;
-    }
-
-    try {
-        // Decodifica o token para pegar o ID
-        const payloadDecoded = JSON.parse(atob(token.split('.')[1]));
-        const userId = payloadDecoded.id || payloadDecoded.id_usuario || payloadDecoded.userId;
-
-        console.log("Buscando usuário ID:", userId);
-
-        const resposta = await fetch(`${BASE_URL}/usuario/${userId}`, {
-            method: 'GET',
-            headers: { 
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const dados = await resposta.json();
-        console.log("Resposta da API:", dados);
-
-        if (resposta.ok && dados.response) {
-            const usuario = Array.isArray(dados.response) ? dados.response[0] : dados.response;
-
-            // Atualiza os campos se eles existirem na tela
-            if (nome) nome.textContent = usuario.nome ? usuario.nome.split(' ')[0] : 'Admin';
-            if (cargo) cargo.textContent = usuario.cargo || 'Gestor';
-            if (foto && usuario.foto) {
-                foto.src = usuario.foto;
-            }
-        } else {
-            console.error("API falhou ao buscar usuário:", dados);
-            if (nome) nome.textContent = "Erro ao carregar";
-        }
-    } catch (erro) {
-        console.error('Erro crítico no carregamento:', erro);
-        if (nome) nome.textContent = "Erro de conexão";
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Carrega cargos se estiver na página de cadastro de Admin
     if (document.getElementById('cargoAdmin')) {
         carregarCargosSelect()
     }
-    
-    // Carrega o perfil do usuário logado se estiver no Dashboard
-    if (document.getElementById('foto-admin-sidebar')) {
-        carregarPerfilLogado()
-    }
-    
-    // Carrega a lista se estiver na página de listagem
     const inputBusca = document.querySelector('input[placeholder="Buscar administrador..."]')
     if (inputBusca || document.getElementById('tela-lista-admins')) {
         listarAdmins()

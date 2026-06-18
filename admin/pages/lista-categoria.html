@@ -15,26 +15,21 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../js/admin.js" defer></script>
-  <script src="../js/categoria.js"></script>
+  <script src="../js/categoria.js" defer></script>
 </head>
 <body class="font-sans bg-gray-50">
 
   <div id="tela-lista-categorias" class="min-h-screen flex">
     
     <aside class="hidden md:flex w-64 bg-[#E4F3F4] flex-col items-center py-8 px-4 h-screen fixed top-0 left-0 z-20">
-      <div class="flex flex-col items-center gap-1 mt-auto w-full">
-        <img src="../img/gestor.png" id="foto-admin-sidebar" alt="Foto do gestor"
-          class="w-20 h-20 rounded-full object-cover border-2 border-white shadow mb-1">
+      <img src="../img/logo.png" alt="Logo Delícia Gelada" class="w-28 mb-6">
+      <p class="text-gray-900 text-sm tracking-widest mb-auto font-medium" style="font-family: cursive;">Área Administrativa</p>
+      
+      <div class="flex flex-col items-center gap-2 mt-auto">
+        <img id="foto-admin-sidebar" src="../img/gestor.png" alt="Foto do gestor"
+          class="w-20 h-20 rounded-full object-cover border-2 border-white shadow">
         <p id="nome-admin-sidebar" class="text-sm font-bold text-gray-800">Carregando...</p>
-        <p id="cargo-admin-sidebar" class="text-xs text-gray-600 font-medium mb-3">...</p>
-        
-        <button onclick="fazerLogout()" 
-          class="flex items-center gap-2 px-4 py-2 text-sm font-bold text-red-500 hover:text-white hover:bg-red-500 rounded-lg transition-colors w-full justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-          </svg>
-          Sair
-        </button>
+        <p id="cargo-admin-sidebar" class="text-xs text-gray-600 font-medium">...</p>
       </div>
     </aside>
 

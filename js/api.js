@@ -28,13 +28,18 @@ export async function getCategorias() {
 }
 
 export async function getBebidas(status) {
-
-    const URL_BEBIDA = `http://localhost:3000/v1/fynix/deliciagelada/bebida?maior_de_18=${status}`
+    // Garantimos que a URL está correta (adicionando a barra /bebida)
+    const URL_BEBIDA = `${URL}/bebida?maior_de_18=${status}`
+    
     const response = await fetch(URL_BEBIDA)
-    bebidas = response.json()
-    return bebidas
+    
+    if (!response.ok) {
+        console.error("Erro na busca de bebidas. Status:", response.status)
+        return { response: [] } // Retorna vazio para não quebrar o resto do código
+    }
+    
+    return await response.json()
 }
-
 
 export async function getTipos() {
     const response = await fetch(`${URL}/tipobebida`)

@@ -7,7 +7,9 @@
 'use strict'
 
 // Defina a URL base da sua API
-const BASE_URL = 'http://localhost:3000/v1/fynix/deliciagelada'
+if (typeof BASE_URL === 'undefined') {
+    var BASE_URL = 'http://localhost:3000/v1/fynix/deliciagelada'
+}
 
 // ==========================================
 // 1. CADASTRAR CARGO (POST)
@@ -243,7 +245,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.fecharModal = function() {
     const modal = document.getElementById('modal-editar-cargo');
-    if (modal) {
-        modal.classList.add('hidden');
-    }
+    if (modal) modal.classList.add('hidden');
 }

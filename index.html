@@ -61,51 +61,21 @@ p-0: remove toda a margem interna do elemnto
       xl: tamanho grande, utilizado no desktop
     -->
     <!-- Main modal -->
-  <header class="relative w-full bg-[#FF9100] h-[105px] md:h-[77px] flex items-center justify-center px-4">
 
-    <!-- Botão Hamburger (Mobile) -->
-    <button id="btn-hamburger" class="md:hidden fixed top-4 left-4 z-50">
-      <img src="./img/menu-hamburguer.png" alt="Menu" class="w-6 h-6">
-    </button>
-
-    <!-- Overlay para sombra -->
-    <div id="menu-overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
-
-    <!-- Logo -->
-    <img src="./img/logo.png" alt="Logo Delícia Gelada"
-      class="w-28 md:w-[200px] xl:w-[280px] md:absolute md:left-[84px] md:top-[3px] z-30 flex justify-center md:flex-none">
-
-    <!-- Menu Desktop -->
-    <nav class="hidden md:flex justify-center items-center gap-6 lg:gap-10 w-full lg:w-[30vw] font-[Inter] text-[14px]">
-      <a href="#inicio"
-        class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-[#FD6100] after:transition-all after:duration-300">INÍCIO</a>
-      <a href="#catalogo"
-        class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-[#FD6100] after:transition-all after:duration-300">CATÁLOGO</a>
-      <a href="#contato"
-        class="relative text-black hover:text-white hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-[#FD6100] after:transition-all after:duration-300">CONTATO</a>
-    </nav>
-
-    <div class="hidden md:flex absolute right-[40px] items-center gap-[10px]">
-
-      <input id="input-pesquisar" type="text" placeholder="Buscar produto"
-        class="w-[190px] xl:w-[240px] h-[34px] xl:h-[38px] rounded-[4px] px-3 text-[12px] shadow-md outline-none">
-
-      <button id="botao-pesquisar" class="text-[28px] xl:text-[34px] leading-none">⌕</button>
+  <div id="age-gate-modal" class="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-white w-[90%] max-w-md rounded-2xl p-8 flex flex-col items-center text-center shadow-2xl">
+      <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-32 mb-4">
+      <h2 class="text-2xl font-bold text-[#FF9100] mb-2 font-[Inter]">Verificação de Idade</h2>
+      <p class="text-gray-600 mb-8 font-medium">Você possui 18 anos ou mais?</p>
+      
+      <div class="flex gap-4 w-full">
+        <button id="btn-menor-idade" class="flex-1 py-3 border-2 border-gray-300 text-gray-600 font-bold rounded-full hover:bg-gray-100 transition">Não</button>
+        <button id="btn-maior-idade" class="flex-1 py-3 bg-[#FF9100] text-white font-bold rounded-full hover:bg-orange-600 transition shadow-md">Sim</button>
+      </div>
+      
+      <p class="text-xs text-gray-400 mt-6">Para acessar nosso site, você precisa confirmar sua idade.</p>
     </div>
-
-    <!-- w-3/4 - largura do elemento igual a 3/4 (75%) da largura da tela).
-        max-w-xs - limita a largura máxima do elemento a um valor definido como Tailwind “xs” (~20rem ou 320px), evitando que fique muito largo em telas grandes.
-        z-50 - define o z-index alto, garantindo que o menu fique sobre outros elementos da página.
-    -->
-    <nav id="mobile-menu"
-      class="fixed top-0 left-0 w-3/4 max-w-xs h-full bg-[#FF9100] shadow-2xl hidden z-50 flex flex-col p-6 gap-4">
-      <a href="#inicio" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">INÍCIO</a>
-      <a href="#catalogo" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CATÁLOGO</a>
-      <a href="#contato" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CONTATO</a>
-      <a href="#sobre-nos" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">SOBRE NÓS</a>
-    </nav>
-
-  </header>
+  </div>
   <!--
     MAIN:
     Container principal da aplicação.
@@ -331,144 +301,12 @@ p-0: remove toda a margem interna do elemnto
         </div>
 
     </section>
-    <!-- CARDS DOS DRINKS -->
-    <div id="container-produtos" class="flex justify-center">
-      <!-- grid de produtos -->
-      <div id="produtos"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-8 md:gap-12 lg:gap-12 xl:gap-12 mt-8">
-        <!-- inicio do card  -->
-        <div id="card-bebida"
-          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-          <!-- imagem  -->
-          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
-            class="w-full h-[150px] xl:h-[229px] object-cover">
-          <!-- informações  -->
-          <div id="info-bebida" class="flex flex-col m-1">
-            <!-- nome  -->
-            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
-              Orange Paradise
-            </h3>
-            <!-- categoria  -->
-            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
-              Tropicais
-            </span>
-            <!-- descricao  -->
-            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
-              Vodka, suco de laranja, limão e essência tropical.
-            </p>
-            <!-- preco  -->
-            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
-              R$28.90
-            </h4>
-            <!-- botao  -->
-            <div class="flex justify-center">
-              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
-                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
-                VER DETALHES
-              </button>
-            </div>
-          </div>
+    <div id="container-produtos" class="flex justify-center min-h-[400px]">
+      
+      <div id="produtos" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-8 md:gap-12 lg:gap-12 xl:gap-12 mt-8">
         </div>
 
-        <div id="card-bebida"
-          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-          <!-- imagem  -->
-          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
-            class="w-full h-[150px] xl:h-[229px] object-cover">
-          <!-- informações  -->
-          <div id="info-bebida" class="flex flex-col m-1">
-            <!-- nome  -->
-            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
-              Orange Paradise
-            </h3>
-            <!-- categoria  -->
-            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
-              Tropicais
-            </span>
-            <!-- descricao  -->
-            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
-              Vodka, suco de laranja, limão e essência tropical.
-            </p>
-            <!-- preco  -->
-            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
-              R$28.90
-            </h4>
-            <!-- botao  -->
-            <div class="flex justify-center">
-              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
-                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
-                VER DETALHES
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-bebida"
-          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-          <!-- imagem  -->
-          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
-            class="w-full h-[150px] xl:h-[229px] object-cover">
-          <!-- informações  -->
-          <div id="info-bebida" class="flex flex-col m-1">
-            <!-- nome  -->
-            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
-              Orange Paradise
-            </h3>
-            <!-- categoria  -->
-            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
-              Tropicais
-            </span>
-            <!-- descricao  -->
-            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
-              Vodka, suco de laranja, limão e essência tropical.
-            </p>
-            <!-- preco  -->
-            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
-              R$28.90
-            </h4>
-            <!-- botao  -->
-            <div class="flex justify-center">
-              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
-                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
-                VER DETALHES
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-bebida"
-          class="bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[290px] xl:h-[423px] flex flex-wrap transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-          <!-- imagem  -->
-          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
-            class="w-full h-[150px] xl:h-[229px] object-cover">
-          <!-- informações  -->
-          <div id="info-bebida" class="flex flex-col m-1">
-            <!-- nome  -->
-            <h3 id="nome-bebida" class="font-bold text-[11px] xl:text-[16px]">
-              Orange Paradise
-            </h3>
-            <!-- categoria  -->
-            <span id="categoria-bebidda" class="text-[#00C3D0] text-[10px] xl:text-[14px] mt-1">
-              Tropicais
-            </span>
-            <!-- descricao  -->
-            <p id="descricao-bebida" class="text-[10px] xl:text-[14px] mt-1 leading-[20px]">
-              Vodka, suco de laranja, limão e essência tropical.
-            </p>
-            <!-- preco  -->
-            <h4 id="preco-bebida" class="font-bold mt-1 text-[11px] xl:text-[16px]">
-              R$28.90
-            </h4>
-            <!-- botao  -->
-            <div class="flex justify-center">
-              <button id="botao-card-ver-detalhes" class="w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0]
-                text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold">
-                VER DETALHES
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
 
       <!-- card ver detalhes -->
 

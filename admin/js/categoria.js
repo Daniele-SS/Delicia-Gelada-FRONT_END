@@ -372,6 +372,7 @@ window.salvarEdicaoModal = async function() {
 // INICIALIZAÇÃO DA PÁGINA DE LISTAGEM
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+    carregarPerfilLogado()
     // Identifica se estamos na tela de listagem de categorias
     if (document.getElementById('tabela-categorias')) {
         listarCategorias()

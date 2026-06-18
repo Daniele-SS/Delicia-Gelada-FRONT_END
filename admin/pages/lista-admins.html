@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../js/admin.js" defer></script>
-  <script src="../js/usuario.js"></script>
+  <script src="../js/usuario.js"defer> </script>
 </head>
 <body class="font-sans bg-gray-50">
 
@@ -26,10 +26,10 @@
       <p class="text-gray-900 text-sm tracking-widest mb-auto font-medium" style="font-family: cursive;">Área Administrativa</p>
       
       <div class="flex flex-col items-center gap-2 mt-auto">
-        <img src="../img/gestor.png" alt="Foto do gestor"
+        <img id="foto-admin-sidebar" src="../img/gestor.png" alt="Foto do gestor"
           class="w-20 h-20 rounded-full object-cover border-2 border-white shadow">
-        <p class="text-sm font-bold text-gray-800">Rodrigo</p>
-        <p class="text-xs text-gray-600 font-medium">Gestor</p>
+        <p id="nome-admin-sidebar" class="text-sm font-bold text-gray-800">Carregando...</p>
+        <p id="cargo-admin-sidebar" class="text-xs text-gray-600 font-medium">...</p>
       </div>
     </aside>
 
@@ -128,6 +128,21 @@
       </div>
     </div>
   </div>
+
+  <div id="modal-editar-bebida" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center backdrop-blur-sm p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6">
+        <h2 class="text-[#005A9C] font-bold text-2xl mb-4">Editar Bebida</h2>
+        <div class="space-y-4">
+            <input type="text" id="editBebNome" placeholder="Nome" class="w-full border p-2 rounded">
+            <textarea id="editBebDesc" placeholder="Descrição" class="w-full border p-2 rounded"></textarea>
+            <input type="text" id="editBebPreco" placeholder="Preço" class="w-full border p-2 rounded">
+        </div>
+        <div class="flex justify-end gap-3 mt-6">
+            <button onclick="fecharModal()" class="px-4 py-2 bg-gray-200 rounded-lg">Cancelar</button>
+            <button onclick="salvarEdicaoBebida()" class="px-4 py-2 bg-[#FF9800] text-white rounded-lg">Salvar</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
