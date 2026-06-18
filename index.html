@@ -418,35 +418,53 @@ p-0: remove toda a margem interna do elemnto
 
     </div>
     <!-- sobre nós  -->
-    <div id="sobre-nos" class="w-full bg-[#E4F3F4] mt-9 p-6">
-      <h1 class="text-[24px] md:text-[48px] xl:text-[48 px] text-[#FF9100] leading-tight font-bold font-[Inter]">
-        Sobre nós</h1>
-      <h1 class="text-[24px] md:text-[40px] xl:text-[48px] leading-tight font-bold font-[Inter]">
-        A Delícia está<br>
-        nos <span
-          class="text-[#FF9100] font-normal font-[Gwendolyn] text-[45px] lg:text-[120px] md:text-[90px]">detalhes!</span>
-      </h1>
-      <h4 class="text-[#8E8E93] text-[11px] md:text-[14px] xl:text-[24px]">
-        A Delícia gelada nasceu da paixão por criar<br>
-        experiências únicas. Nossos drinks são preparados <br>com ingredientes selecionados,
-        muito carinho e um <br>toque especial que você só encontra aqui!
-      </h4>
-      <div class="mt-3 gap-2 flex md:gap-36 md:h-16 items-center">
-        <div class="flex gap-2">
-          <img src="./img/Bay Leaf.png" class="w-8 h-8" alt=" folhas">
-          <h4 class="text-[11px] md:text-[14px] xl:text-[16px]">Ingredientes<br>selecionados.</h4>
-        </div>
-        <div class="flex gap-2">
-          <img src="./img/Crown.png" class="w-8 h-8" alt="coroa">
-          <h4 class="text-[11px] md:text-[14px] xl:text-[16px]">Receitas<br>autorais.</h4>
-        </div>
-        <div class="flex gap-2">
-          <img src="./img/Approval.png" class="w-8 h-8" alt="aprovado">
-          <h4 class="text-[11px] md:text-[14px] xl:text-[16px]">Qualidade em<br>cada drink.</h4>
-        </div>
+<div id="sobre-nos" class="w-full mt-9 relative overflow-hidden min-h-[600px] md:min-h-[500px]">
+  
+  <!-- Vídeo de fundo -->
+  <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+    <iframe
+      src="https://player.vimeo.com/video/1202635332?autoplay=1&loop=1&muted=1&background=1&controls=0&title=0&byline=0&portrait=0"
+      style="position:absolute; top:30%; left:50%; transform:translate(-50%,-30%); width:100vw; height:56.25vw; min-height:120%; min-width:177.78vh; border:0; pointer-events:none;"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Overlay escuro -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Conteúdo -->
+  <div class="relative z-20 p-6 py-16 md:py-20">
+    <h1 class="text-[24px] md:text-[48px] xl:text-[48px] text-[#FF9100] leading-tight font-bold font-[Inter]">
+      Sobre nós
+    </h1>
+    <h1 class="text-[24px] md:text-[40px] xl:text-[48px] leading-tight font-bold font-[Inter] text-white">
+      A Delícia está<br>
+      nos <span class="text-[#FF9100] font-normal font-[Gwendolyn] text-[45px] lg:text-[120px] md:text-[90px]">detalhes!</span>
+    </h1>
+    <h4 class="text-white text-[11px] md:text-[14px] xl:text-[24px]">
+      A Delícia gelada nasceu da paixão por criar<br>
+      experiências únicas. Nossos drinks são preparados <br>com ingredientes selecionados,
+      muito carinho e um <br>toque especial que você só encontra aqui!
+    </h4>
+    <div class="mt-3 gap-2 flex md:gap-36 md:h-16 items-center">
+      <div class="flex gap-2">
+        <img src="./img/Bay Leaf.png" class="w-8 h-8" alt="folhas">
+        <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Ingredientes<br>selecionados.</h4>
+      </div>
+      <div class="flex gap-2">
+        <img src="./img/Crown.png" class="w-8 h-8" alt="coroa">
+        <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Receitas<br>autorais.</h4>
+      </div>
+      <div class="flex gap-2">
+        <img src="./img/Approval.png" class="w-8 h-8" alt="aprovado">
+        <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Qualidade em<br>cada drink.</h4>
       </div>
     </div>
-  </main>
+  </div>
+
+</div>
 
 
   <footer id="contato" class="bg-[#FF9100] text-white text-[10px] md:text-[14px] px-2 py-8">
