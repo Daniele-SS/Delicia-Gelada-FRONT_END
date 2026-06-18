@@ -9,24 +9,43 @@
 
 const BASE_URL = 'http://localhost:3000/v1/fynix/deliciagelada'
 
+function mostrarFeedback(mensagem, tipo = 'erro') {
+    let feedback = document.getElementById('feedback-msg')
+
+    if (!feedback) {
+        feedback = document.createElement('div')
+        feedback.id = 'feedback-msg'
+        feedback.className = 'fixed top-6 right-6 z-50 px-6 py-4 rounded-lg shadow-lg text-white text-sm font-bold transition-all'
+        document.body.appendChild(feedback)
+    }
+
+    feedback.textContent = mensagem
+    feedback.className = `fixed top-6 right-6 z-50 px-6 py-4 rounded-lg shadow-lg text-white text-sm font-bold transition-all ${
+        tipo === 'sucesso' ? 'bg-green-500' : 'bg-red-500'
+    }`
+    feedback.style.display = 'block'
+
+    setTimeout(() => { feedback.style.display = 'none' }, 4000)
+}
+
 async function postCategoria(){
 
     // Captura os valores do formulário
     const nome      = document.getElementById('nomeCategoria').value.trim()
     const descricao = document.getElementById('descricaoCategoria').value.trim()
-    const foto      = document.getElementById('fotoCategoria').value.trim()
+    const foto      = document.getElementById('imagemCategoria').value.trim()
     const ativa     = document.getElementById('categoriaAtiva').checked
     const id_status = ativa ? 1 : 2
 
     // Validação básica no frontend (RNF018)
-    if (nome == null || !nome || isNaN(nome) || nome.length > 50) {
-        alert('O nome da categoria é obrigatório.')
+    if (!nome || nome.length > 50) {
+        mostrarFeedback('O nome da categoria é obrigatório e deve ter no máximo 50 caracteres.')
         return
-    } if (descricao == null || !descricao || isNaN(descricao) || descricao.length > 255) {
-        alert('A descrição da categoria é obrigatória.')
+    } if (!descricao || descricao.length > 255) {
+        mostrarFeedback('A descrição da categoria é obrigatória e deve ter no máximo 255 caracteres.')
         return
-    } if (foto == null) {
-        alert('A foto é um campo obrigatório.')
+    } if (!foto) {
+        mostrarFeedback('A foto é um campo obrigatório.')
         return
     }
 
@@ -48,7 +67,7 @@ async function postCategoria(){
         })
 
         if (resposta.status === 201) {
-            alert('Categoria cadastrada com sucesso!')
+            mostrarFeedback('Categoria cadastrada com sucesso!', 'sucesso')
             // limpa o formulário após salvar
             document.getElementById('nomeCategoria').value      = ''
             document.getElementById('descricaoCategoria').value = ''
@@ -57,50 +76,76 @@ async function postCategoria(){
         } else {
             const erro = await resposta.json()
             console.error('Erro da API:', erro)
-            alert('Erro ao cadastrar categoria. Tente novamente.')
+            mostrarFeedback('Erro ao cadastrar categoria. Tente novamente.')
         }
 
     } catch (erro) {
         console.error('Erro na requisição:', erro)
-        alert('Não foi possível conectar ao servidor. Verifique se o backend está rodando.')
+        mostrarFeedback('Não foi possível conectar ao servidor. Verifique se o backend está rodando.')
     }
 }
 
 
 async function getListarCategoria(){
-    const response = await fetch(BASE_URL)
+    try {
+        const response = await fetch(`${BASE_URL}/categoria`)
 
-    if(!response.ok) throw new Error('Erro ao buscar categorias cadastradas')
-    return response.json()
+        if(!response.ok) throw new Error('Erro ao buscar categorias cadastradas.')
+        return response.json()
+
+    } catch(erro) {
+        console.error('Erro na requisição:', erro)
+        mostrarFeedback('Não foi possível carregar as categorias.')
+    }
 }
 
 
-// async function getBuscarCategorias(id) {
-//     const response = await fetch(BASE_URL)
-// }
+async function getBuscarCategoria(id) {
+    try {
+        const response = await fetch(`${BASE_URL}/categoria/${id}`)
 
+        if (!response.ok) throw new Error('Erro ao buscar categoria.')
 
-async function putCategoria(id){
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
+        return response.json()
+
+    } catch (erro) {
+        console.error('Erro na requisição:', erro)
+        mostrarFeedback('Não foi possível encontrar a categoria.')
     }
+}
 
-    const response = await fetch(`${BASE_URL}/${id}`, options)
-    if(!response.ok) throw new Error('Erro ao atualizar a categoria')
 
-    return response.json()
+async function putCategoria(id, dadosAtualizados){
+    try {
+        const response = await fetch(`${BASE_URL}/categoria/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json' },
+                body: JSON.stringify(dadosAtualizados)
+        })
+
+        if(!response.ok) throw new Error('Erro ao atualizar a categoria.')
+        return response.json()
+
+    } catch(erro) {
+        console.error('Erro na requisição:', erro)
+        mostrarFeedback('Não foi possível atualizar a categoria.')
+    }
 }
 
 
 async function deleteCategoria(id){
-    const options = {
-        method: 'DELETE'
-    }
+    try {
+        const response = await fetch(`${BASE_URL}/categoria/${id}`, {
+            method: 'DELETE'
+        })
 
-    const response = await fetch(`${BASE_URL}/${id}`, options)
-    if(!response.ok) throw new Error('Erro ao deletar a categoria')
+        if(!response.ok) throw new Error('Erro ao deletar a categoria.')
+
+        mostrarFeedback('Categoria removida com sucesso!', 'sucesso')
+
+    } catch(erro) {
+        console.error('Erro na requisição:', erro)
+        mostrarFeedback('Não foi possível remover a categoria.')
+    }
 }

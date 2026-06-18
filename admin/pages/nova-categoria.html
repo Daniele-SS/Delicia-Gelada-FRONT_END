@@ -14,7 +14,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/categoria.js"></script>
   <script src="../js/admin.js" defer></script>
+  <script src="../js/nova-categoria.js" defer></script>
 </head>
 <body class="font-sans bg-gray-50">
 
@@ -91,7 +93,7 @@
             class="w-full md:w-auto px-10 py-3.5 bg-[#E2E8F0] hover:bg-gray-300 text-gray-600 font-bold text-sm rounded-md transition order-2 md:order-1">
             CANCELAR
           </button>
-          <button onclick="salvarNovaCategoria()"
+          <button onclick="salvarNovaCategoria(event)"
             class="w-full md:w-auto px-10 py-3.5 bg-[#FF9800] hover:bg-orange-500 text-white font-bold text-sm rounded-md transition shadow-md order-1 md:order-2">
             SALVAR CATEGORIA
           </button>
