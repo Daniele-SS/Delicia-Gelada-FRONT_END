@@ -13,6 +13,7 @@
   <title>Login | Delicia Gelada</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./admin/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./admin/js/admin.js" defer></script>
 </head>
 <body class="font-inter text-gray-900">
@@ -30,7 +31,7 @@
         </h1>
 
         <div class="w-full max-w-sm flex flex-col gap-4">
-          <input type="email" placeholder="Email"
+          <input type="email" id="inputEmail" placeholder="Email"
             class="w-full border border-gray-300 rounded px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-orange-400">
 
           <div class="relative">
@@ -52,7 +53,7 @@
             </a>
           </div>
 
-          <button onclick="window.location.href='./admin/pages/dashboard.html'"
+          <button onclick="fazerLogin(event)"
             class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded tracking-widest transition">
             ENTRAR
           </button>

@@ -13,8 +13,9 @@
   <title>Adicionar cargo | Delicia Gelada</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../js/admin.js" defer></script>
-  <script src="../js/cargo/novo-cargo.js" defer></script>
+  <script src="../js/cargo.js" defer></script>
 </head>
 <body class="font-sans bg-gray-50">
 
@@ -51,7 +52,7 @@
             
             <div class="flex justify-end gap-4">
               <button onclick="window.location.href='../pages/dashboard.html'" class="px-8 py-3 bg-gray-200 rounded-lg font-bold text-sm">CANCELAR</button>
-              <button onclick="salvarNovoCargo()" class="px-8 py-3 bg-[#FF9800] text-white rounded-lg font-bold text-sm shadow-md">SALVAR CARGO</button>
+              <button onclick="salvarNovoCargo(event)" class="px-8 py-3 bg-[#FF9800] text-white rounded-lg font-bold text-sm shadow-md">SALVAR CARGO</button>
             </div>
           </div>
         </div>

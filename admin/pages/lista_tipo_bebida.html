@@ -6,7 +6,9 @@
   <title>Tipos de Bebida | Delicia Gelada</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../js/admin.js" defer></script>
+  <script src="../js/tipo_bebida.js" defer></script>
 </head>
 <body class="font-sans bg-gray-50">
 
@@ -134,7 +136,7 @@
 
       <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-3 shrink-0">
         <button onclick="fecharModal()" class="px-6 py-2.5 bg-gray-200 text-gray-700 font-bold text-sm rounded-lg hover:bg-gray-300 transition">CANCELAR</button>
-        <button onclick="salvarEdicaoModal()" class="px-6 py-2.5 bg-[#FF9800] text-white font-bold text-sm rounded-lg hover:bg-orange-500 transition shadow-md">SALVAR ALTERAÇÕES</button>
+        <button id="btnSalvarEdicaoTipo" class="px-6 py-2.5 bg-[#FF9800] text-white font-bold text-sm rounded-lg hover:bg-orange-500 transition shadow-md">SALVAR ALTERAÇÕES</button>
       </div>
 
     </div>
