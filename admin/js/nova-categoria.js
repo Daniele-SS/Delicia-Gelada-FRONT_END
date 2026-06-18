@@ -28,13 +28,12 @@ function mostrarFeedback(mensagem, tipo = 'erro') {
     setTimeout(() => { feedback.style.display = 'none' }, 4000)
 }
 
-
 async function postCategoria(){
 
     // Captura os valores do formulário
     const nome      = document.getElementById('nomeCategoria').value.trim()
     const descricao = document.getElementById('descricaoCategoria').value.trim()
-    const foto      = document.getElementById('fotoCategoria').value.trim()
+    const foto      = document.getElementById('imagemCategoria').value.trim()
     const ativa     = document.getElementById('categoriaAtiva').checked
     const id_status = ativa ? 1 : 2
 
