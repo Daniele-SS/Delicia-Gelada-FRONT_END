@@ -45,8 +45,8 @@ async function postCategoria(){
     } if (!descricao || descricao.length > 255) {
         mostrarFeedback('A descrição da categoria é obrigatória e deve ter no máximo 255 caracteres.')
         return
-    } if (foto == null) {
-        alert('A foto é um campo obrigatório.')
+    } if (!foto) {
+        mostrarFeedback('A foto é um campo obrigatório.')
         return
     }
 
