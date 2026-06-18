@@ -440,12 +440,6 @@ async function criarCardDetalhesBebida(bebida) {
         dicaDiv.appendChild(dica)
         cardDetalhes.appendChild(dicaDiv)
 
-<<<<<<< HEAD
-
-
-=======
-        console.log(tipos)
->>>>>>> 5dfee970cbbffea14a0ef32cba00f00f2e044bbd
         // Adiciona o card de detalhes ao DOM
         // O DOM (Document Object Model) é a representação da página HTML como uma árvore de elementos,
         // onde cada tag, atributo ou texto é um nó que pode ser acessado e manipulado pelo JavaScript.
@@ -481,14 +475,7 @@ export async function iniciarPagina() {
         // Exibe o modal e espera a resposta (true ou false)
         const ehMaiorDe18 = await modalTelaInicial()
 
-<<<<<<< HEAD
-        // Passa a resposta para a API
         const json = await getBebidas(ehMaiorDe18)
-        
-=======
-        const json = await getBebidas(true)
-
->>>>>>> 5dfee970cbbffea14a0ef32cba00f00f2e044bbd
         todasBebidas = json.response
         if (!todasBebidas || todasBebidas.length == 0) {
             console.error('API veio vazia')
@@ -507,16 +494,11 @@ export async function iniciarPagina() {
     }
 }
 
-<<<<<<< HEAD
-// Controla o modal de idade e retorna true ou false
 function modalTelaInicial() {
     return new Promise((resolve) => {
         const modal = document.getElementById('age-gate-modal')
         const btnSim = document.getElementById('btn-maior-idade')
         const btnNao = document.getElementById('btn-menor-idade')
-=======
-function modalTelaInicial() {
->>>>>>> 5dfee970cbbffea14a0ef32cba00f00f2e044bbd
 
         if (!modal) {
             resolve(true)
