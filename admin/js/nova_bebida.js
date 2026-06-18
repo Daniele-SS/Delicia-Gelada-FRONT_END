@@ -160,11 +160,16 @@ window.listarBebidas = async function() {
                 btnEditar.appendChild(criarIconeSVG('editar')) // Deixe apenas UM appendChild para o editar
 
                 // Criação do Botão de Excluir
-                const btnExcluir = document.createElement('button')
-                btnExcluir.className = 'text-gray-800 hover:text-red-600 transition'
-                btnExcluir.title = 'Excluir'
-                btnExcluir.addEventListener('click', () => deletarBebida(bebida.id))
-                btnExcluir.appendChild(criarIconeSVG('excluir'))
+                const btnExcluir = document.createElement('button');
+                btnExcluir.className = 'text-gray-800 hover:text-red-600 transition';
+                btnExcluir.title = 'Excluir';
+                btnExcluir.appendChild(criarIconeSVG('excluir'));
+
+                // O onclick direto é à prova de balas no DOM gerado via JS
+                btnExcluir.onclick = function(event) {
+                    event.preventDefault();
+                    deletarBebida(bebida.id); // Se for na tela de Admin, mude para deletarAdmin(admin.id)
+                }
 
                 divAcoes.appendChild(btnEditar)
                 divAcoes.appendChild(btnExcluir)
@@ -184,44 +189,60 @@ window.listarBebidas = async function() {
 }
 
 // ==========================================
-// 3. DELETAR BEBIDA (DELETE)
+// 3. DELETAR ADMIN (DELETE) - COM RASTREADOR
 // ==========================================
-window.deletarBebida = async function(id) {
-    const result = await Swal.fire({
-        title: 'Tem certeza?',
-        text: "Esta ação é irreversível!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sim, excluir!',
-        cancelButtonText: 'Cancelar'
-    });
+window.deletarAdmin = async function(id) {
+    console.log("🕵️ 1. Entrou na função! O ID do Admin é:", id);
 
-    if (result.isConfirmed) {
-        try {
-            const token = localStorage.getItem('tokenDeliciaGelada');
-            const resposta = await fetch(`${BASE_URL}/bebida/${id}`, {
+    try {
+        const result = await Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter a exclusão deste Administrador!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        });
+
+        console.log("🕵️ 2. Usuário respondeu ao Modal:", result);
+
+        if (result.isConfirmed) {
+            console.log("🕵️ 3. Clicou em SIM! Preparando para chamar a API...");
+            
+            const token = localStorage.getItem('tokenDeliciaGelada'); 
+            const url_delete = `${BASE_URL}/usuario/${id}`;
+            
+            console.log("🕵️ 4. URL de exclusão:", url_delete);
+            console.log("🕵️ 5. Token do usuário logado:", token ? "Existe!" : "Vazio/Nulo!");
+
+            const resposta = await fetch(url_delete, {
                 method: 'DELETE',
-                headers: { 'Authorization': 'Bearer ' + token }
+                headers: { 'Authorization': 'Bearer ' + token } 
             });
 
+            console.log("🕵️ 6. API Respondeu! Status Code:", resposta.status);
+
             if (resposta.ok) {
-                Swal.fire('Excluído!', 'A Bebida foi removida com sucesso.', 'success');
-                listarBebidas();
+                Swal.fire('Excluído!', 'O Administrador foi removido.', 'success');
+                listarAdmins();
             } else {
                 const erro = await resposta.json();
+                console.error("🚨 ERRO DA API (Backend reclamou):", erro);
                 Swal.fire({
                     icon: 'error',
                     title: 'Erro ao excluir',
-                    text: erro.message || 'Verifique o banco de dados.',
+                    text: erro.message || 'O servidor recusou a exclusão.',
                     confirmButtonColor: '#005A9C'
                 });
             }
-        } catch (erro) {
-            console.error('Erro de rede ao deletar:', erro);
-            Swal.fire('Erro', 'Falha ao conectar com o servidor.', 'error');
+        } else {
+            console.log("❌ Usuário clicou em cancelar.");
         }
+    } catch (erro) {
+        console.error("🚨 ERRO CRÍTICO NO JAVASCRIPT OU REDE:", erro);
+        Swal.fire('Erro', 'Falha ao processar o código ou conectar na API.', 'error');
     }
 }
 

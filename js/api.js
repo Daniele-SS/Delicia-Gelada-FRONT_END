@@ -1,48 +1,54 @@
 /*******************************************************************************************
-objetivo: Arquivo responável por gerar funções get para popular a landingpage
+objetivo: Arquivo responsável por gerar funções get para popular a landingpage
 autor: Mayara Martins
-versão:1.0.0
-data:17/06/2026
+versão: 1.0.1
+data: 17/06/2026
+
+CORREÇÕES v1.0.1:
+  - BUG #3: Adicionado "await" antes de response.json() em getCategorias() e getTipos()
+            Sem o await, a variável recebia uma Promise pendente (não o dado real),
+            causando json.response === undefined em todo o restante do código.
+  - BUG #4: Movido o "if (!response.ok)" para ANTES de chamar response.json(),
+            pois após consumir o body a verificação não funciona corretamente.
 ********************************************************************************************/
 
 const URL = 'http://localhost:3000/v1/fynix/deliciagelada'
-// const URL_BEBIDA = 'http://localhost:3000/v1/fynix/deliciagelada/bebida?maior_de_18=true'
 
 let categorias = []
 let bebidas = []
 let tipos = []
 
 export async function getCategorias() {
-    //Esse trecho faz uma requisição para uma API usando fetch, verifica se a resposta deu certo e depois transforma os dados em JSON.
-    //crie uma variavel com resposta do servidor
-    //fetch é uma função do JavaScript usada para fazer requisições para uma API ou servido
     const response = await fetch(`${URL}/categoria`)
 
-    categorias = response.json()
-    //se não for ok ele vai disparar um erro 
-    if (!response.ok) throw new Error('Erro ao buscar contatos') //função para ser usada por outros programadores, vvai gerar um erro se não encontrar os dados na api 
-    //Se a resposta estiver correta, essa linha transforma a resposta da API em JSON.
+    // FIX BUG #4: verificar ok ANTES de ler o body
+    if (!response.ok) throw new Error('Erro ao buscar categorias')
 
-    //não está no if
+    // FIX BUG #3: adicionado "await" — sem ele retornava Promise não resolvida
+    categorias = await response.json()
     return categorias
 }
 
 export async function getBebidas(status) {
-    // Garantimos que a URL está correta (adicionando a barra /bebida)
     const URL_BEBIDA = `${URL}/bebida?maior_de_18=${status}`
-    
+
     const response = await fetch(URL_BEBIDA)
-    
+
     if (!response.ok) {
         console.error("Erro na busca de bebidas. Status:", response.status)
-        return { response: [] } // Retorna vazio para não quebrar o resto do código
+        return { response: [] }
     }
-    
+
     return await response.json()
 }
 
 export async function getTipos() {
     const response = await fetch(`${URL}/tipobebida`)
-    tipos = response.json()
+
+    // FIX BUG #4: verificar ok ANTES de ler o body
+    if (!response.ok) throw new Error('Erro ao buscar tipos de bebida')
+
+    // FIX BUG #3: adicionado "await" — sem ele retornava Promise não resolvida
+    tipos = await response.json()
     return tipos
 }

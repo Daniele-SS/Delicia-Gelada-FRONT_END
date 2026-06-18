@@ -48,24 +48,6 @@ export async function menuHamburguer() {
     }
 }
 
-//função para filtrar as categorias, o card redondo
-function filtrarPorCategoria(nomeCategoria) {
-
-    try {
-        const filtrados = todasBebidas.filter(b => {
-
-            const categoria = b.categorias?.[0]?.nome || ''
-
-            return categoria.toLowerCase() == nomeCategoria.toLowerCase()
-        })
-
-        renderizarBebidas(filtrados)
-
-    } catch (error) {
-        return false
-    }
-}
-
 //aqui popula essa sessão com as categorias já cadastradas
 export async function popularCategorias() {
     try {
@@ -123,348 +105,290 @@ containerProdutos.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg
 
 //cria os cards das bebidas, responsivo
 function renderizarBebidas(lista) {
-
     try {
+        const containerPai = document.getElementById('produtos'); // Alterado para buscar a div interna do HTML
+        if (!containerPai) return;
 
-        while (containerProdutos.firstChild) {
-            containerProdutos.removeChild(containerProdutos.firstChild)
+        // Limpeza segura apenas dos produtos, não da página toda
+        while (containerPai.firstChild) {
+            containerPai.removeChild(containerPai.firstChild);
         }
 
-        const container = document.getElementById('container-produtos')
-        container.className = 'flex justify-center'
-
-        while (container.firstChild) {
-            container.removeChild(container.firstChild)
+        if (!lista || lista.length === 0) {
+            const msg = document.createElement('p');
+            msg.textContent = 'Nenhuma bebida encontrada para este filtro.';
+            msg.className = 'col-span-full text-center text-gray-500 my-10';
+            containerPai.appendChild(msg);
+            return;
         }
 
-        if (!lista || lista.length == 0) {
-            const msg = document.createElement('p')
-            msg.textContent = 'nenhuma bebida encontrada'
-            container.appendChild(msg)
-            return
-        }
-
-        containerProdutos.classList.remove('hidden')
+        // Substitua apenas o trecho de criação do card dentro do forEach na função renderizarBebidas:
 
         lista.forEach(bebida => {
-
-            // CARD PRINCIPAL
-
-            const card = document.createElement('div')
-            card.className = 'bg-white rounded-[10px] overflow-hidden shadow-xl border border-gray-100 w-[147px] sm:w-[190px] md:w-[207px] xl:w-[277px] h-[320px] xl:h-[450px] flex flex-col transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl mt-8'
+            // CARD PRINCIPAL - Removemos larguras fixas e usamos w-full e flex-col h-full
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 w-full flex flex-col h-full transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl';
 
             // IMAGEM
-            const img = document.createElement('img')
-            img.className = 'img-bebida w-full h-[150px] xl:h-[229px] object-cover'
-            img.src = bebida.imagem
-            img.alt = bebida.nome
+            const img = document.createElement('img');
+            // Altura fixa com object-cover para padronizar o tamanho das imagens
+            img.className = 'w-full h-[180px] xl:h-[240px] object-cover';
+            img.src = (bebida.imagem && bebida.imagem.startsWith('http')) ? bebida.imagem : './img/logo.png';
+            img.alt = bebida.nome;
 
-            // CONTAINER INFO
-            const info = document.createElement('div')
-            info.className = 'flex flex-col justify-between pl-3'
+            // CONTAINER INFO - Adicionado flex-grow para empurrar o botão sempre pro final
+            const info = document.createElement('div');
+            info.className = 'flex flex-col flex-grow p-4';
 
-            const nome = document.createElement('h3')
-            nome.className = 'nome-bebida font-bold text-[11px] xl:text-[16px]'
-            nome.textContent = bebida.nome
+            const nome = document.createElement('h3');
+            nome.className = 'font-bold text-[14px] xl:text-[18px] text-gray-800 line-clamp-1';
+            nome.textContent = bebida.nome || 'Bebida Sem Nome';
 
-            const categoria = document.createElement('span')
-            categoria.className = 'categoria-bebida text-[#00C3D0] text-[10px] xl:text-[14px] mt-1'
-            categoria.textContent = bebida.categorias?.[0]?.nome || ''
+            const categoria = document.createElement('span');
+            categoria.className = 'text-[#00C3D0] text-[12px] xl:text-[14px] font-medium mt-1';
+            categoria.textContent = (bebida.categorias && bebida.categorias.length > 0) ? bebida.categorias[0].nome : 'Geral';
 
-            const descricao = document.createElement('p')
-            descricao.className = 'descricao-bebida text-[10px] xl:text-[14px] mt-1 leading-[20px]'
-            descricao.textContent = bebida.descricao
+            const descricao = document.createElement('p');
+            descricao.className = 'text-[12px] xl:text-[14px] text-gray-600 mt-2 line-clamp-2'; 
+            descricao.textContent = bebida.descricao || 'Bebida especial da casa.';
 
-            const preco = document.createElement('h4')
-            preco.className = 'preco-bebida font-bold mt-1 text-[11px] xl:text-[16px]'
-            preco.textContent = `R$ ${bebida.preco}`
+            // Container para o preço e botão ficarem no rodapé do card
+            const rodape = document.createElement('div');
+            rodape.className = 'mt-auto pt-4';
 
-            // BOTÃO
-            const divBtn = document.createElement('div')
-            divBtn.className = 'flex justify-center w-full'
+            const preco = document.createElement('h4');
+            preco.className = 'font-bold text-[16px] xl:text-[20px] text-[#FF9100]';
+            const valor = Number(bebida.preco) || 0;
+            preco.textContent = `R$ ${valor.toFixed(2).replace('.', ',')}`;
 
-            const btn = document.createElement('button')
-            btn.className = 'botao-card-ver-detalhes w-[99px] xl:w-[187px] h-[23px] xl:h-[45px] flex justify-center items-center border border-[#00C3D0] text-[#00C3D0] rounded-full mt-2 text-[11px] xl:text-[16px] font-semibold'
-            btn.textContent = 'VER DETALHES'
+            const btn = document.createElement('button');
+            btn.className = 'w-full h-[36px] xl:h-[44px] flex justify-center items-center border-2 border-[#00C3D0] text-[#00C3D0] rounded-full mt-3 text-[13px] xl:text-[15px] font-bold hover:bg-[#00C3D0] hover:text-white transition-colors';
+            btn.textContent = 'VER DETALHES';
 
-            // EVENTO DO BOTÃO (abre detalhes)
             btn.addEventListener('click', () => {
-                criarCardDetalhesBebida(bebida)
-            })
-
-            divBtn.appendChild(btn)
+                criarCardDetalhesBebida(bebida);
+            });
 
             // MONTAGEM
-            info.appendChild(nome)
-            info.appendChild(categoria)
-            info.appendChild(descricao)
-            info.appendChild(preco)
+            info.appendChild(nome);
+            info.appendChild(categoria);
+            info.appendChild(descricao);
+            
+            rodape.appendChild(preco);
+            rodape.appendChild(btn);
+            info.appendChild(rodape);
 
-            card.appendChild(img)
-            card.appendChild(info)
-            card.appendChild(divBtn)
+            card.appendChild(img);
+            card.appendChild(info);
 
-            containerProdutos.appendChild(card)
-
-        })
-
-        container.appendChild(containerProdutos)
+            containerPai.appendChild(card);
+        });
 
     } catch (error) {
-        return false
+        console.error("Erro no renderizarBebidas:", error);
     }
 }
 
 //cria o car de detalhes das bebidas, acionado pelo botão ver etalhes
 async function criarCardDetalhesBebida(bebida) {
-
     try {
-        const json = await getTipos()
+        const json = await getTipos();
+        const tipos = (json && json.response) 
+            ? json.response.find(tipo => Number(tipo.id) === Number(bebida.id_tipo_bebida)) || {} 
+            : {};
 
-        //nesta variável é utilizado o .find() que vai procurar dentro do array o id 
-        //e comparar com o id da bebida enviada. Colocado como Number() porque pode vir como string o numero do id
-        //e comprarado com o tipo de dado === pois é necessário verificar se é um numero mesmo após passar pelo Number
-        const tipos = json.response.find(tipo =>
-            Number(tipo.id) === Number(bebida.id_tipo_bebida)
-        )
-        // Oculta os cards
-        containerProdutos.classList.add('hidden')
+        // 1. EXTRAÇÃO E TRATAMENTO DE DADOS
+        const volume = bebida.volume || tipos.volume || '350 ml';
+        let teor = bebida.teor_alcoolico || tipos.teor_alcoolico || '0';
+        if (!String(teor).includes('%')) teor += '%';
 
-        // Container principal
-        const cardDetalhes = document.createElement('div')
-        cardDetalhes.classList.add('p-2', 'pl-4', 'xl:p-6', 'xl:pl-10')
-
-        const btnVoltar = document.createElement('button')
-        btnVoltar.classList.add('botao-voltar')
-
-        // Cria a imagem
-        const imgVoltar = document.createElement('img')
-        imgVoltar.src = './img/Forward.png'
-        imgVoltar.alt = 'seta para voltar'
-        // Adiciona a imagem dentro do botão
-        btnVoltar.appendChild(imgVoltar)
-
-        // Adiciona o botão ao card de detalhes
-        cardDetalhes.appendChild(btnVoltar)
-
-        const containerImgInfo = document.createElement('div')
-        containerImgInfo.className = 'sm:flex lg:flex xl:flex'
-        // Imagem
-        const img = document.createElement('img')
-        img.src = bebida.imagem
-        img.alt = bebida.nome
-        img.className = 'w-[244px] h-[241px] ml-12 sm:w-[244px] sm:h-[241px] lg:w-[244px] lg:h-[241px] xl:w-[449px] xl:h-[467px] rounded-[10px] object-cover'
-        containerImgInfo.appendChild(img)
-        cardDetalhes.appendChild(containerImgInfo)
-
-        // Informações iniciais
-        const containerInfo = document.createElement('div')
-        containerInfo.className = "flex flex-col justify-between sm:pl-6 lg:pl-6 xl:pl-6"
-
-        const nome = document.createElement('h3')
-        nome.textContent = bebida.nome
-        nome.className = 'font-bold text-[18px] xl:text-[48px]'
-        containerInfo.appendChild(nome)
-        // containerImgInfo.appendChild(containerInfo)
-        // cardDetalhes.appendChild(containerImgInfo)
-
-        const categoria = document.createElement('span')
-        categoria.textContent = bebida.categorias?.[0]?.nome || ''
-        categoria.className = 'text-[#00C3D0] text-[18px] lg:text-[20px] xl:text-[36px] mt-1'
-        containerInfo.appendChild(categoria)
-        // containerImgInfo.appendChild(containerInfo)
-        // cardDetalhes.appendChild(containerImgInfo)
-
-        const descricao = document.createElement('p')
-        descricao.textContent = bebida.descricao
-        descricao.className = 'text-[18px] lg:text-[20px] xl:text-[36px] mt-1 leading-[20px]'
-        containerInfo.appendChild(descricao)
-        // containerImgInfo.appendChild(containerInfo)
-        // cardDetalhes.appendChild(containerImgInfo)
-
-        const preco = document.createElement('h4')
-        preco.textContent = `R$${bebida.preco}`
-        preco.className = 'font-bold mt-2 mb-4 xl:mb-0 xl:mt-6 text-[18px] lg:text-[24px] xl:text-[48px]'
-        containerInfo.appendChild(preco)
-        containerImgInfo.appendChild(containerInfo)
-        cardDetalhes.appendChild(containerImgInfo)
-
-       // Cards extras (volume, teor, perfil)
-        const cardsExtras = document.createElement('div')
-        cardsExtras.className = 'flex justify-between'
-
-        // --- Card 1: Volume ---
-        const cardDiv = document.createElement('div')
-        cardDiv.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
+        const perfil = bebida.perfil_sabor || tipos.perfil_sabor || 'Refrescante';
+        const preparo = bebida.modo_preparo || tipos.modo_preparo || 'Modo de preparo padrão.';
+        const dica = bebida.dica_delicia || tipos.dica_delicia || 'Aproveite seu drink gelado!';
+        const ingredientesRaw = bebida.ingredientes || tipos.ingredientes || 'Ingredientes não informados';
         
-        const imgCard = document.createElement('img')
-        imgCard.src = './img/Measuring Cup.png'
-        imgCard.alt = 'volume'
-        imgCard.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-        
-        const titulo = document.createElement('h4')
-        // Use exatamente o nome da coluna da VIEW
-        titulo.textContent = bebida.volume_em_mililitros || 'Não informado'
-        titulo.className = 'font-bold text-[12px] xl:text-[20px]'
-        
-        const descricaoCard = document.createElement('h4')
-        descricaoCard.textContent = 'Volume'
-        descricaoCard.className = 'text-[12px] xl:text-[20px]'
-        
-        cardDiv.appendChild(imgCard)
-        cardDiv.appendChild(titulo)
-        cardDiv.appendChild(descricaoCard)
+        const precoFormatado = Number(bebida.preco || 0).toFixed(2).replace('.', ',');
+        const categoriaNome = (bebida.categorias && bebida.categorias.length > 0) ? bebida.categorias[0].nome : 'Categoria Geral';
+        const imagemSrc = (bebida.imagem && bebida.imagem.startsWith('http')) ? bebida.imagem : './img/logo.png';
+        const descricaoCurta = bebida.descricao || ingredientesRaw;
 
-        // --- Card 2: Teor Alcoólico ---
-        const cardDiv2 = document.createElement('div')
-        cardDiv2.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
-        
-        const imgCard2 = document.createElement('img')
-        imgCard2.src = './img/teor-alcoolico.png'
-        imgCard2.alt = 'teor alcoolico'
-        imgCard2.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-        
-        const titulo2 = document.createElement('h4')
-        titulo2.textContent = bebida.porcentagem_de_teor_alcoolico || 'Zero'
-        titulo2.className = 'font-bold text-[12px] xl:text-[20px]'
-        
-        const descricaoCard2 = document.createElement('h4')
-        descricaoCard2.textContent = 'Teor Alcoólico'
-        descricaoCard2.className = 'text-[12px] xl:text-[20px]'
-        
-        cardDiv2.appendChild(imgCard2)
-        cardDiv2.appendChild(titulo2)
-        cardDiv2.appendChild(descricaoCard2)
+        // 2. SELEÇÃO DE CONTAINERS
+        const containerPrincipal = document.getElementById('container-produtos');
+        const gridProdutos = document.getElementById('produtos');
+        gridProdutos.classList.add('hidden');
 
-        // --- Card 3: Perfil ---
-        const cardDiv3 = document.createElement('div')
-        cardDiv3.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
-        
-        const imgCard3 = document.createElement('img')
-        imgCard3.src = './img/Winter.png'
-        imgCard3.alt = 'perfil'
-        imgCard3.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-        
-        const titulo3 = document.createElement('h4')
-        titulo3.textContent = tipos.perfil_sabor || 'Não informado' // Adicionei o '||' por segurança
-        titulo3.className = 'font-bold text-[12px] xl:text-[20px]'
-        
-        const descricaoCard3 = document.createElement('h4')
-        descricaoCard3.textContent = 'Perfil'
-        descricaoCard3.className = 'text-[12px] xl:text-[20px]'
-        
-        cardDiv3.appendChild(imgCard3)
-        cardDiv3.appendChild(titulo3)
-        cardDiv3.appendChild(descricaoCard3)
+        // 3. CRIAÇÃO DO CONTAINER PRINCIPAL
+        const cardDetalhes = document.createElement('div');
+        cardDetalhes.id = 'view-detalhes-ativo';
+        cardDetalhes.className = 'w-full max-w-[1200px] mx-auto p-4 md:p-8 fade-in';
 
-        cardsExtras.appendChild(cardDiv)
-        cardsExtras.appendChild(cardDiv2)
-        cardsExtras.appendChild(cardDiv3)
+        // --- BOTÃO VOLTAR ---
+        const btnVoltar = document.createElement('button');
+        btnVoltar.id = 'btn-voltar-detalhes';
+        btnVoltar.className = 'flex items-center text-gray-500 hover:text-[#00C3D0] transition-colors mb-6 text-[32px] cursor-pointer bg-transparent border-none';
+        btnVoltar.innerHTML = '&#8249;'; // Seta para esquerda
+        cardDetalhes.appendChild(btnVoltar);
 
-        containerInfo.appendChild(cardsExtras)
+        // --- BLOCO SUPERIOR (IMAGEM + INFO) ---
+        const topWrapper = document.createElement('div');
+        topWrapper.className = 'flex flex-col md:flex-row gap-8 xl:gap-16 items-center md:items-start';
 
-        // Adicione o container de informações ao card principal
-        containerImgInfo.appendChild(containerInfo)
-        cardDetalhes.appendChild(containerImgInfo)
+        // Coluna Esquerda: Imagem
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'w-full md:w-[45%]';
+        const img = document.createElement('img');
+        img.src = imagemSrc;
+        img.alt = bebida.nome;
+        img.className = 'w-full max-h-[500px] object-cover rounded-[10px] shadow-lg';
+        imgContainer.appendChild(img);
 
-        //linha
-        const linha = document.createElement('hr')
-        linha.className = 'bg-[#D9D9D9] xl:w-full mt-6 xl:mt-14'
-        cardDetalhes.appendChild(linha)
+        // Coluna Direita: Informações
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'w-full md:w-[55%] flex flex-col justify-center';
 
-        // Informações adicionais (ingredientes, preparo, harmonização)
-        const infoAdicional = document.createElement('div')
-        infoAdicional.className = 'flex flex-col md:flex-row justify-center p-4 md:gap-36 gap-8'
+        const titulo = document.createElement('h1');
+        titulo.className = 'text-[32px] md:text-[48px] font-bold text-black leading-tight';
+        titulo.textContent = bebida.nome;
 
-        // Ingredientes
-        const ingDiv = document.createElement('div')
-        ingDiv.className = 'flex flex-col items-center'
-        const ingTitulo = document.createElement('h4')
-        ingTitulo.textContent = 'Ingredientes'
-        ingTitulo.className = 'font-bold mb-2'
-        ingDiv.appendChild(ingTitulo)
-        const p = document.createElement('p')
-        p.textContent = tipos.ingredientes
-        ingDiv.appendChild(p)
-        infoAdicional.appendChild(ingDiv)
+        const catSpan = document.createElement('span');
+        catSpan.className = 'text-[#00C3D0] text-[20px] md:text-[24px] font-medium mt-1';
+        catSpan.textContent = categoriaNome;
 
-        // Modo de preparo
-        const prepDiv = document.createElement('div')
-        prepDiv.className = 'flex flex-col items-center mb-4 md:mb-0 text-center'
-        const preparo = document.createElement('h4')
-        preparo.textContent = 'Modo de preparo'
-        preparo.className = 'font-bold mb-2'
-        prepDiv.appendChild(preparo)
-        const prepP = document.createElement('p')
-        prepP.textContent = tipos.modo_preparo
-        prepDiv.appendChild(prepP)
-        infoAdicional.appendChild(prepDiv)
+        const descP = document.createElement('p');
+        descP.className = 'text-[18px] md:text-[22px] text-gray-700 mt-3 leading-snug';
+        descP.textContent = descricaoCurta;
 
-        // Harmoniza com
-        const harmDiv = document.createElement('div')
-        harmDiv.className = 'flex flex-col items-center'
-        const harmoniza = document.createElement('h4')
-        harmoniza.textContent = 'Harmoniza com'
-        harmoniza.className = 'font-bold mb-2'
-        harmDiv.appendChild(harmoniza)
-        dadosBebida.harmoniza.forEach(h => {
-            const p = document.createElement('p')
-            p.textContent = h
-            harmDiv.appendChild(p)
-        })
-        infoAdicional.appendChild(harmDiv)
+        const precoH2 = document.createElement('h2');
+        precoH2.className = 'text-[32px] md:text-[40px] font-bold text-black mt-6';
+        precoH2.textContent = `R$ ${precoFormatado}`;
 
-        cardDetalhes.appendChild(infoAdicional)
+        // Wrapper dos 3 Mini Cards (Volume, Teor, Perfil)
+        const miniCardsWrapper = document.createElement('div');
+        miniCardsWrapper.className = 'flex gap-4 mt-8 w-full justify-between sm:justify-start';
 
-        // Dica
-        const dicaDiv = document.createElement('div')
-        dicaDiv.className = 'flex justify-center mt-4'
-        const dica = document.createElement('div')
-        dica.className = 'bg-[#E4F3F4] flex justify-start items-center w-full gap-2 h-10 xl:gap-20 xl:w-[1274px] xl:h-[90px] xl:pl-8 rounded-[10px]'
-        const dicaImg = document.createElement('img')
-        dicaImg.src = './img/Idea.png'
-        dicaImg.alt = 'lampada de ideia'
-        dicaImg.className = 'w-[20px] xl:w-[25px] xl:h-[25px]'
-        dica.appendChild(dicaImg)
+        // Função auxiliar para montar os mini cards
+        const criarMiniCard = (iconSrc, value, label) => {
+            const div = document.createElement('div');
+            div.className = 'bg-[#EEF7F8] rounded-[10px] py-4 px-2 flex flex-col items-center justify-center w-full max-w-[130px]';
+            
+            const icone = document.createElement('img');
+            icone.src = iconSrc;
+            icone.className = 'w-8 h-8 mb-2';
+            
+            const spanValue = document.createElement('span');
+            spanValue.className = 'font-bold text-[16px] text-black text-center';
+            spanValue.textContent = value;
+            
+            const spanLabel = document.createElement('span');
+            spanLabel.className = 'text-[12px] md:text-[14px] text-gray-600';
+            spanLabel.textContent = label;
 
-        const dicaTitulo = document.createElement('h4')
-        dicaTitulo.className = 'font-bold text-[10px] xl:text-[24px]'
-        dicaTitulo.textContent = 'Dica Delícia'
-        dica.appendChild(dicaTitulo)
+            div.append(icone, spanValue, spanLabel);
+            return div;
+        };
 
-        const dicaText = document.createElement('h4')
-        dicaText.className = 'text-[#8E8E93] text-[10px] xl:text-[24px]'
-        dicaText.textContent = tipos.dica_delicia
-        dica.appendChild(dicaText)
+        miniCardsWrapper.appendChild(criarMiniCard('./img/Measuring Cup.png', volume, 'Volume'));
+        miniCardsWrapper.appendChild(criarMiniCard('./img/teor-alcoolico.png', teor, 'Teor Alcoólico'));
+        miniCardsWrapper.appendChild(criarMiniCard('./img/Winter.png', perfil, 'Perfil'));
 
-        dicaDiv.appendChild(dica)
-        cardDetalhes.appendChild(dicaDiv)
+        infoContainer.append(titulo, catSpan, descP, precoH2, miniCardsWrapper);
+        topWrapper.append(imgContainer, infoContainer);
+        cardDetalhes.appendChild(topWrapper);
 
-        // Adiciona o card de detalhes ao DOM
-        // O DOM (Document Object Model) é a representação da página HTML como uma árvore de elementos,
-        // onde cada tag, atributo ou texto é um nó que pode ser acessado e manipulado pelo JavaScript.
-        // Ele permite:
-        // 1. Selecionar elementos da página (querySelector, getElementById, etc.)
-        // 2. Alterar conteúdo e estilos dos elementos
-        // 3. Adicionar ou remover elementos dinamicamente
-        // 4. Capturar e responder a eventos do usuário (click, input, scroll, etc.)
-        // Em resumo, o DOM é a ponte entre HTML e JavaScript, permitindo tornar a página interativa e dinâmica.
+        // --- LINHA DIVISÓRIA ---
+        const hr = document.createElement('hr');
+        hr.className = 'my-10 md:my-14 border-gray-200';
+        cardDetalhes.appendChild(hr);
 
-        // containerCards.parentNode - seleciona o elemento pai do container de cards
-        // appendChild(cardDetalhes) - insere o card de detalhes como último filho do pai, fazendo ele aparecer na página
-        // cardDetalhes.appendChild(containerInfo)
-        containerProdutos.parentNode.appendChild(cardDetalhes)
+        // --- BLOCO DO MEIO (3 COLUNAS) ---
+        const midWrapper = document.createElement('div');
+        midWrapper.className = 'grid grid-cols-1 md:grid-cols-3 gap-8 text-center';
 
-        // Voltar
+        // Função auxiliar para lidar com quebras de linha (<br>) no DOM
+        const adicionarComQuebraDeLinha = (elementoPai, arrayDeTextos) => {
+            arrayDeTextos.forEach((texto, index) => {
+                elementoPai.appendChild(document.createTextNode(texto.trim()));
+                if (index < arrayDeTextos.length - 1) {
+                    elementoPai.appendChild(document.createElement('br'));
+                }
+            });
+        };
+
+        // Coluna 1: Ingredientes
+        const colIngredientes = document.createElement('div');
+        colIngredientes.className = 'flex flex-col items-center';
+        const titleIngredientes = document.createElement('h3');
+        titleIngredientes.className = 'font-bold text-[18px] md:text-[20px] text-black mb-4';
+        titleIngredientes.textContent = 'Ingredientes';
+        const pIngredientes = document.createElement('p');
+        pIngredientes.className = 'text-[16px] text-gray-700 leading-relaxed';
+        adicionarComQuebraDeLinha(pIngredientes, ingredientesRaw.split(','));
+        colIngredientes.append(titleIngredientes, pIngredientes);
+
+        // Coluna 2: Modo de preparo
+        const colPreparo = document.createElement('div');
+        colPreparo.className = 'flex flex-col items-center px-4 border-t md:border-t-0 md:border-l md:border-r border-gray-200 pt-6 md:pt-0';
+        const titlePreparo = document.createElement('h3');
+        titlePreparo.className = 'font-bold text-[18px] md:text-[20px] text-black mb-4';
+        titlePreparo.textContent = 'Modo de preparo';
+        const pPreparo = document.createElement('p');
+        pPreparo.className = 'text-[16px] text-gray-700 leading-relaxed max-w-[300px]';
+        pPreparo.textContent = preparo;
+        colPreparo.append(titlePreparo, pPreparo);
+
+        // Coluna 3: Harmoniza com
+        const colHarmoniza = document.createElement('div');
+        colHarmoniza.className = 'flex flex-col items-center border-t md:border-t-0 border-gray-200 pt-6 md:pt-0';
+        const titleHarmoniza = document.createElement('h3');
+        titleHarmoniza.className = 'font-bold text-[18px] md:text-[20px] text-black mb-4';
+        titleHarmoniza.textContent = 'Harmoniza com';
+        const pHarmoniza = document.createElement('p');
+        pHarmoniza.className = 'text-[16px] text-gray-700 leading-relaxed';
+        adicionarComQuebraDeLinha(pHarmoniza, ['Frutos do mar', 'Saladas frescas', 'Petiscos leves']);
+        colHarmoniza.append(titleHarmoniza, pHarmoniza);
+
+        midWrapper.append(colIngredientes, colPreparo, colHarmoniza);
+        cardDetalhes.appendChild(midWrapper);
+
+        // --- BLOCO INFERIOR (DICA DELÍCIA) ---
+        const dicaWrapper = document.createElement('div');
+        dicaWrapper.className = 'bg-[#EEF7F8] rounded-[10px] p-6 mt-12 mb-8 flex flex-col sm:flex-row items-center gap-4';
+
+        const dicaIcon = document.createElement('div');
+        dicaIcon.className = 'text-[32px] md:text-[40px]';
+        dicaIcon.textContent = '💡';
+
+        const dicaTextContainer = document.createElement('div');
+        dicaTextContainer.className = 'flex flex-col sm:flex-row sm:items-center w-full gap-2 text-center sm:text-left';
+
+        const dicaTitle = document.createElement('span');
+        dicaTitle.className = 'font-bold text-[18px] text-black whitespace-nowrap';
+        dicaTitle.textContent = 'Dica Delícia';
+
+        const dicaSeparator = document.createElement('span');
+        dicaSeparator.className = 'hidden sm:block text-gray-300 mx-2';
+        dicaSeparator.textContent = '|';
+
+        const dicaTextSpan = document.createElement('span');
+        dicaTextSpan.className = 'text-[16px] text-gray-600';
+        dicaTextSpan.textContent = dica;
+
+        dicaTextContainer.append(dicaTitle, dicaSeparator, dicaTextSpan);
+        dicaWrapper.append(dicaIcon, dicaTextContainer);
+        cardDetalhes.appendChild(dicaWrapper);
+
+        // 4. ADICIONA À TELA
+        containerPrincipal.appendChild(cardDetalhes);
+
+        // 5. EVENTO DE VOLTAR
         btnVoltar.addEventListener('click', () => {
-            cardDetalhes.remove()
-            containerProdutos.classList.remove('hidden')
-        })
+            cardDetalhes.remove();
+            gridProdutos.classList.remove('hidden');
+        });
 
     } catch (error) {
-        return false
+        console.error("Erro ao criar tela de detalhes:", error);
     }
-
 }
 
 //função para iniciar a pagina
@@ -590,27 +514,41 @@ function buscarPorNome() {
 //filtra as bebidas por categoria e tipo, 
 function filtrarTodos() {
     try {
-        const categoriaSelecionada = document.getElementById('categoria').value
-        const tipoSelecionado = document.getElementById('tipo').value
+        const categoriaSelecionada = document.getElementById('categoria').value;
+        const tipoSelecionado = document.getElementById('tipo').value;
 
-        //percorre todas as bebidas e cria uma lista só com as que passam no filtro 
         const filtrados = todasBebidas.filter(b => {
+            const categoriaAPI = (b.categorias && b.categorias.length > 0) ? b.categorias[0].nome : '';
+            
+            // Aceita se o select estiver na opção padrão ('Categoria' ou 'Tipo') OU se houver match
+            const matchCategoria = !categoriaSelecionada || categoriaSelecionada === 'Categoria' || categoriaAPI === categoriaSelecionada;
+            const matchTipo = !tipoSelecionado || tipoSelecionado === 'Tipo' || Number(b.id_tipo_bebida) === Number(tipoSelecionado);
 
-            // b é um objeto dentro do foreach, "?" - significa "continua se existir", caso não exista retorna undefined
-            const categoriaAPI = b.categorias?.[0]?.nome || ''
+            return matchCategoria && matchTipo;
+        });
 
-            const caregoria = !categoriaSelecionada || categoriaAPI == categoriaSelecionada
-
-            const tipo = !tipoSelecionado || Number(b.id_tipo_bebida) == Number(tipoSelecionado)
-
-            const pesquisa = caregoria && tipo
-
-            return pesquisa
-        })
-
-        renderizarBebidas(filtrados)
+        renderizarBebidas(filtrados);
     } catch (error) {
-        return false
+        console.error("Erro no filtro múltiplo:", error);
+    }
+}
+
+// Em filtrarPorCategoria, adicione isto para que ele volte ao normal ao invés de quebrar
+function filtrarPorCategoria(nomeCategoria) {
+    try {
+        if (!nomeCategoria || nomeCategoria === 'Todos') {
+             renderizarBebidas(todasBebidas);
+             return;
+        }
+
+        const filtrados = todasBebidas.filter(b => {
+            const categoriaAPI = (b.categorias && b.categorias.length > 0) ? b.categorias[0].nome : '';
+            return categoriaAPI.toLowerCase() === nomeCategoria.toLowerCase();
+        });
+
+        renderizarBebidas(filtrados);
+    } catch (error) {
+        console.error("Erro ao filtrar categoria circular:", error);
     }
 }
 

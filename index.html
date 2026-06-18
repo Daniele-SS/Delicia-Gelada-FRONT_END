@@ -2,23 +2,16 @@
 ===============================================================================
 ARQUIVO........: index.html
 PROJETO........: Projeto Integrador Delícia Gelada
-VERSÃO.........: 1.0.0
-AUTORES..........: Diego de Pádua Bezerra de Lemos e Mayara Martins de Andrade
+VERSÃO.........: 1.0.4
+AUTORES..........: Diego de Pádua e Mayara Andrade
 DATA...........: 08/06/2026
 
-DESCRIÇÃO:
-Página principal da aplicação Delícia Gelada responsável pela apresentação
-institucional da empresa, catálogo de produtos e navegação do usuário.
-
-TECNOLOGIAS:
-HTML5
-Tailwind CSS
-JavaScript
-
-MANUTENÇÃO:
-Alterações futuras deverão manter a fidelidade visual do protótipo e a
-responsividade da aplicação.
-
+CORREÇÕES v1.0.1:
+  - BUG #1: Fechada a <div class="flex"> dos botões do banner (faltava </div>)
+  - BUG #2: Fechada a <section> do catálogo (faltava </section>)
+  - BUG #5: Corrigido typo "xl-flex-row" → "xl:flex-row" nos selinhos
+  - BUG #5: Corrigido "lg:[250px]" → "lg:w-[250px]" no campo busca
+  - BUG #5: Corrigido "lg:[150px]" → "lg:w-[150px]" no botão buscar por preço
 ===============================================================================
 -->
 
@@ -40,187 +33,179 @@ responsividade da aplicação.
   <script src="./js/app.js" type="module" defer></script>
 </head>
 
-<!--
-BODY:
-bg: Define a cor de fundo geral da página (#1f1f1f).
-m-0: remove toda a margem externa do elemento
-p-0: remove toda a margem interna do elemnto
--->
-
 <body class="bg-white m-0 p-0 box-border font-[Inter]">
-  <!-- HEADER 
-      CABEÇALHO DA PÁGINA
+<!-- HEADER -->
+  <header class="relative w-full bg-[#FF9100] h-[50px] md:h-[77px] flex items-center justify-center px-4">
+ 
+    <button id="btn-hamburger" class="md:hidden fixed top-3 left-4 z-50">
+      <img src="./img/menu-hamburguer.png" alt="Menu" class="w-6 h-6">
+    </button>
+ 
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+ 
+    <!-- Logo: oculta no mobile, visível no desktop -->
+    <img src="./img/logo.png" alt="Logo Delícia Gelada"
+     class="hidden md:block md:w-[200px] xl:w-[280px] md:absolute md:left-[70px] xl:left-[95px] md:top-2 z-30">
+ 
+      <!-- NAVEGAÇÃO DESKTOP -->
+    <nav class="hidden md:flex gap-8 xl:gap-14 absolute left-1/2 transform -translate-x-1/2">
+      <a href="#inicio"   class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">INÍCIO</a>
+      <a href="#catalogo" class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">CATÁLOGO</a>
+      <a href="#contato"  class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">CONTATO</a>
+    </nav>
+ 
+    <!-- BUSCA DESKTOP -->
+  <div class="hidden md:flex items-center bg-white rounded-full px-3 h-[36px] xl:h-[40px] w-[180px] xl:w-[220px] gap-2 ml-auto">
+    <input id="input-pesquisar" type="text" placeholder="Buscar produto"
+      class="flex-1 text-[12px] xl:text-[13px] outline-none bg-transparent text-gray-700 placeholder-gray-400">
+    <button id="botao-pesquisar" class="text-[#FF9100] text-[18px] font-bold">⌕</button>
+  </div>
 
-      relative      -> Permite posicionar elementos internos de forma absoluta.
-      h-[81px]      -> Define altura fixa de 81 pixels a ser utilizada no mobile.
-      bg-[#e9f8f8]  -> Cor de fundo do cabeçalho.
-      flex          -> Utiliza Flexbox para alinhamento dos elementos.
-      items-center  -> Centraliza os elementos verticalmente.
-      px-[62px]     -> Adiciona espaçamento interno horizontal de 62 pixels.
-      md: tamanho médio, utilizado no tablet
-      xl: tamanho grande, utilizado no desktop
-    -->
-    <!-- Main modal -->
+  <!-- MOBILE: só link INÍCIO à direita -->
+  <div class="flex md:hidden w-full justify-end items-center">
+    <a href="#inicio" class="text-white font-bold text-[14px] tracking-wide">INÍCIO</a>
+  </div>
+ 
+  </header>
 
-  <div id="age-gate-modal" class="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center backdrop-blur-sm">
-    <div class="bg-white w-[90%] max-w-md rounded-2xl p-8 flex flex-col items-center text-center shadow-2xl">
-      <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-32 mb-4">
-      <h2 class="text-2xl font-bold text-[#FF9100] mb-2 font-[Inter]">Verificação de Idade</h2>
-      <p class="text-gray-600 mb-8 font-medium">Você possui 18 anos ou mais?</p>
-      
-      <div class="flex gap-4 w-full">
-        <button id="btn-menor-idade" class="flex-1 py-3 border-2 border-gray-300 text-gray-600 font-bold rounded-full hover:bg-gray-100 transition">Não</button>
-        <button id="btn-maior-idade" class="flex-1 py-3 bg-[#FF9100] text-white font-bold rounded-full hover:bg-orange-600 transition shadow-md">Sim</button>
+<!-- BANNER PRINCIPAL -->
+<section id="inicio" class="w-full min-h-[70vh] bg-cover bg-center relative flex flex-col justify-center"
+  style="background-image: url('./img/Rectangle 2.png');">
+
+  <div class="absolute inset-0 bg-black/40"></div> <div class="absolute top-4 left-1/2 -translate-x-1/2 z-20 md:hidden">
+    <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-[150px]">
+  </div>
+
+  <div class="relative z-10 px-6 md:px-[70px] xl:px-[95px] text-white pt-24 md:pt-0">
+    <h1 class="text-[32px] sm:text-[40px] md:text-[56px] xl:text-[72px] leading-tight font-bold font-[Inter] flex flex-col">
+      <span>Sinta o sabor do</span>
+      <span class="text-[#FF9100] font-normal font-[Gwendolyn] text-[60px] sm:text-[80px] md:text-[110px] xl:text-[140px] -mt-4 sm:-mt-6 md:-mt-10 ml-8 md:ml-16">
+        momento!
+      </span>
+    </h1>
+
+    <p class="mt-4 md:mt-8 text-[16px] md:text-[20px] lg:text-[24px] leading-snug font-light max-w-2xl">
+      Coquetéis artesanais e bebidas especiais <br class="hidden sm:block">
+      para refrescar seus melhores momentos.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mt-8">
+      <a href="#catalogo">
+        <button class="px-6 py-3 md:px-8 md:py-4 bg-[#FF9100] rounded-full text-white text-[14px] md:text-[16px] font-bold hover:bg-[#e07d00] transition-colors">
+          Ver Catálogo
+        </button>
+      </a>
+      <a href="#sobre-nos">
+        <button class="px-6 py-3 md:px-8 md:py-4 bg-transparent rounded-full text-[#00C3D0] text-[14px] md:text-[16px] font-bold border-2 border-[#00C3D0] hover:bg-[#00C3D0] hover:text-white transition-colors">
+          Sobre a Delícia Gelada
+        </button>
+      </a>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-6 mt-8">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 md:w-14 md:h-14 border-2 border-white rounded-full flex items-center justify-center text-[18px] md:text-[20px] font-bold">
+          18+
+        </div>
+        <p class="text-[12px] md:text-[14px] leading-tight font-semibold">
+          Site exclusivo para <br>maiores de 18 anos.
+        </p>
       </div>
-      
-      <p class="text-xs text-gray-400 mt-6">Para acessar nosso site, você precisa confirmar sua idade.</p>
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 md:w-14 md:h-14 border-2 border-white rotate-45 rounded-md flex items-center justify-center">
+          <span class="-rotate-45 text-[24px] md:text-[28px]">✓</span>
+        </div>
+        <p class="text-[12px] md:text-[14px] leading-tight font-semibold">
+          Segurança e qualidade <br>em cada detalhe.
+        </p>
+      </div>
     </div>
   </div>
-  <!--
-    MAIN:
-    Container principal da aplicação.
+</section>
+
+<section class="bg-white px-6 md:px-10 xl:px-[70px] pt-10 xl:pt-20">
+  <div class="max-w-[1780px] mx-auto">
     
-    w-[1024px]      -> Define largura fixa de 985px conforme o protótipo original.
-    mx-auto        -> Centraliza o conteúdo horizontalmente na página.
-    bg-white       -> Define fundo branco para a área principal.
-    min-h-screen   -> Garante altura mínima equivalente a 100% da tela.
-    overflow-hidden -> Impede que elementos ultrapassem os limites do container.
-    -->
-  <main class="w-full mx-auto min-h-screen">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div id="catalogo">
+        <p class="text-[14px] xl:text-[16px] text-[#FF9100] font-semibold mb-2">CATÁLOGO</p>
+        <h2 class="text-[24px] md:text-[32px] xl:text-[40px] font-bold leading-tight">
+          Destaques da <span class="text-[#00C3D0]">Casa</span>
+        </h2>
+      </div>
+      <button id="btn-ver-todos" class="px-6 py-2 border border-[#00C3D0] rounded-full text-[#00C3D0] text-[13px] xl:text-[15px] font-semibold hover:bg-[#00C3D0] hover:text-white transition-colors">
+        Ver todos os Drinks
+      </button>
+    </div>
 
-    <!-- BANNER PRINCIPAL -->
-    <section id="inicio" class="w-full h-[420px] md:h-[480px] xl:h-[700px] bg-cover bg-center relative"
-      style="background-image: url('./img/Rectangle 2.png');">
-
-      <!-- Camada escura para melhorar a leitura dos textos -->
-      <div class="absolute inset-0 bg-black/30"></div>
-
-      <!-- Conteúdo principal do banner -->
-      <div
-        class="relative h-full z-10 pt-[50px] md:pt-[115px] lg:pt-[120px] xl:pt-[150px] pl-6 md:pl-[70px] xl:pl-[95px] text-white">
-
-        <!-- Título de destaque da página -->
-        <h1 class="text-[25px] md:text-[48px] xl:text-[62px] leading-tight font-bold font-[Inter]">
-          Sinta o sabor <br>
-          do <span class=" absolute top-14 md:top-[142px] lg:top-[120px] xl:top-[180px] left-16 md:left-[140px] lg:left-[150px] xl:left-[180px] text-[#FF9100] font-normal font-[Gwendolyn]
-                             text-[52px] lg:text-[120px] md:text-[90px]">momento!</span>
-        </h1>
-
-        <!-- Descrição institucional -->
-        <p class="mt-[8px] text-[15px] md:text-[19px] lg:text-[24px] xl:text-[24px] leading-tight font-light">
-          Coquetéis artesanais e bebidas especiais <br>
-          para refrescar seus melhores momentos.
-        </p>
-
-        <!-- BOTÕES -->
-        <a href="#catalogo">
-          <div class="flex gap-4 md:gap-6 xl:gap-8 mt-5 xl:mt-7">
-            <button
-              class="w-[100px] md:w-[170px] xl:w-[190px] h-[25px] md:h-[44px] xl:h-[48px] bg-[#FF9100] rounded-full text-white text-[11px] md:text-[14px] xl:text-[15px] font-bold">
-              Ver Catálogo
-            </button>
-        </a>
-
-        <a href="#sobre-nos">
-          <button class="w-[135px] md:w-[230px] xl:w-[255px] h-[25px] md:h-[44px] xl:h-[48px] bg-white rounded-full text-[#00C3D0] text-[11px] md:text-[14px] xl:text-[15px] font-bold 
-                    border-2 lg:border-3 border-[#00C3D0] ">
-            Sobre a Delícia Gelada
-          </button>
-        </a>
-
+    <div class="flex flex-col lg:flex-row gap-4 mt-8 w-full items-stretch lg:items-center">
+      
+      <div class="flex-1 bg-white rounded-md shadow-md flex items-center px-4 h-12 lg:h-14">
+        <input id="busca-nome" type="text" placeholder="Buscar por nome do drink" class="w-full text-[14px] outline-none bg-transparent">
+        <button id="btn-busca" class="text-[24px] text-[#FF9100]">⌕</button>
       </div>
 
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full lg:w-auto flex-1">
+        <select id="categoria" class="w-full h-12 lg:h-14 bg-white rounded-md shadow-md px-3 text-[13px] outline-none">
+          <option>Categoria</option>
+        </select>
 
-      <!-- SELINHOS -->
-      <div class="flex flex-col md:flex-row lg:flex-row xl-flex-row gap-6 md:gap-10 xl:gap-14 mt-5 xl:mt-6">
+        <select id="tipo" class="w-full h-12 lg:h-14 bg-white rounded-md shadow-md px-3 text-[13px] outline-none">
+          <option>Tipo</option>
+        </select>
 
-        <div class="flex items-center gap-3">
-          <div class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rounded-full flex items-center justify-center text-[18px] 
-                      md:text-[22px] xl:text-[24px]">
-            18+
-          </div>
-
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] leading-tight font-semibold">
-            Site exclusivo para <br>
-            maiores de 18 anos.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <div
-            class="w-[44px] md:w-[52px] xl:w-[58px] h-[44px] md:h-[52px] xl:h-[58px] border-2 border-white rotate-45 rounded-md flex items-center justify-center">
-            <span class="-rotate-45 text-[22px] md:text-[28px] xl:text-[32px]">✓</span>
-          </div>
-
-          <p class="text-[10px] md:text-[12px] xl:text-[14px] leading-tight font-semibold">
-            Segurança e qualidade <br>
-            em cada detalhe.
-          </p>
-        </div>
-
+        <input id="preco-min" type="number" placeholder="Min (R$)" class="w-full h-12 lg:h-14 bg-white rounded-md shadow-md px-3 text-[13px] outline-none">
+        
+        <input id="preco-max" type="number" placeholder="Max (R$)" class="w-full h-12 lg:h-14 bg-white rounded-md shadow-md px-3 text-[13px] outline-none">
       </div>
 
-      </div>
-    </section>
+      <button id="btn-preco" class="w-full lg:w-auto px-6 h-12 lg:h-14 border border-[#00C3D0] rounded-md text-white bg-[#00C3D0] text-[14px] font-semibold hover:bg-[#009bade6] transition-colors whitespace-nowrap">
+        Filtrar Preço
+      </button>
+    </div>
+
+  </div>
+</section>
 
     <!-- CATEGORIAS DE PRODUTOS -->
-    <!-- 
-        py - padding vertical
-     -->
     <section id="categorias" class="bg-white py-8 px-6 md:px-10 xl:px-[70px]">
       <div class="max-w-[1780px] mx-auto flex flex-wrap justify-center gap-6 md:gap-12 xl:gap-[70px]">
 
-        <!-- Card 1 -->
         <a href="" class="block">
-          <div
-            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-            <img src="./img/classicos.png" alt="Clássicos"
-              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+          <div class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/classicos.png" alt="Clássicos" class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
             <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Clássicos</h3>
             <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Receitas tradicionais</p>
           </div>
         </a>
 
-        <!-- Card 2 -->
         <a href="" class="block">
-          <div
-            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-            <img src="./img/tropicais.png" alt="Tropicais"
-              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+          <div class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/tropicais.png" alt="Tropicais" class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
             <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Tropicais</h3>
             <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Sabores do paraíso</p>
           </div>
         </a>
 
-        <!-- Card 3 -->
         <a href="" class="block">
-          <div
-            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-            <img src="./img/frozen.png" alt="Frozen"
-              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+          <div class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/frozen.png" alt="Frozen" class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
             <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Frozen</h3>
             <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Gelados e cremosos</p>
           </div>
         </a>
 
-        <!-- Card 4 -->
         <a href="" class="block">
-          <div
-            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-            <img src="./img/alcoolicos.png" alt="Alcoólicos"
-              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+          <div class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/alcoolicos.png" alt="Alcoólicos" class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
             <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Alcoólicos</h3>
             <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Com teor alcoólico</p>
           </div>
         </a>
 
-
-        <!-- Card 5 -->
         <a href="" class="block">
-          <div
-            class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-            <img src="./img/nao-alcoolico.png" alt="Não alcoólico"
-              class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
+          <div class="bg-white rounded-full shadow-lg p-6 flex flex-col items-center text-center w-[150px] md:w-[190px] xl:w-[220px] transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="./img/nao-alcoolico.png" alt="Não alcoólico" class="w-[80px] h-[80px] md:w-[105px] md:h-[105px] xl:w-[120px] xl:h-[120px] rounded-full object-cover mb-3">
             <h3 class="text-[12px] md:text-[14px] xl:text-[16px] font-medium">Não alcoólico</h3>
             <p class="text-[10px] md:text-[12px] xl:text-[14px] text-gray-600 mt-1">Sem álcool</p>
           </div>
@@ -230,294 +215,161 @@ p-0: remove toda a margem interna do elemnto
     </section>
 
     <!-- CATÁLOGO / DESTAQUES -->
-    <!-- 
-      px - padding horizontal
-      pt - padding top
-    -->
+    <!-- FIX BUG #2: esta section agora é corretamente fechada com </section> abaixo -->
     <section class="bg-white px-6 md:px-10 xl:px-[70px] pt-[40px] xl:pt-[80px]">
-
       <div class="max-w-[1780px] mx-auto">
 
-        <!-- Cabeçalho da seção -->
         <div class="flex items-center justify-between">
-
           <div id="catalogo">
             <p class="text-[12px] md:text-[14px] xl:text-[16px] text-[#FF9100] font-semibold mb-[8px]">
               CATÁLOGO
             </p>
-
             <h2 class="text-[18px] md:text-[32px] xl:text-[40px] font-bold leading-none">
               Destaques da <span class="text-[#00C3D0]">Casa</span>
             </h2>
           </div>
 
-          <button id="btn-ver-todos" class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
-                  text-[#00C3D0] text-[9px] md:text-[13px] xl:text-[15px] font-semibold">
+          <button id="btn-ver-todos" class="w-[110px] md:w-[190px] xl:w-[220px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full text-[#00C3D0] text-[9px] md:text-[13px] xl:text-[15px] font-semibold">
             Ver todos os Drinks
           </button>
-
         </div>
 
         <div class="flex">
           <!-- Filtros de busca -->
           <div class="flex flex-wrap gap-4 md:gap-3 lg:gap-2 xl:gap-6 mt-[30px] w-full">
 
-            <!-- Busca -->
-            <div
-              class="w-[240px] md:w-[220px] lg:[250px] xl:w-[330px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
-              <input id="busca-nome" type="text" placeholder="Buscar por nome do drink"
-                class="w-full text-[13px] pt-[10px] outline-none">
+            <!-- FIX BUG #5: "lg:[250px]" corrigido para "lg:w-[250px]" -->
+            <div class="w-[240px] md:w-[220px] lg:w-[250px] xl:w-[330px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md flex items-center px-[14px]">
+              <input id="busca-nome" type="text" placeholder="Buscar por nome do drink" class="w-full text-[13px] pt-[10px] outline-none">
               <button id="btn-busca" class="text-[28px]">⌕</button>
             </div>
 
-            <!-- Categoria -->
-            <select id="categoria"
-              class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
+            <select id="categoria" class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
               <option>Categoria</option>
             </select>
 
-            <!-- Tipo -->
-            <select id="tipo"
-              class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
+            <select id="tipo" class="w-[111px] md:w-[115px] lg:w-[130px] xl:w-[200px] h-[41px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
               <option>Tipo</option>
             </select>
 
-            <!-- Preço mínimo -->
             <input id="preco-min" type="text" placeholder="Preço min"
               class="w-[95px] h-[41px] md:w-[115px] lg:w-[130px] xl:w-[190px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
 
-            <!-- Preço máximo -->
             <input id="preco-max" type="text" placeholder="Preço max"
               class="w-[95px] h-[41px] md:w-[115px] lg:w-[130px] xl:w-[190px] md:h-[45px] lg:h-[51px] xl:h-[61px] bg-white rounded-[6px] shadow-md px-[14px] text-[11px]">
 
           </div>
-          <!-- Botão -->
+
+          <!-- FIX BUG #5: "lg:[150px]" corrigido para "lg:w-[150px]" -->
           <div class="flex items-end justify-center">
-            <button id="btn-preco" class="w-[110px] md:w-[150px] lg:[150px] xl:w-[210px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full 
-                           text-white bg-[#00C3D0] text-[10px] md:text-[13px] xl:text-[15px] font-semibold">
+            <button id="btn-preco" class="w-[110px] md:w-[150px] lg:w-[150px] xl:w-[210px] h-[30px] md:h-[44px] xl:h-[50px] border border-[#00C3D0] rounded-full text-white bg-[#00C3D0] text-[10px] md:text-[13px] xl:text-[15px] font-semibold">
               Buscar por preço
             </button>
           </div>
         </div>
 
+      </div>
     </section>
+    <!-- FIM FIX BUG #2: section fechada aqui, container-produtos fica fora dela como esperado -->
+
     <div id="container-produtos" class="flex justify-center min-h-[400px]">
-      
       <div id="produtos" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-8 md:gap-12 lg:gap-12 xl:gap-12 mt-8">
+      </div>
+    </div>
+
+    <!-- SOBRE NÓS -->
+    <div id="sobre-nos" class="w-full mt-9 relative overflow-hidden min-h-[600px] md:min-h-[500px]">
+
+      <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <iframe
+          src="https://player.vimeo.com/video/1202635332?autoplay=1&loop=1&muted=1&background=1&controls=0&title=0&byline=0&portrait=0"
+          style="position:absolute; top:30%; left:50%; transform:translate(-50%,-30%); width:100vw; height:56.25vw; min-height:120%; min-width:177.78vh; border:0; pointer-events:none;"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+      <div class="relative z-20 p-6 py-16 md:py-20">
+        <h1 class="text-[24px] md:text-[48px] xl:text-[48px] text-[#FF9100] leading-tight font-bold font-[Inter]">
+          Sobre nós
+        </h1>
+        <h1 class="text-[24px] md:text-[40px] xl:text-[48px] leading-tight font-bold font-[Inter] text-white">
+          A Delícia está<br>
+          nos <span class="text-[#FF9100] font-normal font-[Gwendolyn] text-[45px] lg:text-[120px] md:text-[90px]">detalhes!</span>
+        </h1>
+        <h4 class="text-white text-[11px] md:text-[14px] xl:text-[24px]">
+          A Delícia gelada nasceu da paixão por criar<br>
+          experiências únicas. Nossos drinks são preparados <br>com ingredientes selecionados,
+          muito carinho e um <br>toque especial que você só encontra aqui!
+        </h4>
+        <div class="mt-3 gap-2 flex md:gap-36 md:h-16 items-center">
+          <div class="flex gap-2">
+            <img src="./img/Bay Leaf.png" class="w-8 h-8 filter invert" alt="folhas">
+            <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Ingredientes<br>selecionados.</h4>
+          </div>
+          <div class="flex gap-2">
+            <img src="./img/Crown.png" class="w-8 h-8 filter invert" alt="coroa">
+            <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Receitas<br>autorais.</h4>
+          </div>
+          <div class="flex gap-2">
+            <img src="./img/Approval.png" class="w-8 h-8 filter invert" alt="aprovado">
+            <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Qualidade em<br>cada drink.</h4>
+          </div>
         </div>
+      </div>
 
     </div>
 
-      <!-- card ver detalhes -->
+    <!-- FOOTER -->
+    <footer id="contato" class="bg-[#FF9100] text-white text-[10px] md:text-[14px] px-2 py-8">
+      <div class="flex md:flex-row items-start md:items-center md:justify-center gap-4 md:gap-36">
 
-      <!-- <div id="card-ver-detalhes" class="p-2 pl-4 xl:p-6 xl:pl-10 ">
-        <button id="btn-voltar" class="botao-voltar">
-          <img src="./img/Forward.png" alt="seta para voltar">
-        </button>
-        <div class="  sm:flex lg:flex xl:flex ">
-          <img id="img-bebida" src="./img/orange-paradise.png" alt="Drink Orange Paradise"
-            class="w-[244px] h-[241px] ml-12 sm:w-[244px] sm:h-[241px] lg:w-[244px] lg:h-[241px] xl:w-[449px] xl:h-[467px] rounded-[10px] object-cover">
-
-          informações  iniciais
-          <div id="info-bebida" class="flex flex-col justify-between sm:pl-6 lg:pl-6 xl:pl-6">
-            nome
-            <h3 id="nome-bebida" class="font-bold text-[18px]  xl:text-[48px]">
-              Orange Paradise
-            </h3>
-            categoria
-            <span id="categoria-bebidda" class="text-[#00C3D0] text-[18px] lg:text-[20px] xl:text-[36px] mt-1">
-              Tropicais
-            </span>
-            descricao
-            <p id="descricao-bebida" class="text-[18px] lg:text-[20px] xl:text-[36px] mt-1 leading-[20px]">
-              Vodka, suco de laranja, limão e essência tropical.
-            </p>
-            preco
-            <h4 id="preco-bebida" class="font-bold mt-2 mb-4 xl:mb-0 xl:mt-6 text-[18px] lg:text-[24px] xl:text-[48px]">
-              R$28.90
-            </h4>
-
-            cards 
-            <div class="flex justify-between">
-              <div
-                class="bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2">
-                <img src="./img/Measuring Cup.png" alt="copo medidor" class="w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]">
-                <h4 class="font-bold text-[12px] xl:text-[20px]">350 ml</h4>
-                <h4 class="text-[12px] xl:text-[20px]">Volume</h4>
-              </div>
-
-              <div
-                class="bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2">
-                <img src="./img/teor-alcoolico.png" alt="porcentagem de teor alcoolico"
-                  class="w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]">
-                <h4 class="font-bold text-[12px] xl:text-[20px]">18%</h4>
-                <h4 class="text-[12px] xl:text-[20px]">Teor Alcoólico</h4>
-              </div>
-
-              <div
-                class="bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2">
-                <img src="./img/Winter.png" alt="copo medidor" class="w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]">
-                <h4 class="font-bold text-[12px] xl:text-[20px]">Refrescante</h4>
-                <h4 class="text-[12px] xl:text-[20px]">Perfil</h4>
-              </div>
+        <div class="md:flex md:gap-36">
+          <div class="flex items-start gap-2 w-full">
+            <img src="./img/Phone.png" alt="Telefone" class="w-6 h-6">
+            <div class="flex flex-col">
+              <span class="font-bold">Telefone</span>
+              <span>(11) 98765-4321</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 w-full py-6 md:py-0">
+            <img src="./img/Email.png" alt="E-mail" class="w-6 h-6">
+            <div class="flex flex-col">
+              <span class="font-bold">E-mail</span>
+              <span>contato@deliciagelada.com.br</span>
             </div>
           </div>
         </div>
 
-        <hr class=" bg-[#D9D9D9] xl:w-full mt-6 xl:mt-14">
-
-        informações adicionais
-        <div class="flex flex-col md:flex-row justify-center p-4 md:gap-36 gap-8">
-
-          Ingredientes
-          <div class="flex flex-col items-center mb-4 md:mb-0">
-            <h4 class="font-bold mb-2">Ingredientes</h4>
-            <p>Vodka</p>
-            <p>Suco de laranja</p>
-            <p>Limão</p>
-            <p>Essência tropical</p>
-            <p>Gelo</p>
+        <div class="md:flex md:gap-36">
+          <div class="flex items-center gap-2 w-full">
+            <img src="./img/Location.png" alt="Localização" class="w-6 h-6">
+            <div class="flex flex-col">
+              <span class="font-bold">Localização</span>
+              <span>Rua das Graças, 123<br>Centro - Jandira/SP</span>
+            </div>
           </div>
-
-          Modo de preparo
-          <div class="flex flex-col items-center mb-4 md:mb-0 text-center">
-            <h4 class="font-bold mb-2">Modo de preparo</h4>
-            <p>
-              Em uma coqueteleira, adicione todos os<br> ingredientes com o gelo.
-              Agite bem e coe<br> em um copo com gelo. Finalize com rodelas de laranja.
-            </p>
-          </div>
-
-          Harmoniza com
-          <div class="flex flex-col items-center">
-            <h4 class="font-bold mb-2">Harmoniza com</h4>
-            <p>Frutos do mar</p>
-            <p>Saladas frescas</p>
-            <p>Petiscos leves</p>
-          </div>
-
-        </div>
-
-        dica 
-        <div class="flex justify-center">
-          <div id="dica"
-            class="bg-[#E4F3F4] flex justify-start items-center w-fit gap- h-10 xl:gap-20 xl:w-[1274px] xl:h-[90px] xl:pl-8 rounded-[10px]">
-
-            <img src="./img/Idea.png" alt="lampada de ideia" class="w-[20px] xl:w-[25px] xl:h-[25px]">
-
-            <h4 class="font-bold text-[10px]  xl:text-[24px]">Dica Delícia</h4>
-            <h4 class="text-[#8E8E93] text-[10px] xl:text-[24px]">Fica ainda melhor com gelo e servido em um copo alto!
-            </h4>
-
+          <div class="flex items-center gap-2 w-full py-6 md:py-0">
+            <img src="./img/Instagram.png" alt="Instagram" class="w-6 h-6">
+            <div class="flex flex-col">
+              <span class="font-bold">Siga-nos</span>
+              <span>@deliciageladadrinks</span>
+            </div>
           </div>
         </div>
 
-      </div> -->
-
-
-
-    </div>
-    <!-- sobre nós  -->
-<div id="sobre-nos" class="w-full mt-9 relative overflow-hidden min-h-[600px] md:min-h-[500px]">
-  
-  <!-- Vídeo de fundo -->
-  <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
-    <iframe
-      src="https://player.vimeo.com/video/1202635332?autoplay=1&loop=1&muted=1&background=1&controls=0&title=0&byline=0&portrait=0"
-      style="position:absolute; top:30%; left:50%; transform:translate(-50%,-30%); width:100vw; height:56.25vw; min-height:120%; min-width:177.78vh; border:0; pointer-events:none;"
-      frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-  <!-- Overlay escuro -->
-  <div class="absolute inset-0 bg-black/50 z-10"></div>
-
-  <!-- Conteúdo -->
-  <div class="relative z-20 p-6 py-16 md:py-20">
-    <h1 class="text-[24px] md:text-[48px] xl:text-[48px] text-[#FF9100] leading-tight font-bold font-[Inter]">
-      Sobre nós
-    </h1>
-    <h1 class="text-[24px] md:text-[40px] xl:text-[48px] leading-tight font-bold font-[Inter] text-white">
-      A Delícia está<br>
-      nos <span class="text-[#FF9100] font-normal font-[Gwendolyn] text-[45px] lg:text-[120px] md:text-[90px]">detalhes!</span>
-    </h1>
-    <h4 class="text-white text-[11px] md:text-[14px] xl:text-[24px]">
-      A Delícia gelada nasceu da paixão por criar<br>
-      experiências únicas. Nossos drinks são preparados <br>com ingredientes selecionados,
-      muito carinho e um <br>toque especial que você só encontra aqui!
-    </h4>
-    <div class="mt-3 gap-2 flex md:gap-36 md:h-16 items-center">
-      <div class="flex gap-2">
-        <img src="./img/Bay Leaf.png" class="w-8 h-8" alt="folhas">
-        <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Ingredientes<br>selecionados.</h4>
-      </div>
-      <div class="flex gap-2">
-        <img src="./img/Crown.png" class="w-8 h-8" alt="coroa">
-        <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Receitas<br>autorais.</h4>
-      </div>
-      <div class="flex gap-2">
-        <img src="./img/Approval.png" class="w-8 h-8" alt="aprovado">
-        <h4 class="text-[11px] md:text-[14px] xl:text-[16px] text-white">Qualidade em<br>cada drink.</h4>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <footer id="contato" class="bg-[#FF9100] text-white text-[10px] md:text-[14px] px-2 py-8">
-    <div class="flex md:flex-row items-start md:items-center md:justify-center gap-4 md:gap-36 ">
-
-      <div class="md:flex md:gap-36">
-        <!-- Bloco 1: Telefone -->
-        <div class="flex items-start gap-2 w-full">
-          <img src="./img/Phone.png" alt="Telefone" class="w-6 h-6">
-          <div class="flex flex-col">
-            <span class="font-bold">Telefone</span>
-            <span>(11) 98765-4321</span>
-          </div>
-        </div>
-
-        <!-- Bloco 2: E-mail -->
-        <div class="flex items-center gap-2 w-full py-6 md:py-0">
-          <img src="./img/Email.png" alt="E-mail" class="w-6 h-6">
-          <div class="flex flex-col">
-            <span class="font-bold">E-mail</span>
-            <span>contato@deliciagelada.com.br</span>
-          </div>
-        </div>
       </div>
 
-      <div class="md:flex md:gap-36">
-        <!-- Bloco 3: Localização -->
-        <div class="flex items-center gap-2 w-full">
-          <img src="./img/Location.png" alt="Localização" class="w-6 h-6">
-          <div class="flex flex-col">
-            <span class="font-bold">Localização</span>
-            <span>Rua das Graças, 123<br>Centro -Jandira/SP</span>
-          </div>
-        </div>
-
-        <!-- Bloco 4: Instagram -->
-        <div class="flex items-center gap-2 w-full py-6 md:py-0">
-          <img src="./img/Instagram.png" alt="Instagram" class="w-6 h-6">
-          <div class="flex flex-col">
-            <span class="font-bold">Siga-nos</span>
-            <span>@deliciageladadrinks</span>
-          </div>
-        </div>
+      <div class="border-t border-white mt-2 pt-4 flex flex-col items-center justify-center text-[12px] md:flex-row md:justify-center md:text-[14px] gap-2">
+        <span>2026 Delícia Gelada. Todos os direitos reservados</span>
+        <div class="border border-white rounded-full w-6 h-6 flex items-center justify-center text-[10px]">18+</div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Linha horizontal + copyright + 18+ -->
-    <div
-      class="border-t border-white mt-2 pt-4 flex flex-col items-center justify-center text-[12px] md:flex-row md:justify-center md:text-[14px] gap-2">
-      <span>2026 Delícia Gelada. Todos os direitos reservados</span>
-      <div class="border border-white rounded-full w-6 h-6 flex items-center justify-center text-[10px]">18+</div>
-    </div>
-  </footer>
+  </main>
 </body>
 
 </html>

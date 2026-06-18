@@ -210,24 +210,25 @@ window.listarAdmins = async function() {
                 });
                 divAcoes.appendChild(btnEditar);
 
-                const btnExcluir = document.createElement('button');
-                btnExcluir.className = 'text-gray-800 hover:text-red-600 transition';
-                btnExcluir.title = "Excluir";
-                btnExcluir.appendChild(criarIconeSVG('excluir'));
-                
-                btnExcluir.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                    deletarAdmin(admin.id);
-                });
-                divAcoes.appendChild(btnExcluir);
+                const btnExcluir = document.createElement('button')
+                btnExcluir.className = 'text-gray-800 hover:text-red-600 transition'
+                btnExcluir.title = "Excluir"
+                btnExcluir.appendChild(criarIconeSVG('excluir'))
 
-                tdAcoes.appendChild(divAcoes);
-                tr.appendChild(tdAcoes);
-                tabelaBody.appendChild(tr);
-            });
+                btnExcluir.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    e.stopImmediatePropagation()
+                    deletarAdmin(admin.id)
+                })
+                divAcoes.appendChild(btnExcluir)
+
+                tdAcoes.appendChild(divAcoes)
+                tr.appendChild(tdAcoes)
+                tabelaBody.appendChild(tr)
+            })
         }
     } catch (erro) {
-        console.error('Erro ao buscar admins:', erro);
+        console.error('Erro ao buscar admins:', erro)
     }
 }
 
@@ -259,11 +260,16 @@ window.atualizarAdmin = async function(id) {
         payload.senha = senhaValor;
     }
 
-    // Nota: Requer JWT válido caso o endpoint valide token (headers: { 'Authorization': 'Bearer ' + token })
+    // AQUI ESTÁ A CORREÇÃO: Bloco try substituído com o envio do Token
     try {
+        const token = localStorage.getItem('tokenDeliciaGelada');
+
         const resposta = await fetch(`${BASE_URL}/usuario/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token // Autorização adicionada!
+            },
             body: JSON.stringify(payload)
         });
 
@@ -278,10 +284,11 @@ window.atualizarAdmin = async function(id) {
             fecharModal();
             listarAdmins();
         } else {
+            const erro = await resposta.json();
             Swal.fire({
                 icon: 'error',
                 title: 'Erro',
-                text: 'Erro ao atualizar o Administrador.',
+                text: erro.message || 'Erro ao atualizar o Administrador.',
                 confirmButtonColor: '#005A9C'
             });
         }
@@ -306,20 +313,24 @@ window.deletarAdmin = async function(id) {
     });
 
     if (result.isConfirmed) {
-        // Nota: Requer JWT válido caso o endpoint valide token
         try {
+            // Pegando o token armazenado no login
+            const token = localStorage.getItem('tokenDeliciaGelada'); 
+
             const resposta = await fetch(`${BASE_URL}/usuario/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + token } // Passando a credencial
             });
 
             if (resposta.ok) {
                 Swal.fire('Excluído!', 'O Administrador foi removido.', 'success');
                 listarAdmins();
             } else {
+                const erro = await resposta.json();
                 Swal.fire({
                     icon: 'error',
                     title: 'Erro',
-                    text: 'Não foi possível excluir o administrador.',
+                    text: erro.message || 'Não foi possível excluir o administrador.',
                     confirmButtonColor: '#005A9C'
                 });
             }

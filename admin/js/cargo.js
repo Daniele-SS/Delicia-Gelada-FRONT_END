@@ -7,9 +7,8 @@
 'use strict'
 
 // Defina a URL base da sua API
-if (typeof BASE_URL === 'undefined') {
-    const BASE_URL = 'http://localhost:3000/v1/fynix/deliciagelada'
-}
+const BASE_URL = 'http://localhost:3000/v1/fynix/deliciagelada'
+
 
 // ==========================================
 // 1. CADASTRAR CARGO (POST)
