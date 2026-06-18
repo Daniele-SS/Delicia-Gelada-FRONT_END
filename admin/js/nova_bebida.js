@@ -6,7 +6,7 @@
  ***********************************************************************************/
 'use strict'
 
-const BASE_URL = 'https://delicia-gelada-api.cleverapps.io/v1/fynix/deliciagelada'
+const BASE_URL = 'http://localhost:3000/v1/fynix/deliciagelada'
 
 // ==========================================
 // FUNÇÃO AUXILIAR: ÍCONES SVG SEGUROS (SEM INNERHTML)

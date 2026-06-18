@@ -198,7 +198,7 @@ window.fazerLogin = async function(event) {
     }
 
     try {
-        const resposta = await fetch('https://delicia-gelada-api.cleverapps.io/v1/fynix/deliciagelada/login', {
+        const resposta = await fetch('http://localhost:3000/v1/fynix/deliciagelada/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: emailValor, senha: senhaValor })
@@ -244,7 +244,6 @@ window.fazerLogin = async function(event) {
 // 6. CARREGAR PERFIL DO USUÁRIO LOGADO
 // ==========================================
 window.carregarPerfilLogado = async function() {
-    console.log('✅ carregarPerfilLogado do admin.js executando')
     const token = localStorage.getItem('tokenDeliciaGelada')
     
     // Se não tem token, bloqueia a tela e expulsa pro login
@@ -262,7 +261,7 @@ window.carregarPerfilLogado = async function() {
 
         if (userId) {
             // Busca os dados completos do usuário no banco usando o ID
-            const resposta = await fetch(`https://delicia-gelada-api.cleverapps.io/v1/fynix/deliciagelada/usuario/${userId}`, {
+            const resposta = await fetch(`http://localhost:3000/v1/fynix/deliciagelada/usuario/${userId}`, {
                 headers: { 'Authorization': 'Bearer ' + token }
             })
             
