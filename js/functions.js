@@ -221,6 +221,9 @@ async function criarCardDetalhesBebida(bebida) {
 
     try {
 
+        const json = await getTipos()
+        const tipos = json.response
+
         // Oculta os cards
         containerProdutos.classList.add('hidden')
 
@@ -286,28 +289,75 @@ async function criarCardDetalhesBebida(bebida) {
         // Cards extras (volume, teor, perfil)
         const cardsExtras = document.createElement('div')
         cardsExtras.className = 'flex justify-between'
-        dadosBebida.cards.forEach(c => {
-            const cardDiv = document.createElement('div')
-            cardDiv.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
 
-            const imgCard = document.createElement('img')
-            imgCard.src = c.img
-            imgCard.alt = c.alt
-            imgCard.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
-            cardDiv.appendChild(imgCard)
+        // inicio do card
+        const cardDiv = document.createElement('div')
+        cardDiv.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
 
-            const titulo = document.createElement('h4')
-            titulo.textContent = c.titulo
-            titulo.className = 'font-bold text-[12px] xl:text-[20px]'
-            cardDiv.appendChild(titulo)
+        // imagem
+        const imgCard = document.createElement('img')
+        imgCard.src = './img/Measuring Cup.png'
+        imgCard.alt = 'copo medidor'
+        imgCard.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
+        cardDiv.appendChild(imgCard)
 
-            const descricaoCard = document.createElement('h4')
-            descricaoCard.textContent = c.descricaoCard
-            descricaoCard.className = 'text-[12px] xl:text-[20px]'
-            cardDiv.appendChild(descricaoCard)
+        const titulo = document.createElement('h4')
+        titulo.textContent = tipos.volume
+        titulo.className = 'font-bold text-[12px] xl:text-[20px]'
+        cardDiv.appendChild(titulo)
 
-            cardsExtras.appendChild(cardDiv)
-        })
+        const descricaoCard = document.createElement('h4')
+        descricaoCard.textContent = 'Volume'
+        descricaoCard.className = 'text-[12px] xl:text-[20px]'
+        cardDiv.appendChild(descricaoCard)
+        // fim do card 
+
+        //inicio card 2
+        const cardDiv2 = document.createElement('div')
+        cardDiv2.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
+
+        const imgCard2 = document.createElement('img')
+        imgCard2.src = './img/teor-alcoolico.png'
+        imgCard2.alt = 'porcentagem de teor alcoolico'
+        imgCard2.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
+        cardDiv2.appendChild(imgCard2)
+
+        const titulo2 = document.createElement('h4')
+        titulo2.textContent = tipos.teor_alcoolico
+        titulo2.className = 'font-bold text-[12px] xl:text-[20px]'
+        cardDiv2.appendChild(titulo2)
+
+        const descricaoCard2 = document.createElement('h4')
+        descricaoCard2.textContent = 'Teor Alcoólico'
+        descricaoCard2.className = 'text-[12px] xl:text-[20px]'
+        cardDiv2.appendChild(descricaoCard2)
+        //fim do card 2
+
+        //inicio card 3
+        const cardDiv3 = document.createElement('div')
+        cardDiv3.className = 'bg-[#E4F3F4] w-[91px] h-[74px] xl:w-[168px] xl:h-[144px] rounded-[10px] xl:mt-14 flex flex-col items-center justify-center xl:gap-2'
+
+        const imgCard3 = document.createElement('img')
+        imgCard3.src = './img/Winter.png'
+        imgCard3.alt = 'perfil'
+        imgCard3.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
+        cardDiv3.appendChild(imgCard3)
+
+        const titulo3 = document.createElement('h4')
+        titulo3.textContent = tipos.volume
+        titulo3.className = 'font-bold text-[12px] xl:text-[20px]'
+        cardDiv3.appendChild(titulo3)
+
+        const descricaoCard3 = document.createElement('h4')
+        descricaoCard3.textContent = 'Volume'
+        descricaoCard3.className = 'text-[12px] xl:text-[20px]'
+        cardDiv3.appendChild(descricaoCard3)
+        //fim do card 3
+
+        cardsExtras.appendChild(cardDiv)
+        cardsExtras.appendChild(cardDiv2)
+        cardsExtras.appendChild(cardDiv3)
+
         containerInfo.appendChild(cardsExtras)
         containerImgInfo.appendChild(containerInfo)
         cardDetalhes.appendChild(containerImgInfo)
@@ -417,24 +467,28 @@ export async function iniciarPagina() {
 
     try {
 
-        const json = await getBebidas()
+        const json = await getBebidas(true)
+        
         todasBebidas = json.response
-
         if (!todasBebidas || todasBebidas.length == 0) {
             console.error('API veio vazia')
             return
         }
 
-        // console.log("BEBIDAS:", todasBebidas)
+        console.log("BEBIDAS:", todasBebidas)
         renderizarBebidas(todasBebidas.slice(0, 4))
-
-        carregarCategorias()
-        carregarTipos()
+       
+        await carregarCategorias()
+        await carregarTipos()        
         configurarEventos()
 
     } catch (error) {
         return false
     }
+}
+
+function modalTelaInicial(){
+
 }
 
 //função para configurar todos os eventos seja click ou enter utilizado na pagina
@@ -471,7 +525,7 @@ function configurarEventos() {
 
         btnPesquisar.addEventListener('click', buscaInputPesquisar)
 
-        console.log(document.getElementById('botao-pesquisar'))
+        // console.log(document.getElementById('botao-pesquisar'))
 
     } catch (error) {
         return false
@@ -528,6 +582,7 @@ async function carregarTipos() {
     try {
         const json = await getTipos()
         const tipos = json.response
+        console.log(tipos)
 
         const select = document.getElementById('tipo')
 
@@ -560,6 +615,7 @@ async function carregarCategorias() {
     try {
         const json = await getCategorias()
         const categorias = json.response
+        console.log(categorias)
 
         const select = document.getElementById('categoria')
 
@@ -567,18 +623,18 @@ async function carregarCategorias() {
             select.removeChild(select.firstChild)
         }
 
-        const option = document.createElement('option')
-        option.value = ''
-        option.textContent = 'Categoria'
-        select.appendChild(option)
+        const option1 = document.createElement('option')
+        option1.value = ''
+        option1.textContent = 'teste'
+        select.appendChild(option1)
 
         categorias.forEach(categoria => {
 
-            const option = document.createElement('option')
-            option.value = categoria.nome
-            option.textContent = categoria.nome
+            const option2 = document.createElement('option')
+            option2.value = categoria.nome
+            option2.textContent = categoria.nome
 
-            select.appendChild(option)
+            select.appendChild(option2)
         })
     } catch (error) {
         return false

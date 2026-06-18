@@ -8,7 +8,6 @@ Descrição:
 Responsável pela manipulação dos elementos da página e renderização
 dos cards dos drinks.
 ************************************************************************/
-import { getCategorias } from './api.js'
 import { iniciarPagina, popularCategorias, menuHamburguer } from './functions.js'
 
 

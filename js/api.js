@@ -6,6 +6,7 @@ data:17/06/2026
 ********************************************************************************************/
 
 const URL = 'http://localhost:3000/v1/fynix/deliciagelada'
+// const URL_BEBIDA = 'http://localhost:3000/v1/fynix/deliciagelada/bebida?maior_de_18=true'
 
 let categorias = []
 let bebidas = []
@@ -26,11 +27,14 @@ export async function getCategorias() {
     return categorias
 }
 
-export async function getBebidas() {
-    const response = await fetch(`${URL}/bebida`)
+export async function getBebidas(status) {
+
+    const URL_BEBIDA = `http://localhost:3000/v1/fynix/deliciagelada/bebida?maior_de_18=${status}`
+    const response = await fetch(URL_BEBIDA)
     bebidas = response.json()
     return bebidas
 }
+
 
 export async function getTipos() {
     const response = await fetch(`${URL}/tipobebida`)
