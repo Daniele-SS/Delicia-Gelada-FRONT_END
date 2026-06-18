@@ -5,7 +5,7 @@ versão:1.0.0
 data:17/06/2026
 ********************************************************************************************/
 
-const URL = 'http://localhost:3000/v1/fynix/deliciagelada'
+const URL = 'https://delicia-gelada-api.cleverapps.io/v1/fynix/deliciagelada'
 // const URL_BEBIDA = 'http://localhost:3000/v1/fynix/deliciagelada/bebida?maior_de_18=true'
 
 let categorias = []
