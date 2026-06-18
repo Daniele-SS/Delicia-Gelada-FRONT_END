@@ -220,8 +220,13 @@ async function criarCardDetalhesBebida(bebida) {
 
     try {
         const json = await getTipos()
-        const tipos = json.response
 
+        //nesta variável é utilizado o .find() que vai procurar dentro do array o id 
+        //e comparar com o id da bebida enviada. Colocado como Number() porque pode vir como string o numero do id
+        //e comprarado com o tipo de dado === pois é necessário verificar se é um numero mesmo após passar pelo Number
+        const tipos = json.response.find(tipo =>
+            Number(tipo.id) === Number(bebida.id_tipo_bebida)
+        )
         // Oculta os cards
         containerProdutos.classList.add('hidden')
 
@@ -341,7 +346,7 @@ async function criarCardDetalhesBebida(bebida) {
         imgCard3.className = 'w-[20px] h-[20px] xl:w-[50px] xl:h-[50px]'
         
         const titulo3 = document.createElement('h4')
-        titulo3.textContent = bebida.perfil_de_sabor_da_bebida || 'Não informado'
+        titulo3.textContent = tipos.perfil_sabor || 'Não informado' // Adicionei o '||' por segurança
         titulo3.className = 'font-bold text-[12px] xl:text-[20px]'
         
         const descricaoCard3 = document.createElement('h4')
@@ -379,7 +384,7 @@ async function criarCardDetalhesBebida(bebida) {
         ingTitulo.className = 'font-bold mb-2'
         ingDiv.appendChild(ingTitulo)
         const p = document.createElement('p')
-        p.textContent = bebida.descricao
+        p.textContent = tipos.ingredientes
         ingDiv.appendChild(p)
         infoAdicional.appendChild(ingDiv)
 
@@ -391,7 +396,7 @@ async function criarCardDetalhesBebida(bebida) {
         preparo.className = 'font-bold mb-2'
         prepDiv.appendChild(preparo)
         const prepP = document.createElement('p')
-        prepP.textContent = dadosBebida.preparo
+        prepP.textContent = tipos.modo_preparo
         prepDiv.appendChild(prepP)
         infoAdicional.appendChild(prepDiv)
 
@@ -429,14 +434,18 @@ async function criarCardDetalhesBebida(bebida) {
 
         const dicaText = document.createElement('h4')
         dicaText.className = 'text-[#8E8E93] text-[10px] xl:text-[24px]'
-        dicaText.textContent = dadosBebida.dica
+        dicaText.textContent = tipos.dica_delicia
         dica.appendChild(dicaText)
 
         dicaDiv.appendChild(dica)
         cardDetalhes.appendChild(dicaDiv)
 
+<<<<<<< HEAD
 
 
+=======
+        console.log(tipos)
+>>>>>>> 5dfee970cbbffea14a0ef32cba00f00f2e044bbd
         // Adiciona o card de detalhes ao DOM
         // O DOM (Document Object Model) é a representação da página HTML como uma árvore de elementos,
         // onde cada tag, atributo ou texto é um nó que pode ser acessado e manipulado pelo JavaScript.
@@ -472,9 +481,14 @@ export async function iniciarPagina() {
         // Exibe o modal e espera a resposta (true ou false)
         const ehMaiorDe18 = await modalTelaInicial()
 
+<<<<<<< HEAD
         // Passa a resposta para a API
         const json = await getBebidas(ehMaiorDe18)
         
+=======
+        const json = await getBebidas(true)
+
+>>>>>>> 5dfee970cbbffea14a0ef32cba00f00f2e044bbd
         todasBebidas = json.response
         if (!todasBebidas || todasBebidas.length == 0) {
             console.error('API veio vazia')
@@ -483,9 +497,9 @@ export async function iniciarPagina() {
 
         console.log("BEBIDAS:", todasBebidas)
         renderizarBebidas(todasBebidas.slice(0, 4))
-       
+
         await carregarCategorias()
-        await carregarTipos()        
+        await carregarTipos()
         configurarEventos()
 
     } catch (error) {
@@ -493,12 +507,16 @@ export async function iniciarPagina() {
     }
 }
 
+<<<<<<< HEAD
 // Controla o modal de idade e retorna true ou false
 function modalTelaInicial() {
     return new Promise((resolve) => {
         const modal = document.getElementById('age-gate-modal')
         const btnSim = document.getElementById('btn-maior-idade')
         const btnNao = document.getElementById('btn-menor-idade')
+=======
+function modalTelaInicial() {
+>>>>>>> 5dfee970cbbffea14a0ef32cba00f00f2e044bbd
 
         if (!modal) {
             resolve(true)
@@ -663,7 +681,7 @@ async function carregarCategorias() {
 
         const option1 = document.createElement('option')
         option1.value = ''
-        option1.textContent = 'teste'
+        option1.textContent = 'Categoria'
         select.appendChild(option1)
 
         categorias.forEach(categoria => {
