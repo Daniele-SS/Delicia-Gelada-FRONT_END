@@ -48,109 +48,109 @@ p-0: remove toda a margem interna do elemnto
 -->
 
 <body class="bg-white m-0 p-0 box-border font-[Inter]">
-    <!-- HEADER -->
-    <header class="relative w-full bg-[#FF9100] h-[105px] md:h-[77px] flex items-center justify-center px-4">
+  <!-- HEADER -->
+  <header class="relative w-full bg-[#FF9100] h-[105px] md:h-[77px] flex items-center justify-center px-4">
 
-      <button id="btn-hamburger" class="md:hidden fixed top-4 left-4 z-50">
-        <img src="./img/menu-hamburguer.png" alt="Menu" class="w-6 h-6">
-      </button>
-  
-      <div id="menu-overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
-  
-      <!-- Logo: oculta no mobile, visível no desktop -->
-      <img src="./img/logo.png" alt="Logo Delícia Gelada"
-        class="w-28 md:w-[200px] xl:w-[280px] md:absolute md:left-[84px] md:top-[3px] z-30 flex justify-center md:flex-none">
-  
-      <!-- NAVEGAÇÃO DESKTOP -->
-      <nav class="hidden md:flex gap-8 xl:gap-14 absolute left-1/2 transform -translate-x-1/2">
-        <a href="#inicio"
-          class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">INÍCIO</a>
-        <a href="#catalogo"
-          class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">CATÁLOGO</a>
-        <a href="#contato"
-          class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">CONTATO</a>
-      </nav>
-  
-      <!-- BUSCA DESKTOP -->
-      <div
-        class="hidden md:flex items-center bg-white rounded-full px-3 h-[36px] xl:h-[40px] w-[180px] xl:w-[220px] gap-2 ml-auto">
-        <input id="input-pesquisar" type="text" placeholder="Buscar produto"
-          class="flex-1 text-[12px] xl:text-[13px] outline-none bg-transparent text-gray-700 placeholder-gray-400">
-        <button id="botao-pesquisar" class="text-[#FF9100] text-[18px] font-bold">⌕</button>
+    <button id="btn-hamburger" class="md:hidden fixed top-4 left-4 z-50">
+      <img src="./img/menu-hamburguer.png" alt="Menu" class="w-6 h-6">
+    </button>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+    <!-- Logo: oculta no mobile, visível no desktop -->
+    <img src="./img/logo.png" alt="Logo Delícia Gelada"
+      class="w-28 md:w-[200px] xl:w-[280px] md:absolute md:left-[84px] md:top-[3px] z-30 flex justify-center md:flex-none">
+
+    <!-- NAVEGAÇÃO DESKTOP -->
+    <nav class="hidden md:flex gap-8 xl:gap-14 absolute left-1/2 transform -translate-x-1/2">
+      <a href="#inicio"
+        class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">INÍCIO</a>
+      <a href="#catalogo"
+        class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">CATÁLOGO</a>
+      <a href="#contato"
+        class="text-white font-semibold text-[13px] xl:text-[15px] hover:opacity-75 transition-opacity">CONTATO</a>
+    </nav>
+
+    <!-- BUSCA DESKTOP -->
+    <div
+      class="hidden md:flex items-center bg-white rounded-full px-3 h-[36px] xl:h-[40px] w-[180px] xl:w-[220px] gap-2 ml-auto">
+      <input id="input-pesquisar" type="text" placeholder="Buscar produto"
+        class="flex-1 text-[12px] xl:text-[13px] outline-none bg-transparent text-gray-700 placeholder-gray-400">
+      <button id="botao-pesquisar" class="text-[#FF9100] text-[18px] font-bold">⌕</button>
+    </div>
+
+    <!-- MOBILE: só link INÍCIO à direita -->
+    <nav id="mobile-menu"
+      class="fixed top-0 left-0 w-3/4 max-w-xs h-full bg-[#FF9100] shadow-2xl hidden z-50 flex flex-col p-6 gap-4">
+      <a href="#inicio" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">INÍCIO</a>
+      <a href="#catalogo" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CATÁLOGO</a>
+      <a href="#contato" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CONTATO</a>
+      <a href="#sobre-nos" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">SOBRE NÓS</a>
+    </nav>
+  </header>
+
+  <!-- BANNER PRINCIPAL -->
+  <section id="inicio" class="w-fix h-fix bg-cover bg-center relative flex flex-col justify-center"
+    style="background-image: url('./img/Rectangle 2.png');">
+
+    <div class="absolute inset-0 bg-black/40"></div>
+    <!-- <div class="md:absolute top-4 left-1/2 -translate-x-1/2 z-20 md:hidden">
+      <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-[150px]">
+    </div> -->
+
+    <div
+      class="relative w-full min-h-[75vh] z-10 px-6 md:px-[70px] xl:px-[95px] text-white pt-6 sm:pt-16 md:pt-24 lg:pt-28 xl:pt-36 md:pt-0">
+      <h1
+        class="text-[32px] sm:text-[40px] md:text-[56px] xl:text-[72px] leading-tight font-bold font-[Inter] flex flex-col">
+        <span>Sinta o sabor do</span>
+        <span
+          class="text-[#FF9100] font-normal font-[Gwendolyn] text-[60px] sm:text-[80px] md:text-[110px] xl:text-[140px] -mt-4 sm:-mt-6 md:-mt-10 ml-8 md:ml-16">
+          momento!
+        </span>
+      </h1>
+
+      <p class="mt-4 md:mt-8 text-[16px] md:text-[20px] lg:text-[24px] leading-snug font-light max-w-2xl">
+        Coquetéis artesanais e bebidas especiais <br class="hidden sm:block">
+        para refrescar seus melhores momentos.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-8">
+        <a href="#catalogo">
+          <button
+            class="px-6 py-3 md:px-8 md:py-4 bg-[#FF9100] rounded-full text-white text-[14px] md:text-[16px] font-bold hover:bg-[#e07d00] transition-colors">
+            Ver Catálogo
+          </button>
+        </a>
+        <a href="#sobre-nos">
+          <button
+            class="px-6 py-3 md:px-8 md:py-4 bg-transparent rounded-full text-[#00C3D0] text-[14px] md:text-[16px] font-bold border-2 border-[#00C3D0] hover:bg-[#00C3D0] hover:text-white transition-colors">
+            Sobre a Delícia Gelada
+          </button>
+        </a>
       </div>
-  
-      <!-- MOBILE: só link INÍCIO à direita -->
-      <nav id="mobile-menu"
-        class="fixed top-0 left-0 w-3/4 max-w-xs h-full bg-[#FF9100] shadow-2xl hidden z-50 flex flex-col p-6 gap-4">
-        <a href="#inicio" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">INÍCIO</a>
-        <a href="#catalogo" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CATÁLOGO</a>
-        <a href="#contato" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">CONTATO</a>
-        <a href="#sobre-nos" class="px-4 py-2 text-white font-bold hover:bg-orange-600 rounded">SOBRE NÓS</a>
-      </nav>
-    </header>
-  
-    <!-- BANNER PRINCIPAL -->
-    <section id="inicio" class="w-fix h-fix bg-cover bg-center relative flex flex-col justify-center"
-      style="background-image: url('./img/Rectangle 2.png');">
-  
-      <div class="absolute inset-0 bg-black/40"></div>
-      <!-- <div class="md:absolute top-4 left-1/2 -translate-x-1/2 z-20 md:hidden">
-        <img src="./img/logo.png" alt="Logo Delícia Gelada" class="w-[150px]">
-      </div> -->
-  
-      <div
-        class="relative w-full min-h-[75vh] z-10 px-6 md:px-[70px] xl:px-[95px] text-white pt-6 sm:pt-16 md:pt-24 lg:pt-28 xl:pt-36 md:pt-0">
-        <h1
-          class="text-[32px] sm:text-[40px] md:text-[56px] xl:text-[72px] leading-tight font-bold font-[Inter] flex flex-col">
-          <span>Sinta o sabor do</span>
-          <span
-            class="text-[#FF9100] font-normal font-[Gwendolyn] text-[60px] sm:text-[80px] md:text-[110px] xl:text-[140px] -mt-4 sm:-mt-6 md:-mt-10 ml-8 md:ml-16">
-            momento!
-          </span>
-        </h1>
-  
-        <p class="mt-4 md:mt-8 text-[16px] md:text-[20px] lg:text-[24px] leading-snug font-light max-w-2xl">
-          Coquetéis artesanais e bebidas especiais <br class="hidden sm:block">
-          para refrescar seus melhores momentos.
-        </p>
-  
-        <div class="flex flex-wrap gap-4 mt-8">
-          <a href="#catalogo">
-            <button
-              class="px-6 py-3 md:px-8 md:py-4 bg-[#FF9100] rounded-full text-white text-[14px] md:text-[16px] font-bold hover:bg-[#e07d00] transition-colors">
-              Ver Catálogo
-            </button>
-          </a>
-          <a href="#sobre-nos">
-            <button
-              class="px-6 py-3 md:px-8 md:py-4 bg-transparent rounded-full text-[#00C3D0] text-[14px] md:text-[16px] font-bold border-2 border-[#00C3D0] hover:bg-[#00C3D0] hover:text-white transition-colors">
-              Sobre a Delícia Gelada
-            </button>
-          </a>
+
+      <div class="flex sm:flex-row gap-6 mt-8">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-12 h-12 md:w-14 md:h-14 border-2 border-white rounded-full flex items-center justify-center text-[18px] md:text-[20px] font-bold">
+            18+
+          </div>
+          <p class="text-[12px] md:text-[14px] leading-tight font-semibold">
+            Site exclusivo para <br>maiores de 18 anos.
+          </p>
         </div>
-  
-        <div class="flex sm:flex-row gap-6 mt-8">
-          <div class="flex items-center gap-3">
-            <div
-              class="w-12 h-12 md:w-14 md:h-14 border-2 border-white rounded-full flex items-center justify-center text-[18px] md:text-[20px] font-bold">
-              18+
-            </div>
-            <p class="text-[12px] md:text-[14px] leading-tight font-semibold">
-              Site exclusivo para <br>maiores de 18 anos.
-            </p>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-12 h-12 md:w-14 md:h-14 border-2 border-white rotate-45 rounded-md flex items-center justify-center">
+            <span class="-rotate-45 text-[24px] md:text-[28px]">✓</span>
           </div>
-          <div class="flex items-center gap-3">
-            <div
-              class="w-12 h-12 md:w-14 md:h-14 border-2 border-white rotate-45 rounded-md flex items-center justify-center">
-              <span class="-rotate-45 text-[24px] md:text-[28px]">✓</span>
-            </div>
-            <p class="text-[12px] md:text-[14px] leading-tight font-semibold">
-              Segurança e qualidade <br>em cada detalhe.
-            </p>
-          </div>
+          <p class="text-[12px] md:text-[14px] leading-tight font-semibold">
+            Segurança e qualidade <br>em cada detalhe.
+          </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- CATEGORIAS DE PRODUTOS -->
     <!-- 

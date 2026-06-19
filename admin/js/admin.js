@@ -257,7 +257,7 @@ window.carregarPerfilLogado = async function() {
         const payloadDecoded = JSON.parse(atob(token.split('.')[1]))
         
         // O JWT geralmente salva o ID como "id" ou "id_usuario"
-        const userId = payloadDecoded.id || payloadDecoded.id_usuario || payloadDecoded.userId
+        const userId = payloadDecoded.userID?.id
 
         if (userId) {
             // Busca os dados completos do usuário no banco usando o ID
@@ -307,7 +307,6 @@ window.fazerLogout = function() {
 // INICIALIZAÇÃO DE PÁGINAS PROTEGIDAS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Se a tela tiver o menu lateral (como o dashboard), carrega os dados!
     if (document.getElementById('foto-admin-sidebar')) {
         carregarPerfilLogado()
     }
