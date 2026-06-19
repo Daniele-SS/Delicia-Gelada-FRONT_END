@@ -37,7 +37,7 @@ function criarIconeSVG(tipo) {
 // ==========================================
 // 1. CADASTRAR BEBIDA (POST com FormData)
 // ==========================================
-window.salvarNovaBebida = async function(event) {
+window.salvarNovaBebida = async function (event) {
     if (event) event.preventDefault()
 
     const nomeInput = document.getElementById('nomeBebida')
@@ -52,11 +52,11 @@ window.salvarNovaBebida = async function(event) {
     formData.append('nome', nomeInput.value.trim())
     formData.append('descricao', descInput.value.trim())
     formData.append('preco', precoInput.value.replace(',', '.'))
-    formData.append('id_tipo_bebida', tipoSelect.value) 
+    formData.append('id_tipo_bebida', tipoSelect.value)
     formData.append('id_categoria', categoriaSelect.value)
-    formData.append('id_status', statusCheckbox.checked ? 1 : 2) 
+    formData.append('id_status', statusCheckbox.checked ? 1 : 2)
     formData.append('imagem', fotoInput.files[0]) // Enviando como 'imagem'
-    formData.append('id_usuario', 1) 
+    formData.append('id_usuario', 1)
 
     const token = localStorage.getItem('tokenDeliciaGelada')
 
@@ -73,9 +73,9 @@ window.salvarNovaBebida = async function(event) {
             descInput.value = ''
             precoInput.value = ''
             fotoInput.value = ''
-            
+
             // Recarrega se a tabela existir
-            if(document.getElementById('tabela-bebidas')) listarBebidas() 
+            if (document.getElementById('tabela-bebidas')) listarBebidas()
         } else {
             Swal.fire({ icon: 'error', title: 'Erro', text: 'Falha ao cadastrar bebida.' })
         }
@@ -87,16 +87,16 @@ window.salvarNovaBebida = async function(event) {
 // ==========================================
 // 2. LISTAR BEBIDAS (GET)
 // ==========================================
-window.listarBebidas = async function() {
+window.listarBebidas = async function () {
     try {
         const token = localStorage.getItem('tokenDeliciaGelada')
         const resposta = await fetch(`${BASE_URL}/bebida`, {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
         })
-        
+
         const dados = await resposta.json()
-        
+
         if (resposta.ok && dados.response) {
             const tabelaBody = document.querySelector('#tabela-bebidas tbody')
             if (!tabelaBody) return
@@ -111,7 +111,7 @@ window.listarBebidas = async function() {
 
                 const tr = document.createElement('tr')
                 tr.className = 'border-b border-gray-200 hover:bg-gray-50 transition text-center'
-                
+
                 // Coluna: Imagem e Nome
                 const tdNome = document.createElement('td')
                 tdNome.className = 'py-4 px-6 text-sm font-semibold text-[#005A9C] text-left flex items-center gap-3'
@@ -134,7 +134,7 @@ window.listarBebidas = async function() {
                 // Coluna: Tipo (Dica: Se você trouxe o nome do tipo na sua VIEW, pode usar bebida.tipo_bebida aqui)
                 const tdTipo = document.createElement('td')
                 tdTipo.className = 'py-4 px-6 text-sm text-gray-600 border-l border-gray-200'
-                tdTipo.textContent = 'Drink' 
+                tdTipo.textContent = 'Drink'
                 tr.appendChild(tdTipo)
 
                 // Coluna: Preço
@@ -166,7 +166,7 @@ window.listarBebidas = async function() {
                 btnExcluir.appendChild(criarIconeSVG('excluir'));
 
                 // O onclick direto é à prova de balas no DOM gerado via JS
-                btnExcluir.onclick = function(event) {
+                btnExcluir.onclick = function (event) {
                     event.preventDefault();
                     deletarBebida(bebida.id); // Se for na tela de Admin, mude para deletarAdmin(admin.id)
                 }
@@ -188,10 +188,54 @@ window.listarBebidas = async function() {
     }
 }
 
+
+window.deletarBebida = async function (id) {
+    const result = await Swal.fire({
+        title: 'Tem certeza?',
+        text: 'Você não poderá reverter a exclusão desta bebida!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+    })
+
+    if (result.isConfirmed) {
+        const token = localStorage.getItem('tokenDeliciaGelada')
+
+        try {
+            const resposta = await fetch(`${BASE_URL}/bebida/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+
+            if (resposta.ok) {
+                Swal.fire('Excluída!', 'A bebida foi removida com sucesso.', 'success')
+                listarBebidas()
+            } else {
+                const erro = await resposta.json()
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro ao excluir',
+                    text: erro.message || 'Não foi possível excluir a bebida.'
+                })
+            }
+        } catch (erro) {
+            console.error('Erro ao deletar bebida:', erro)
+            Swal.fire('Erro', 'Falha ao conectar com a API.', 'error')
+        }
+    }
+}
+
+
+
 // ==========================================
 // 3. DELETAR ADMIN (DELETE) - COM RASTREADOR
 // ==========================================
-window.deletarAdmin = async function(id) {
+window.deletarAdmin = async function (id) {
     console.log("🕵️ 1. Entrou na função! O ID do Admin é:", id);
 
     try {
@@ -210,16 +254,16 @@ window.deletarAdmin = async function(id) {
 
         if (result.isConfirmed) {
             console.log("🕵️ 3. Clicou em SIM! Preparando para chamar a API...");
-            
-            const token = localStorage.getItem('tokenDeliciaGelada'); 
+
+            const token = localStorage.getItem('tokenDeliciaGelada');
             const url_delete = `${BASE_URL}/usuario/${id}`;
-            
+
             console.log("🕵️ 4. URL de exclusão:", url_delete);
             console.log("🕵️ 5. Token do usuário logado:", token ? "Existe!" : "Vazio/Nulo!");
 
             const resposta = await fetch(url_delete, {
                 method: 'DELETE',
-                headers: { 'Authorization': 'Bearer ' + token } 
+                headers: { 'Authorization': 'Bearer ' + token }
             });
 
             console.log("🕵️ 6. API Respondeu! Status Code:", resposta.status);
@@ -270,8 +314,8 @@ async function carregarSelects() {
         // Popular Categorias
         const resCat = await fetch(`${BASE_URL}/categoria`)
         const dadosCat = await resCat.json()
-        
-        if(dadosCat.response) {
+
+        if (dadosCat.response) {
             dadosCat.response.forEach(cat => {
                 const option = document.createElement('option')
                 option.value = cat.id
@@ -289,8 +333,8 @@ async function carregarSelects() {
         // Popular Tipos de Bebida
         const resTipo = await fetch(`${BASE_URL}/tipobebida`)
         const dadosTipo = await resTipo.json()
-        
-        if(dadosTipo.response) {
+
+        if (dadosTipo.response) {
             dadosTipo.response.forEach(tipo => {
                 const option = document.createElement('option')
                 option.value = tipo.id
@@ -310,9 +354,9 @@ async function carregarSelects() {
 // ==========================================
 
 // Variável global para guardar o ID da bebida que está a ser editada
-let bebidaEditandoId = null; 
+let bebidaEditandoId = null;
 
-window.editarBebida = async function(id) {
+window.editarBebida = async function (id) {
     try {
         // 1. Busca os dados atuais da bebida pelo ID
         const resposta = await fetch(`${BASE_URL}/bebida/${id}`);
@@ -324,21 +368,21 @@ window.editarBebida = async function(id) {
 
             // 2. Preenche a modal com os dados
             document.getElementById('editBebNome').value = bebida.nome;
-            
+
             // Tratamento para preço (volta ao formato original com ponto para facilitar se precisar converter)
             document.getElementById('editBebPreco').value = bebida.preco;
-            
+
             // Para categoria e tipo, idealmente teríamos um select, mas como o HTML tem um input text:
             const nomeCategoria = bebida.categorias && bebida.categorias.length > 0 ? bebida.categorias[0].nome : '';
             document.getElementById('editBebCat').value = nomeCategoria;
-            
+
             const nomeTipo = bebida.tipo || bebida.nome_tipo || '';
             document.getElementById('editBebTipo').value = nomeTipo;
 
             // 3. Mostra a imagem atual no preview, se existir
             const preview = document.getElementById('previewEditBeb');
             const textoUpload = document.getElementById('textoUploadEditBeb');
-            
+
             if (bebida.imagem && bebida.imagem.startsWith('http')) {
                 preview.src = bebida.imagem;
                 preview.classList.remove('hidden');
@@ -359,41 +403,41 @@ window.editarBebida = async function(id) {
     }
 }
 
-window.fecharModal = function() {
+window.fecharModal = function () {
     document.getElementById('modal-editar-bebida').classList.add('hidden');
     bebidaEditandoId = null;
-    
+
     // Limpa o input de arquivo e o preview ao fechar
     const inputFicheiro = document.getElementById('editBebImagem');
-    if(inputFicheiro) inputFicheiro.value = '';
-    
+    if (inputFicheiro) inputFicheiro.value = '';
+
     document.getElementById('previewEditBeb').src = '';
     document.getElementById('previewEditBeb').classList.add('hidden');
     document.getElementById('textoUploadEditBeb').classList.remove('hidden');
 }
 
-window.salvarEdicaoModal = async function() {
+window.salvarEdicaoModal = async function () {
     if (!bebidaEditandoId) return;
 
     // A edição, por lidar com imagens possivelmente novas, também deve usar FormData
     const formData = new FormData();
-    
+
     const nome = document.getElementById('editBebNome').value.trim();
     const preco = document.getElementById('editBebPreco').value.trim().replace(',', '.');
     const inputFicheiro = document.getElementById('editBebImagem');
-    
+
     // Atenção: Aqui assumimos que se a categoria ou tipo forem alterados, o backend aceita o nome ou precisa do ID.
     // O seu HTML atual tem inputs de texto para Categoria e Tipo na modal de edição. 
     // Para simplificar, vou enviar apenas os dados principais se não existirem IDs explícitos na modal.
-    
+
     formData.append('nome', nome);
     formData.append('preco', preco);
-    
+
     // Se o utilizador selecionou uma nova imagem, anexa ao FormData
     if (inputFicheiro.files && inputFicheiro.files[0]) {
         formData.append('imagem', inputFicheiro.files[0]);
     }
-    
+
     // (Opcional) Reenvie o status atual para evitar que o backend apague, caso o seu controller exija.
     // formData.append('id_status', 1);
 
@@ -423,9 +467,9 @@ window.salvarEdicaoModal = async function() {
 // ==========================================
 // 6. CARREGAR PERFIL DO USUÁRIO LOGADO
 // ==========================================
-window.carregarPerfilLogado = async function() {
+window.carregarPerfilLogado = async function () {
     const token = localStorage.getItem('tokenDeliciaGelada')
-    
+
     // Elementos da tela
     const imgPerfil = document.getElementById('foto-admin-sidebar')
     const txtNome = document.getElementById('nome-admin-sidebar')
@@ -440,20 +484,20 @@ window.carregarPerfilLogado = async function() {
         const resposta = await fetch(`http://localhost:3000/v1/fynix/deliciagelada/usuario/${userId}`, {
             headers: { 'Authorization': 'Bearer ' + token }
         })
-        
+
         const dados = await resposta.json()
 
         if (resposta.ok && dados.response) {
             const usuario = dados.response
-            
+
             console.log("DADOS DO USUÁRIO RECEBIDOS:", usuario) // Isso vai mostrar a foto real
 
             if (txtNome && usuario.nome) txtNome.textContent = usuario.nome.split(' ')[0]
             if (txtCargo && usuario.cargo) txtCargo.textContent = usuario.cargo
-            
+
             if (imgPerfil && usuario.foto) {
                 console.log("TENTANDO APLICAR FOTO:", usuario.foto)
-                imgPerfil.src = usuario.foto 
+                imgPerfil.src = usuario.foto
             } else {
                 console.warn("A foto do usuário está vazia ou o ID 'foto-admin-sidebar' não foi encontrado.")
             }
@@ -465,19 +509,19 @@ window.carregarPerfilLogado = async function() {
 
 function carregarPerfilUsuario() {
     // Busca as informações no localStorage. Se não achar, usa valores padrão
-    const nomeLogado = localStorage.getItem('nomeUsuario') || 'Administrador'; 
+    const nomeLogado = localStorage.getItem('nomeUsuario') || 'Administrador';
     const fotoLogado = localStorage.getItem('fotoUsuario'); // O link da Azure
-    const cargoLogado = localStorage.getItem('cargoUsuario') || 'Membro'; 
-    
+    const cargoLogado = localStorage.getItem('cargoUsuario') || 'Membro';
+
     // Pega os elementos na tela
     const elementoNome = document.getElementById('nome-usuario-sidebar');
     const elementoFoto = document.getElementById('foto-usuario-sidebar');
     const elementoCargo = document.getElementById('cargo-usuario-sidebar');
-    
+
     // Substitui as informações na tela
     if (elementoNome) elementoNome.textContent = nomeLogado;
     if (elementoCargo) elementoCargo.textContent = cargoLogado;
-    
+
     // Só substitui a foto se realmente tiver um link no localStorage, senão mantém a padrão
     if (elementoFoto && fotoLogado) {
         elementoFoto.src = fotoLogado;
@@ -489,7 +533,7 @@ function carregarPerfilUsuario() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     carregarPerfilLogado()
-    
+
     // 1. Carrega as funcionalidades da página de bebidas
     if (document.getElementById('categoriaBebida')) {
         carregarSelects()
@@ -502,6 +546,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Chamamos a função oficial que usa o Token e a API
     if (document.getElementById('foto-admin-sidebar')) {
         console.log("Menu lateral detectado. Iniciando carregamento do perfil...")
-        carregarPerfilLogado() 
+        carregarPerfilLogado()
     }
 })

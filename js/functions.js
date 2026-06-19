@@ -149,7 +149,7 @@ function renderizarBebidas(lista) {
             categoria.textContent = (bebida.categorias && bebida.categorias.length > 0) ? bebida.categorias[0].nome : 'Geral';
 
             const descricao = document.createElement('p');
-            descricao.className = 'text-[12px] xl:text-[14px] text-gray-600 mt-2 line-clamp-2'; 
+            descricao.className = 'text-[12px] xl:text-[14px] text-gray-600 mt-2 line-clamp-2';
             descricao.textContent = bebida.descricao || 'Bebida especial da casa.';
 
             // Container para o preço e botão ficarem no rodapé do card
@@ -173,7 +173,7 @@ function renderizarBebidas(lista) {
             info.appendChild(nome);
             info.appendChild(categoria);
             info.appendChild(descricao);
-            
+
             rodape.appendChild(preco);
             rodape.appendChild(btn);
             info.appendChild(rodape);
@@ -193,8 +193,8 @@ function renderizarBebidas(lista) {
 async function criarCardDetalhesBebida(bebida) {
     try {
         const json = await getTipos();
-        const tipos = (json && json.response) 
-            ? json.response.find(tipo => Number(tipo.id) === Number(bebida.id_tipo_bebida)) || {} 
+        const tipos = (json && json.response)
+            ? json.response.find(tipo => Number(tipo.id) === Number(bebida.id_tipo_bebida)) || {}
             : {};
 
         // 1. EXTRAÇÃO E TRATAMENTO DE DADOS
@@ -206,7 +206,7 @@ async function criarCardDetalhesBebida(bebida) {
         const preparo = bebida.modo_preparo || tipos.modo_preparo || 'Modo de preparo padrão.';
         const dica = bebida.dica_delicia || tipos.dica_delicia || 'Aproveite seu drink gelado!';
         const ingredientesRaw = bebida.ingredientes || tipos.ingredientes || 'Ingredientes não informados';
-        
+
         const precoFormatado = Number(bebida.preco || 0).toFixed(2).replace('.', ',');
         const categoriaNome = (bebida.categorias && bebida.categorias.length > 0) ? bebida.categorias[0].nome : 'Categoria Geral';
         const imagemSrc = (bebida.imagem && bebida.imagem.startsWith('http')) ? bebida.imagem : './img/logo.png';
@@ -270,15 +270,15 @@ async function criarCardDetalhesBebida(bebida) {
         const criarMiniCard = (iconSrc, value, label) => {
             const div = document.createElement('div');
             div.className = 'bg-[#EEF7F8] rounded-[10px] py-4 px-2 flex flex-col items-center justify-center w-full max-w-[130px]';
-            
+
             const icone = document.createElement('img');
             icone.src = iconSrc;
             icone.className = 'w-8 h-8 mb-2';
-            
+
             const spanValue = document.createElement('span');
             spanValue.className = 'font-bold text-[16px] text-black text-center';
             spanValue.textContent = value;
-            
+
             const spanLabel = document.createElement('span');
             spanLabel.className = 'text-[12px] md:text-[14px] text-gray-600';
             spanLabel.textContent = label;
@@ -406,8 +406,12 @@ export async function iniciarPagina() {
             return
         }
 
-        console.log("BEBIDAS:", todasBebidas)
+
+        await
+
+            console.log("BEBIDAS:", todasBebidas)
         renderizarBebidas(todasBebidas.slice(0, 4))
+
 
         await carregarCategorias()
         await carregarTipos()
@@ -519,7 +523,7 @@ function filtrarTodos() {
 
         const filtrados = todasBebidas.filter(b => {
             const categoriaAPI = (b.categorias && b.categorias.length > 0) ? b.categorias[0].nome : '';
-            
+
             // Aceita se o select estiver na opção padrão ('Categoria' ou 'Tipo') OU se houver match
             const matchCategoria = !categoriaSelecionada || categoriaSelecionada === 'Categoria' || categoriaAPI === categoriaSelecionada;
             const matchTipo = !tipoSelecionado || tipoSelecionado === 'Tipo' || Number(b.id_tipo_bebida) === Number(tipoSelecionado);
@@ -537,8 +541,8 @@ function filtrarTodos() {
 function filtrarPorCategoria(nomeCategoria) {
     try {
         if (!nomeCategoria || nomeCategoria === 'Todos') {
-             renderizarBebidas(todasBebidas);
-             return;
+            renderizarBebidas(todasBebidas);
+            return;
         }
 
         const filtrados = todasBebidas.filter(b => {

@@ -13,9 +13,10 @@ CORREÇÕES v1.0.1:
             (b) race condition sobrescrevendo o resultado de iniciarPagina()
 ************************************************************************/
 
-import { iniciarPagina, menuHamburguer } from './functions.js'
+import { iniciarPagina, menuHamburguer, popularCategorias } from './functions.js'
 
 iniciarPagina()
+popularCategorias()
 menuHamburguer()
 
 // popularCategorias() — REMOVIDO (BUG #6)
